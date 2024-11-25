@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace School.Application.Handlers.Courses.Queries.GetCourseList
 {
-    public class GetCourseListQueryHadler : IRequestHandler<GetCourseListQuery, CourseListVm>
+    public class GetCourseListQueryHandler : IRequestHandler<GetCourseListQuery, CourseListVm>
     {
         private readonly ISchoolDbContext context;
         private readonly IMapper mapper;
 
-        public GetCourseListQueryHadler(ISchoolDbContext context, IMapper mapper)
+        public GetCourseListQueryHandler(ISchoolDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;

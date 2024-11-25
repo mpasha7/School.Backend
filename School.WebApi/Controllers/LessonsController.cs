@@ -10,7 +10,9 @@ using School.WebApi.Models.Lesson;
 
 namespace School.WebApi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
+    //[Authorize]
     public class LessonsController : BaseController
     {
         private readonly IMapper _mapper;
@@ -30,8 +32,7 @@ namespace School.WebApi.Controllers
         /// <returns>Returns LessonListVm</returns>
         /// <response code="200">Success</response>
         /// <response code="401">If the user is unauthorized</response>
-        [HttpGet]
-        //[Authorize]
+        [HttpGet(Name = nameof(GetLessonsList))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<LessonListVm>> GetLessonsList([FromQuery] int courseid)
@@ -57,8 +58,7 @@ namespace School.WebApi.Controllers
         /// <returns>Returns LessonDetailsVm</returns>
         /// <response code="200">Success</response>
         /// <response code="401">If the user in unauthorized</response>
-        [HttpGet("{id}")]
-        //[Authorize]
+        [HttpGet("{id}", Name = nameof(GetLesson))]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<LessonDetailsVm>> GetLesson(int id, [FromQuery] int courseid)
@@ -90,8 +90,7 @@ namespace School.WebApi.Controllers
         /// <returns>Returns lesson id (int)</returns>
         /// <response code="201">Success</response>
         /// <response code="401">If the user in unauthorized</response>
-        [HttpPost]
-        //[Authorize]
+        [HttpPost(Name = nameof(CreateLesson))]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<int>> CreateLesson([FromBody] CreateLessonDto createLessonDto)
@@ -117,8 +116,7 @@ namespace School.WebApi.Controllers
         /// <returns>Returns NoContent</returns>
         /// <response code="204">Success</response>
         /// <response code="401">If the user in unauthorized</response>
-        [HttpPut]
-        //[Authorize]
+        [HttpPut(Name = nameof(UpdateLesson))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> UpdateLesson([FromBody] UpdateLessonDto updateLessonDto) // TODO: Id in Sample request
@@ -141,8 +139,7 @@ namespace School.WebApi.Controllers
         /// <returns>Returns NoContent</returns>
         /// <response code="204">Success</response>
         /// <response code="401">If the user in unauthorized</response>
-        [HttpDelete("{id}")]
-        //[Authorize]
+        [HttpDelete("{id}", Name = nameof(DeleteLesson))]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> DeleteLesson(int id, [FromQuery]int courseid)

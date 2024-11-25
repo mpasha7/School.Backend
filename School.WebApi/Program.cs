@@ -4,6 +4,9 @@ using School.Application;
 using School.Persistence;
 using System.Reflection;
 using School.WebApi.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace School.WebApi
 {
@@ -33,6 +36,26 @@ namespace School.WebApi
                 });
             });
 
+            builder.Services.AddAuthentication(opts =>
+            {
+                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer("Bearer", opts =>
+                {
+                    opts.Authority = "https://localhost:44393";
+                    opts.Audience = "CoursesWebApi";
+                    opts.RequireHttpsMetadata = false; // TODO: HTTPS????
+                });
+
+            builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+            builder.Services.AddSwaggerGen(opts =>
+            {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                opts.IncludeXmlComments(xmlPath);
+            });
+
             var app = builder.Build();
 
 
@@ -54,10 +77,18 @@ namespace School.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(opts =>
+            {
+                opts.RoutePrefix = string.Empty;
+                opts.SwaggerEndpoint("swagger/v1/swagger.json", "School API");
+            });
             app.UseCustomExceptionHandler();
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
             app.Run();

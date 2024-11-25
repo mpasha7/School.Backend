@@ -10,6 +10,7 @@ namespace School.Domain
     public class Course
     {
         public int Id { get; set; }
+        public string? CoachGuid { get; set; }
         public DateTime CreatedDate { get; set; }
         
         public string? Title { get; set; }
@@ -19,8 +20,6 @@ namespace School.Domain
         public string? PhotoPath { get; set; }
         public string? BeginQuestionnaire { get; set; }
         public string? EndQuestionnaire { get; set; }
-
-        public string? CoachGuid { get; set; }
 
         [JsonIgnore]
         public virtual IEnumerable<Lesson> Lessons { get; set; }
