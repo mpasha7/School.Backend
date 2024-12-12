@@ -91,7 +91,7 @@ namespace School.WebApi.Controllers
         /// <response code="201">Success</response>
         /// <response code="401">If the user in unauthorized</response>
         [HttpPost(Name = nameof(CreateLesson))]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         public async Task<ActionResult<int>> CreateLesson([FromBody] CreateLessonDto createLessonDto)
         {

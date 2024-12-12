@@ -1,0 +1,26 @@
+<h1>Courses</h1>
+
+@if (courses$ | async; as courseListVm){
+  @if(courseListVm.courses.length > 0) {
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of courseListVm.courses; track $index) {
+          <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.photoPath}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+}

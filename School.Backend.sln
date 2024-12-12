@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "School.WebApi", "School.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Tests", "School.Tests\School.Tests.csproj", "{7A1AF66F-C681-40B2-8230-8F4B3C9B6CFE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{813B2DF5-4D80-4D52-99E9-1D75EE687CB6}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "School.Angular", "School.Angular\School.Angular.esproj", "{496B5016-5C79-4D6B-81B0-B5922FFB1D59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,12 @@ Global
 		{7A1AF66F-C681-40B2-8230-8F4B3C9B6CFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A1AF66F-C681-40B2-8230-8F4B3C9B6CFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A1AF66F-C681-40B2-8230-8F4B3C9B6CFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +67,7 @@ Global
 		{878756F1-BB3D-4CFB-94FC-74BA886708DD} = {423C5126-EC4C-408F-BB31-EF8850FB5BBD}
 		{93617A9D-E239-4E8D-A165-CE8394FAC5D5} = {149595B8-029B-4C00-8C69-BF8DDDF25F16}
 		{7A1AF66F-C681-40B2-8230-8F4B3C9B6CFE} = {664E0DF6-F953-40AA-8F3E-9F050758176A}
+		{496B5016-5C79-4D6B-81B0-B5922FFB1D59} = {813B2DF5-4D80-4D52-99E9-1D75EE687CB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16D74DAB-6149-4284-BDDB-7ABD8DD76104}

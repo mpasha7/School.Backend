@@ -24,7 +24,7 @@ namespace School.Tests.Handlers.Courses.Queries
         }
 
         [Fact]
-        public async void GetCourseListQueryHandler_Success()
+        public async Task GetCourseListQueryHandler_Success()
         {
             // Arrange
             var handler = new GetCourseListQueryHandler(Context, Mapper);

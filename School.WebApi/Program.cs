@@ -77,13 +77,15 @@ namespace School.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
+            app.UseCustomExceptionHandler();
             app.UseSwagger();
             app.UseSwaggerUI(opts =>
             {
                 opts.RoutePrefix = string.Empty;
                 opts.SwaggerEndpoint("swagger/v1/swagger.json", "School API");
             });
-            app.UseCustomExceptionHandler();
             app.UseRouting();
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
