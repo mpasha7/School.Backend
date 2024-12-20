@@ -83,8 +83,8 @@ namespace School.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(opts =>
             {
-                opts.RoutePrefix = string.Empty;
-                opts.SwaggerEndpoint("swagger/v1/swagger.json", "School API");
+                //opts.RoutePrefix = string.Empty;
+                //opts.SwaggerEndpoint("swagger/v1/swagger.json", "School API");
             });
             app.UseRouting();
             app.UseHttpsRedirection();
