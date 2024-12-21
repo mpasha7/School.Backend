@@ -8,7 +8,7 @@ namespace School.Application.Common.Exceptions
 {
     public class NoAccessException : Exception
     {
-        public NoAccessException(string name, int key) : base($"No access to '{name}' ({key}).")
+        public NoAccessException(string name, int key) : base($"No access to '{name}' (id = {key}).")
         {
         }
     }
