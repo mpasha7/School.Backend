@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces;
+using School.Application.Interfaces.Repository;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,24 +13,23 @@ namespace School.Application.Handlers.Courses.Commands.DeleteCourse
 {
     public class DeleteCourseCommandHandler : IRequestHandler<DeleteCourseCommand>
     {
-        private readonly ISchoolDbContext context;
+        private readonly ICourseRepository _repository;
 
-        public DeleteCourseCommandHandler(ISchoolDbContext context)
+        public DeleteCourseCommandHandler(ICourseRepository repository)
         {
-            this.context = context;
+            this._repository = repository;
         }
 
         public async Task Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
-            var course = await context.Courses.FindAsync(request.Id, cancellationToken);
+            var course = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.Id);
             else if (course.CoachGuid != request.CoachGuid)
                 throw new NoAccessException(nameof(Course), request.Id);
 
-            context.Courses.Remove(course);
-            await context.SaveChangesAsync(cancellationToken);
+            await _repository.DeleteAsync(course, cancellationToken);
         }
     }
 }

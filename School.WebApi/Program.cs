@@ -7,6 +7,8 @@ using School.WebApi.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using School.Application.Interfaces.Repository;
+using School.WebApi.Repository;
 
 namespace School.WebApi
 {
@@ -24,6 +26,7 @@ namespace School.WebApi
 
             builder.Services.AddApplication();
             builder.Services.AddPersistence(builder.Configuration);
+            builder.Services.AddScoped<ICourseRepository, CourseRepository>();
             builder.Services.AddControllers();
 
             builder.Services.AddCors(opts =>

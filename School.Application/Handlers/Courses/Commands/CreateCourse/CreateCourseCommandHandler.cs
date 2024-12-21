@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using School.Application.Interfaces;
+using School.Application.Interfaces.Repository;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,11 @@ namespace School.Application.Handlers.Courses.Commands.CreateCourse
 {
     public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, int>
     {
-        private readonly ISchoolDbContext context;
+        private readonly ICourseRepository _repository;
 
-        public CreateCourseCommandHandler(ISchoolDbContext context)
+        public CreateCourseCommandHandler(ICourseRepository repository)
         {
-            this.context = context;
+            this._repository = repository;
         }
 
         public async Task<int> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
@@ -34,8 +35,7 @@ namespace School.Application.Handlers.Courses.Commands.CreateCourse
                 EndQuestionnaire = request.EndQuestionnaire
             };
 
-            await context.Courses.AddAsync(course, cancellationToken);
-            await context.SaveChangesAsync(cancellationToken);
+            await _repository.AddAsync(course, cancellationToken);
             return course.Id;
         }
     }

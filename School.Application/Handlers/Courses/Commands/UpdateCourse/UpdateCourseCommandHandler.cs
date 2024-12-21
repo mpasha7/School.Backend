@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces;
+using School.Application.Interfaces.Repository;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,16 @@ namespace School.Application.Handlers.Courses.Commands.UpdateCourse
 {
     public class UpdateCourseCommandHandler : IRequestHandler<UpdateCourseCommand>
     {
-        private readonly ISchoolDbContext context;
+        private readonly ICourseRepository _repository;
 
-        public UpdateCourseCommandHandler(ISchoolDbContext context)
+        public UpdateCourseCommandHandler(ICourseRepository repository)
         {
-            this.context = context;
+            this._repository = repository;
         }
 
         public async Task Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
         {
-            var course = await context.Courses.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            var course = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.Id);
@@ -37,7 +38,7 @@ namespace School.Application.Handlers.Courses.Commands.UpdateCourse
             course.BeginQuestionnaire = request.BeginQuestionnaire;
             course.EndQuestionnaire = request.EndQuestionnaire;
 
-            await context.SaveChangesAsync(cancellationToken);            
+            await _repository.UpdateAsync(course, cancellationToken);
         }
     }
 }

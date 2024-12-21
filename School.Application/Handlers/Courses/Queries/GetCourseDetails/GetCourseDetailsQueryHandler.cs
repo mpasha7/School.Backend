@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces;
+using School.Application.Interfaces.Repository;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -14,18 +15,18 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
 {
     public class GetCourseDetailsQueryHandler : IRequestHandler<GetCourseDetailsQuery, CourseDetailsVm>
     {
-        private readonly ISchoolDbContext context;
+        private readonly ICourseRepository _repository;
         private readonly IMapper mapper;
 
-        public GetCourseDetailsQueryHandler(ISchoolDbContext context, IMapper mapper)
+        public GetCourseDetailsQueryHandler(ICourseRepository repository, IMapper mapper)
         {
-            this.context = context;
+            this._repository = repository;
             this.mapper = mapper;
         }
 
         public async Task<CourseDetailsVm> Handle(GetCourseDetailsQuery request, CancellationToken cancellationToken)
         {
-            var course = await context.Courses.FirstOrDefaultAsync(c => c.Id == request.Id, cancellationToken);
+            var course = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.Id);
