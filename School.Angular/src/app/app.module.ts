@@ -6,17 +6,31 @@ import { AppComponent } from './app.component';
 import { AsyncPipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
+import { CoursesComponent } from './courses/courses.component';
+import { CourseListComponent } from './courses/course-list/course-list.component';
+import { CourseFormComponent } from './courses/course-form/course-form.component';
+import { LessonsComponent } from './lessons/lessons.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    // HeaderComponent,
+    // FooterComponent,
+    // CoursesComponent,
+    // CourseListComponent,
+    // CourseFormComponent,
+    // LessonsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AsyncPipe, 
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

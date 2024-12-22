@@ -1,0 +1,47 @@
+<form [formGroup]="createCourseForm" (ngSubmit)="createCourse()">
+    <h2>Добавление курса</h2>
+  
+    <div>
+      <label for="title"></label>
+      <input formControlName="title">
+    </div>
+  
+    <div>
+      <label for="description"></label>
+      <input formControlName="description">
+    </div>
+  
+    <div>
+      <label for="shortDescription"></label>
+      <input formControlName="shortDescription">
+    </div>
+  
+    <div>
+      <label for="publicDescription"></label>
+      <input formControlName="publicDescription">
+    </div>
+  
+    <div>
+      <label for="photoPath"></label>
+      <input formControlName="photoPath">
+    </div>
+  
+    <div>
+      <label for="beginQuestionnaire"></label>
+      <input formControlName="beginQuestionnaire">
+    </div>
+  
+    <div>
+      <label for="endQuestionnaire"></label>
+      <input formControlName="endQuestionnaire">
+    </div>
+  
+    <div>
+      <button type="submit">Сохранить</button>
+      <!-- <a routerLink="/">Отмена</a> -->
+      <button type="button" routerLink="/">Cancel</button>
+    </div>
+  </form>
+  
+  
+  
