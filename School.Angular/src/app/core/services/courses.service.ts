@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { CourseDetailsVm, CourseListVm } from '../models/course.model';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ResponseDto } from '../models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +21,15 @@ export class CoursesService {
     return this.http.get<CourseDetailsVm>(`${this.baseUrl}/${id}`);
   }
 
-  createCourse(createCourseDto: any): Observable<number> {
-    return this.http.post<number>(this.baseUrl, createCourseDto);
+  createCourse(createCourseDto: any): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.baseUrl, createCourseDto);
   }
 
-  updateCourse(updateCourseDto: any) {
-    return this.http.put(this.baseUrl, updateCourseDto);
+  updateCourse(updateCourseDto: any): Observable<ResponseDto> {
+    return this.http.put<ResponseDto>(this.baseUrl, updateCourseDto);
   }
 
-  deleteCourse(id: number) {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  deleteCourse(id: number): Observable<ResponseDto> {
+    return this.http.delete<ResponseDto>(`${this.baseUrl}/${id}`);
   }
 }

@@ -13,6 +13,9 @@ import { LessonsComponent } from './lessons/lessons.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { LayoutModule } from './layout/layout.module';
+import { StoreModule } from '@ngrx/store';
+import { appEffects, store } from './redux/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { LayoutModule } from './layout/layout.module';
     AsyncPipe, 
     FormsModule, 
     ReactiveFormsModule,
-    LayoutModule
+    LayoutModule,
+    StoreModule.forRoot(store),
+    EffectsModule.forRoot(appEffects)
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

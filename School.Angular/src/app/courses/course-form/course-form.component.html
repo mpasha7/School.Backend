@@ -1,45 +1,44 @@
-<form [formGroup]="createCourseForm" (ngSubmit)="createCourse()">
-    <h2>Добавление курса</h2>
+<form [formGroup]="courseForm" (ngSubmit)="saveCourseData()">
+    <h2>{{pageTitle}}</h2>
   
     <div>
-      <label for="title"></label>
+      <label for="title">Название:</label><br/>
       <input formControlName="title">
     </div>
   
     <div>
-      <label for="description"></label>
-      <input formControlName="description">
+      <label for="description">Описание:</label><br/>
+      <textarea formControlName="description"></textarea>
     </div>
   
     <div>
-      <label for="shortDescription"></label>
-      <input formControlName="shortDescription">
+      <label for="shortDescription">Краткое описание:</label><br/>
+      <textarea formControlName="shortDescription"></textarea>
     </div>
   
     <div>
-      <label for="publicDescription"></label>
-      <input formControlName="publicDescription">
+      <label for="publicDescription">Публичное описание:</label><br/>
+      <textarea formControlName="publicDescription"></textarea>
     </div>
   
     <div>
-      <label for="photoPath"></label>
+      <label for="photoPath">Путь к фото:</label><br/>
       <input formControlName="photoPath">
     </div>
   
     <div>
-      <label for="beginQuestionnaire"></label>
+      <label for="beginQuestionnaire">Анкета в начало:</label><br/>
       <input formControlName="beginQuestionnaire">
     </div>
   
     <div>
-      <label for="endQuestionnaire"></label>
+      <label for="endQuestionnaire">Анкета в конец:</label><br/>
       <input formControlName="endQuestionnaire">
     </div>
   
     <div>
       <button type="submit">Сохранить</button>
-      <!-- <a routerLink="/">Отмена</a> -->
-      <button type="button" routerLink="/">Cancel</button>
+      <button type="button" routerLink="/">Назад</button>
     </div>
   </form>
   

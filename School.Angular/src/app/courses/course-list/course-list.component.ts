@@ -1,34 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../core/services/courses.service';
-import { CourseListVm } from '../../core/models/course.model';
+import { CourseListVm, CourseLookupDto } from '../../core/models/course.model';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../redux/store';
+import { deleteCourse, loadCourseList } from '../../redux/courses/courses.actions';
+import { selectCourseList } from '../../redux/courses/courses.selector';
 
 @Component({
   selector: 'app-course-list',
   standalone: true,
-  imports: [AsyncPipe, RouterLink],
+  imports: [RouterLink],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })
 export class CourseListComponent implements OnInit {
-  courses$!: Observable<CourseListVm>;
+  courseList!: CourseLookupDto[];
 
-  constructor(private service: CoursesService) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.courses$ = this.service.getCourseList();
+    this.store.dispatch(loadCourseList());
+    this.store.select(selectCourseList).subscribe((data) => {
+      this.courseList = data;
+    });
   }
 
-  deleteCourse(id: number) {
-    if (!confirm()) { return; }
-
-    this.service.deleteCourse(id)
-      .subscribe({
-        next: (value) => {
-          this.courses$ = this.service.getCourseList();
-        }
-      })
+  onDeleteCourse(id: number) {
+    if (confirm("Вы хотите удалить этот курс?")) {
+      this.store.dispatch(deleteCourse({id: id}));
+    }
   }
 }

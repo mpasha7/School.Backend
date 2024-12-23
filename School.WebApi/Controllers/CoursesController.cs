@@ -6,12 +6,15 @@ using School.Application.Handlers.Courses.Commands.DeleteCourse;
 using School.Application.Handlers.Courses.Commands.UpdateCourse;
 using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
+using School.Domain;
+using School.WebApi.Models;
 using School.WebApi.Models.Course;
 
 namespace School.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -36,9 +39,11 @@ namespace School.WebApi.Controllers
         /// </remarks>
         /// <returns>Returns CourseListVm</returns>
         /// <response code="200">Success</response>
-        /// <response code="401">If the user is unauthorized</response>
+        /// <response code="400">Request is not correct</response>
+        /// <response code="401">User is unauthorized</response>
+        /// <response code="403">No access to object</response>
+        /// <response code="404">Object is not found</response>
         [HttpGet(Name = nameof(GetCoursesList))]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<CourseListVm>> GetCoursesList()
         {
             var query = new GetCourseListQuery
@@ -59,9 +64,11 @@ namespace School.WebApi.Controllers
         /// <param name="id">Course id (int)</param>
         /// <returns>Returns CourseDetailsVm</returns>
         /// <response code="200">Success</response>
-        /// <response code="401">If the user in unauthorized</response>
+        /// <response code="400">Request is not correct</response>
+        /// <response code="401">User is unauthorized</response>
+        /// <response code="403">No access to object</response>
+        /// <response code="404">Object is not found</response>
         [HttpGet("{id}", Name = nameof(GetCourse))]
-        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<CourseDetailsVm>> GetCourse(int id)
         {
             var query = new GetCourseDetailsQuery
@@ -91,16 +98,19 @@ namespace School.WebApi.Controllers
         /// </remarks>
         /// <param name="createCourseDto">CreateCourseDto object</param>
         /// <returns>Returns course id (int)</returns>
-        /// <response code="201">Success</response>
-        /// <response code="401">If the user in unauthorized</response>
+        /// <response code="200">Success</response>
+        /// <response code="400">Request is not correct</response>
+        /// <response code="401">User is unauthorized</response>
+        /// <response code="403">No access to object</response>
+        /// <response code="404">Object is not found</response>
         [HttpPost(Name = nameof(CreateCourse))]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<int>> CreateCourse([FromBody] CreateCourseDto createCourseDto)
+        public async Task<ActionResult<ResponseDto>> CreateCourse([FromBody] CreateCourseDto createCourseDto)
         {
             var command = _mapper.Map<CreateCourseCommand>(createCourseDto);
             command.CoachGuid = UserGuid;
             var courseId = await Mediator!.Send(command);
-            return Ok(courseId);
+            var response = new ResponseDto();
+            return Ok(response.Success($"Create new Course (id = {courseId}) is successful"));
         }
 
         /// <summary>
@@ -116,16 +126,19 @@ namespace School.WebApi.Controllers
         /// </remarks>
         /// <param name="updateCourseDto">UpdateCourseDto object</param>
         /// <returns>Returns NoContent</returns>
-        /// <response code="204">Success</response>
-        /// <response code="401">If the user in unauthorized</response>
+        /// <response code="200">Success</response>
+        /// <response code="400">Request is not correct</response>
+        /// <response code="401">User is unauthorized</response>
+        /// <response code="403">No access to object</response>
+        /// <response code="404">Object is not found</response>
         [HttpPut(Name = nameof(UpdateCourse))]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> UpdateCourse([FromBody] UpdateCourseDto updateCourseDto) // TODO: Id in Sample request
+        public async Task<ActionResult<ResponseDto>> UpdateCourse([FromBody] UpdateCourseDto updateCourseDto) // TODO: Id in Sample request
         {
             var command = _mapper.Map<UpdateCourseCommand>(updateCourseDto);
             command.CoachGuid = UserGuid;
             await Mediator!.Send(command);
-            return NoContent();
+            var response = new ResponseDto();
+            return Ok(response.Success($"Update Course (id = {updateCourseDto.Id}) is successful"));
         }
 
         /// <summary>
@@ -137,11 +150,13 @@ namespace School.WebApi.Controllers
         /// </remarks>
         /// <param name="id">Course id (int)</param>
         /// <returns>Returns NoContent</returns>
-        /// <response code="204">Success</response>
-        /// <response code="401">If the user in unauthorized</response>
+        /// <response code="200">Success</response>
+        /// <response code="400">Request is not correct</response>
+        /// <response code="401">User is unauthorized</response>
+        /// <response code="403">No access to object</response>
+        /// <response code="404">Object is not found</response>
         [HttpDelete("{id}", Name = nameof(DeleteCourse))]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> DeleteCourse(int id)
+        public async Task<ActionResult<ResponseDto>> DeleteCourse(int id)
         {
             var command = new DeleteCourseCommand
             {
@@ -149,7 +164,8 @@ namespace School.WebApi.Controllers
                 CoachGuid = UserGuid
             };
             await Mediator!.Send(command);
-            return NoContent();
+            var response = new ResponseDto();
+            return Ok(response.Success($"Delete Course (id = {id}) is successful"));
         }
     }
 }
