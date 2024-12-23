@@ -7,11 +7,8 @@ namespace School.WebApi.Repository
 {
     public class CourseRepository : GenericRepository<Course>, ICourseRepository
     {
-
-
         public CourseRepository(SchoolDbContext context) : base(context)
         {
-
         }
     }
 }

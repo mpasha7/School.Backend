@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces;
+using School.Application.Interfaces.Repository;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,16 @@ namespace School.Application.Handlers.Lessons.Commands.DeleteLesson
 {
     public class DeleteLessonCommandHandler : IRequestHandler<DeleteLessonCommand>
     {
-        private readonly ISchoolDbContext context;
+        private readonly ILessonRepository _lessonRepository;
 
-        public DeleteLessonCommandHandler(ISchoolDbContext context)
+        public DeleteLessonCommandHandler(ILessonRepository lessonRepository)
         {
-            this.context = context;
+            this._lessonRepository = lessonRepository;
         }
 
         public async Task Handle(DeleteLessonCommand request, CancellationToken cancellationToken)
         {
-            var lesson = await context.Lessons.Include(les => les.Course).FirstOrDefaultAsync(les => les.Id == request.Id, cancellationToken);
+            var lesson = await _lessonRepository.GetByIdAsync(request.Id, cancellationToken, includeProperty: "Course");
 
             if (lesson == null)
                 throw new NotFoundException(nameof(Lesson), request.Id);
@@ -33,8 +34,7 @@ namespace School.Application.Handlers.Lessons.Commands.DeleteLesson
             else if (lesson.Course.CoachGuid != request.CoachGuid)
                 throw new NoAccessException(nameof(Lesson), request.Id);
 
-            context.Lessons.Remove(lesson);
-            await context.SaveChangesAsync(cancellationToken);
+            await _lessonRepository.DeleteAsync(lesson, cancellationToken);
         }
     }
 }

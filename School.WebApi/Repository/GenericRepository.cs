@@ -41,9 +41,15 @@ namespace School.WebApi.Repository
                 return await query.ToListAsync(cancellationToken);
         }
 
-        public async Task<T?> GetByIdAsync(int id, CancellationToken cancellationToken)
+        public async Task<T?> GetByIdAsync(
+            int id, 
+            CancellationToken cancellationToken,
+            string includeProperty = "")
         {
-            return await _dbSet.FindAsync(id, cancellationToken);
+            var res = await _dbSet.FindAsync(id, cancellationToken);
+            if (!string.IsNullOrEmpty(includeProperty) && res != null)
+                _context.Entry(res).Reference(includeProperty).Load();
+            return res;
         }
 
         public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)

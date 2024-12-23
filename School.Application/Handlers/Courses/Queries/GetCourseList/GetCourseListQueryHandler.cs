@@ -16,19 +16,19 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseList
     public class GetCourseListQueryHandler : IRequestHandler<GetCourseListQuery, CourseListVm>
     {
         private readonly ICourseRepository _repository;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
         public GetCourseListQueryHandler(ICourseRepository repository, IMapper mapper)
         {
             this._repository = repository;
-            this.mapper = mapper;
+            this._mapper = mapper;
         }
 
         public async Task<CourseListVm> Handle(GetCourseListQuery request, CancellationToken cancellationToken)
         {
             var courses = (await _repository.GetAllAsync(cancellationToken, filter: c => c.CoachGuid == request.CoachGuid))
                 .AsQueryable()
-                .ProjectTo<CourseLookupDto>(mapper.ConfigurationProvider)
+                .ProjectTo<CourseLookupDto>(_mapper.ConfigurationProvider)
                 .ToList();
 
             return new CourseListVm { Courses = courses };

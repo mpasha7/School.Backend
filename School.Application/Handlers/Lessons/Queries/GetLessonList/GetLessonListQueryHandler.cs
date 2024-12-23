@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces;
+using School.Application.Interfaces.Repository;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -15,28 +16,30 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonList
 {
     public class GetLessonListQueryHandler : IRequestHandler<GetLessonListQuery, LessonListVm>
     {
-        private readonly ISchoolDbContext context;
-        private readonly IMapper mapper;
+        private readonly ILessonRepository _lessonRepository;
+        private readonly ICourseRepository _courseRepository;
+        private readonly IMapper _mapper;
 
-        public GetLessonListQueryHandler(ISchoolDbContext context, IMapper mapper)
+        public GetLessonListQueryHandler(ILessonRepository lessonRepository, ICourseRepository courseRepository, IMapper mapper)
         {
-            this.context = context;
-            this.mapper = mapper;
+            this._lessonRepository = lessonRepository;
+            this._courseRepository = courseRepository;
+            this._mapper = mapper;
         }
 
         public async Task<LessonListVm> Handle(GetLessonListQuery request, CancellationToken cancellationToken)
         {
-            var course = await context.Courses.FirstOrDefaultAsync(c => c.Id == request.CourseId, cancellationToken);
+            var course = await _courseRepository.GetByIdAsync(request.CourseId, cancellationToken);
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.CourseId);
             else if (course.CoachGuid != request.CoachGuid)
                 throw new NoAccessException(nameof(Course), request.CourseId);
 
-            var lessons = await context.Lessons
-                .Where(les => les.CourseId == request.CourseId)
-                .ProjectTo<LessonLookupDto>(mapper.ConfigurationProvider)
-                .ToListAsync(cancellationToken);
+            var lessons = (await _lessonRepository.GetAllAsync(cancellationToken, filter: les => les.CourseId == request.CourseId))
+                .AsQueryable()
+                .ProjectTo<LessonLookupDto>(_mapper.ConfigurationProvider)
+                .ToList();
 
             return new LessonListVm { Lessons = lessons };
         }

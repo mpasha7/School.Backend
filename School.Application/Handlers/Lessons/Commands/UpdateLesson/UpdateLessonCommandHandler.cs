@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces;
+using School.Application.Interfaces.Repository;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,16 @@ namespace School.Application.Handlers.Lessons.Commands.UpdateLesson
 {
     public class UpdateLessonCommandHandler : IRequestHandler<UpdateLessonCommand>
     {
-        private readonly ISchoolDbContext context;
+        private readonly ILessonRepository _lessonRepository;
 
-        public UpdateLessonCommandHandler(ISchoolDbContext context)
+        public UpdateLessonCommandHandler(ILessonRepository lessonRepository)
         {
-            this.context = context;
+            this._lessonRepository = lessonRepository;
         }
 
         public async Task Handle(UpdateLessonCommand request, CancellationToken cancellationToken)
         {
-            var lesson = await context.Lessons.Include(les => les.Course).FirstOrDefaultAsync(les => les.Id == request.Id, cancellationToken);
+            var lesson = await _lessonRepository.GetByIdAsync(request.Id, cancellationToken, includeProperty: "Course");
 
             if (lesson == null)
                 throw new NotFoundException(nameof(Lesson), request.Id);
@@ -38,7 +39,7 @@ namespace School.Application.Handlers.Lessons.Commands.UpdateLesson
             lesson.Description = request.Description;
             lesson.VideoLink = request.VideoLink;
 
-            await context.SaveChangesAsync(cancellationToken);
+            await _lessonRepository.UpdateAsync(lesson, cancellationToken);
         }
     }
 }

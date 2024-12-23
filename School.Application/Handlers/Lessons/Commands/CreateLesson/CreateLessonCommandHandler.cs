@@ -2,22 +2,25 @@
 using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces;
+using School.Application.Interfaces.Repository;
 using School.Domain;
 
 namespace School.Application.Handlers.Lessons.Commands.CreateLesson
 {
     public class CreateLessonCommandHandler : IRequestHandler<CreateLessonCommand, int>
-    {
-        private readonly ISchoolDbContext context;
+    {        
+        private readonly ILessonRepository _lessonRepository;
+        private readonly ICourseRepository _courseRepository;
 
-        public CreateLessonCommandHandler(ISchoolDbContext context)
+        public CreateLessonCommandHandler(ILessonRepository lessonRepository, ICourseRepository courseRepository)
         {
-            this.context = context;
+            this._lessonRepository = lessonRepository;
+            this._courseRepository = courseRepository;
         }
 
         public async Task<int> Handle(CreateLessonCommand request, CancellationToken cancellationToken)
         {
-            var course = await context.Courses.FirstOrDefaultAsync(c => c.Id == request.CourseId);
+            var course = await _courseRepository.GetByIdAsync(request.CourseId, cancellationToken);
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.CourseId);
@@ -34,8 +37,7 @@ namespace School.Application.Handlers.Lessons.Commands.CreateLesson
                 VideoLink = request.VideoLink
             };
 
-            await context.Lessons.AddAsync(lesson, cancellationToken);
-            await context.SaveChangesAsync(cancellationToken);
+            await _lessonRepository.AddAsync(lesson, cancellationToken);
             return lesson.Id;
         }
     }
