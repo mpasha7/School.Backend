@@ -1,4 +1,5 @@
 <h1>Курсы:</h1>
+
 <button type="button" routerLink="/courses/form/0">Добавить</button>
 
 @if (courseList && courseList.length > 0){
@@ -16,7 +17,9 @@
       @for (item of courseList; track $index) {
         <tr>
           <td>{{item.id}}</td>
-          <td>{{item.title}}</td>
+          <td>
+            <button type="button" routerLink="/lessons/{{item.id}}/list">{{item.title}}</button>
+          </td>
           <td>{{item.description}}</td>
           <td>{{item.photoPath}}</td>
           <td>

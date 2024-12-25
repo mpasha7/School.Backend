@@ -1,5 +1,6 @@
 import { CourseDetailsVm, CourseLookupDto } from "../../core/models/course.model";
 
+
 export interface CoursesState {
     courseList: CourseLookupDto[];
     selectedCourse: CourseDetailsVm | null;

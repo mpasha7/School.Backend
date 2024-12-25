@@ -27,11 +27,12 @@ namespace School.WebApi
             builder.Services.AddApplication();
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<ILessonRepository, LessonRepository>();
             builder.Services.AddControllers();
 
             builder.Services.AddCors(opts =>
             {
-                opts.AddPolicy("AllowAll", policy => // TODO: Ограничить CORS перед развертыванием
+                opts.AddPolicy("AllowAll", policy => // TODO: Ограничить CORS
                 {
                     policy.AllowAnyHeader();
                     policy.AllowAnyMethod();

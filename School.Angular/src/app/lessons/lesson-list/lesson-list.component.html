@@ -1,0 +1,35 @@
+<h1>{{courseTitle}}</h1>
+<h2>Уроки курса</h2>
+
+<button type="button" routerLink="/lessons/{{courseId}}/form/0">Добавить</button>
+
+@if (lessonList && lessonList.length > 0){
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Number</th>
+        <th>Title</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of lessonList; track $index) {
+        <tr>
+          <td>{{item.id}}</td>
+          <td>{{item.number}}</td>
+          <td>{{item.title}}</td>
+          <td>
+            <button type="button" routerLink="/lessons/{{courseId}}/form/{{item.id}}">Редактировать</button>
+            <button type="button" (click)="onDeleteLesson(item.id)">Удалить</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+@else {
+  <p>Здесь пока нет уроков</p>
+}
+
+<button type="button" routerLink="/">Назад</button>

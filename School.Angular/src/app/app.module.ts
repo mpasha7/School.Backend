@@ -6,26 +6,15 @@ import { AppComponent } from './app.component';
 import { AsyncPipe } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
-import { CoursesComponent } from './courses/courses.component';
-import { CourseListComponent } from './courses/course-list/course-list.component';
-import { CourseFormComponent } from './courses/course-form/course-form.component';
-import { LessonsComponent } from './lessons/lessons.component';
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
 import { LayoutModule } from './layout/layout.module';
 import { StoreModule } from '@ngrx/store';
 import { appEffects, store } from './redux/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    // HeaderComponent,
-    // FooterComponent,
-    // CoursesComponent,
-    // CourseListComponent,
-    // CourseFormComponent,
-    // LessonsComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +24,18 @@ import { EffectsModule } from '@ngrx/effects';
     ReactiveFormsModule,
     LayoutModule,
     StoreModule.forRoot(store),
-    EffectsModule.forRoot(appEffects)
+    EffectsModule.forRoot(appEffects),
+
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: false,
+      autoPause: true,
+      features: {
+        pause: false,
+        lock: true,
+        persist: true
+      }
+    })
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

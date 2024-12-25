@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursesService } from '../../core/services/courses.service';
-import { CourseListVm, CourseLookupDto } from '../../core/models/course.model';
-import { Observable } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
+import { CourseLookupDto } from '../../core/models/course.model';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../redux/store';

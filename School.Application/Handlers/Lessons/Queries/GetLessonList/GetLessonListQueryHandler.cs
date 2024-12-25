@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
+using School.Application.Handlers.Courses.Queries.GetCourseList;
 using School.Application.Interfaces;
 using School.Application.Interfaces.Repository;
 using School.Domain;
@@ -41,7 +42,7 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonList
                 .ProjectTo<LessonLookupDto>(_mapper.ConfigurationProvider)
                 .ToList();
 
-            return new LessonListVm { Lessons = lessons };
+            return new LessonListVm { Lessons = lessons, Course = _mapper.Map<CourseLookupDto>(course) };
         }
     }
 }

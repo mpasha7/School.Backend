@@ -8,6 +8,7 @@ import { createCourse, loadCourse, updateCourse } from '../../redux/courses/cour
 import { CourseDetailsVm, CreateCourseDto, UpdateCourseDto } from '../../core/models/course.model';
 import { selectCourse } from '../../redux/courses/courses.selector';
 import { JsonPipe } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-form',
@@ -19,13 +20,12 @@ import { JsonPipe } from '@angular/common';
 export class CourseFormComponent implements OnInit {
   courseForm: FormGroup;
   pageTitle: string = '';
-  courseId: number;
-  selectedCourse!: CourseDetailsVm | null;
+  courseId!: number;
 
   constructor(
     private store: Store<AppState>,
     private router: Router,
-    private activateRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute
   ) {
     this.courseForm = new FormGroup({
       title: new FormControl<string>(''),
@@ -36,7 +36,8 @@ export class CourseFormComponent implements OnInit {
       beginQuestionnaire: new FormControl<string | null>(null),
       endQuestionnaire: new FormControl<string | null>(null),
     });
-    this.courseId = this.activateRoute.snapshot.params["id"];
+    this.courseId = this.activatedRoute.snapshot.params["id"];
+    // this.activatedRoute.parent?.params.subscribe(params => this.courseId = params["courseid"]);
   }
 
   ngOnInit(): void {
@@ -44,9 +45,8 @@ export class CourseFormComponent implements OnInit {
       this.pageTitle = "Редактирование курса";
 
       this.store.dispatch(loadCourse({id: this.courseId}));
+
       this.store.select(selectCourse).subscribe((data) => {
-        // if (this.courseId != this.courseForm.value.id)
-        //   throw new Error('Object ID is not correct')
         this.courseForm.patchValue({
           title: data?.title,
           description: data?.description,
@@ -64,7 +64,7 @@ export class CourseFormComponent implements OnInit {
   }
 
   saveCourseData() {
-    const createDto = {
+    const createCourseDto = {
       title: this.courseForm.value.title,
       description: this.courseForm.value.description,
       shortDescription: this.courseForm.value.shortDescription,
@@ -75,11 +75,11 @@ export class CourseFormComponent implements OnInit {
     };
 
     if (this.courseId > 0) {
-      const updateDto = {id: this.courseId, ...createDto}
-      this.store.dispatch(updateCourse({updateCourseDto: updateDto}))
+      const updateCourseDto = {id: this.courseId, ...createCourseDto};
+      this.store.dispatch(updateCourse({updateCourseDto: updateCourseDto}));
     }
     else {
-      this.store.dispatch(createCourse({createCourseDto: createDto}));
+      this.store.dispatch(createCourse({createCourseDto: createCourseDto}));
     }
     this.router.navigate([""]);
   }

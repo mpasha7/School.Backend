@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
+using School.Application.Handlers.Courses.Queries.GetCourseList;
 using School.Application.Interfaces;
 using School.Application.Interfaces.Repository;
 using School.Domain;
@@ -16,12 +17,12 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonDetails
     public class GetLessonDetailsQueryHandler : IRequestHandler<GetLessonDetailsQuery, LessonDetailsVm>
     {
         private readonly ILessonRepository _lessonRepository;
-        private readonly IMapper mapper;
+        private readonly IMapper _mapper;
 
         public GetLessonDetailsQueryHandler(ILessonRepository lessonRepository, IMapper mapper)
         {
             this._lessonRepository = lessonRepository;
-            this.mapper = mapper;
+            this._mapper = mapper;
         }
 
         public async Task<LessonDetailsVm> Handle(GetLessonDetailsQuery request, CancellationToken cancellationToken)
@@ -37,7 +38,9 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonDetails
             else if (lesson.Course.CoachGuid != request.CoachGuid)
                 throw new NoAccessException(nameof(Lesson), request.Id);
 
-            return mapper.Map<LessonDetailsVm>(lesson);
+            var lessonDto = _mapper.Map<LessonDetailsVm>(lesson);
+            lessonDto.Course = _mapper.Map<CourseLookupDto>(lesson.Course);
+            return lessonDto;
         }
     }
 }

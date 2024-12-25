@@ -1,0 +1,34 @@
+<h1>{{courseTitle}}</h1>
+<h2>{{pageTitle}}</h2>
+
+<form [formGroup]="lessonForm" (ngSubmit)="saveLessonData()">
+
+    <div>
+        <label for="number">Порядковый номер:</label><br/>
+        <input formControlName="number">
+    </div>
+  
+    <div>
+      <label for="title">Название:</label><br/>
+      <input formControlName="title">
+    </div>
+  
+    <div>
+      <label for="description">Описание:</label><br/>
+      <textarea formControlName="description"></textarea>
+    </div>
+
+    <div>
+        <label for="videoLink">Ссылка на видео:</label><br/>
+        <input formControlName="videoLink">
+    </div>
+  
+    <div>
+      <button type="submit">Сохранить</button>
+      <button type="button" routerLink="/lessons/{{courseId}}/list">Назад</button>
+    </div>
+  </form>
+  
+  
+  
+

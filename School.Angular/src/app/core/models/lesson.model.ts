@@ -1,5 +1,8 @@
+import { CourseLookupDto } from "./course.model";
+
 export interface LessonListVm {
     lessons: LessonLookupDto[];
+    course: CourseLookupDto;
 }
 
 export interface LessonLookupDto {
@@ -16,6 +19,8 @@ export interface LessonDetailsVm {
     title: string | null;
     description: string | null;
     videoLink: string | null;
+
+    course: CourseLookupDto;
 }
 
 export interface CreateLessonDto {
