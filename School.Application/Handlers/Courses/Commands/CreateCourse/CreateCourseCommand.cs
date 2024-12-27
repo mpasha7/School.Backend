@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,9 @@ namespace School.Application.Handlers.Courses.Commands.CreateCourse
         public string? Description { get; set; }
         public string? ShortDescription { get; set; }
         public string? PublicDescription { get; set; }
-        public string? PhotoPath { get; set; }
         public string? BeginQuestionnaire { get; set; }
         public string? EndQuestionnaire { get; set; }
+
+        public IFormFile? FormFile { get; set; }
     }
 }

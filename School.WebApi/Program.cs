@@ -9,6 +9,8 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using School.Application.Interfaces.Repository;
 using School.WebApi.Repository;
+using School.Application.Interfaces.Services;
+using School.WebApi.Services;
 
 namespace School.WebApi
 {
@@ -28,6 +30,8 @@ namespace School.WebApi
             builder.Services.AddPersistence(builder.Configuration);
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
             builder.Services.AddScoped<ILessonRepository, LessonRepository>();
+            builder.Services.AddScoped<IFileRepository, FileRepository>();
+            builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddControllers();
 
             builder.Services.AddCors(opts =>

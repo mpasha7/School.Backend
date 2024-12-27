@@ -6,6 +6,8 @@ using School.Application.Handlers.Courses.Commands.DeleteCourse;
 using School.Application.Handlers.Courses.Commands.UpdateCourse;
 using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
+using School.Application.Handlers.Files.Commands.CreateFile;
+using School.Application.Handlers.Files.Commands.DeleteFile;
 using School.Domain;
 using School.WebApi.Models;
 using School.WebApi.Models.Course;
@@ -108,7 +110,9 @@ namespace School.WebApi.Controllers
         {
             var command = _mapper.Map<CreateCourseCommand>(createCourseDto);
             command.CoachGuid = UserGuid;
+            command.FormFile = HttpContext.Request.Form.Files[0];
             var courseId = await Mediator!.Send(command);
+
             var response = new ResponseDto();
             return Ok(response.Success($"Create new Course (id = {courseId}) is successful"));
         }
@@ -136,7 +140,9 @@ namespace School.WebApi.Controllers
         {
             var command = _mapper.Map<UpdateCourseCommand>(updateCourseDto);
             command.CoachGuid = UserGuid;
+            command.FormFile = HttpContext.Request.Form.Files[0];
             await Mediator!.Send(command);
+
             var response = new ResponseDto();
             return Ok(response.Success($"Update Course (id = {updateCourseDto.Id}) is successful"));
         }
@@ -164,6 +170,7 @@ namespace School.WebApi.Controllers
                 CoachGuid = UserGuid
             };
             await Mediator!.Send(command);
+
             var response = new ResponseDto();
             return Ok(response.Success($"Delete Course (id = {id}) is successful"));
         }

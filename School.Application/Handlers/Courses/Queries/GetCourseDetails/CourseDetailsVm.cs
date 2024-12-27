@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using School.Application.Common.Mappings;
+using School.Application.Handlers.Files;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,10 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
         public string? Description { get; set; }
         public string? ShortDescription { get; set; }
         public string? PublicDescription { get; set; }
-        public string? PhotoPath { get; set; }
         public string? BeginQuestionnaire { get; set; }
         public string? EndQuestionnaire { get; set; }
+
+        public FileLookupDto? Photo { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -29,7 +31,6 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
                 .ForMember(vm => vm.Description, opt => opt.MapFrom(c => c.Description))
                 .ForMember(vm => vm.ShortDescription, opt => opt.MapFrom(c => c.ShortDescription))
                 .ForMember(vm => vm.PublicDescription, opt => opt.MapFrom(c => c.PublicDescription))
-                .ForMember(vm => vm.PhotoPath, opt => opt.MapFrom(c => c.PhotoPath))
                 .ForMember(vm => vm.BeginQuestionnaire, opt => opt.MapFrom(c => c.BeginQuestionnaire))
                 .ForMember(vm => vm.EndQuestionnaire, opt => opt.MapFrom(c => c.EndQuestionnaire));
         }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using School.Application.Common.Mappings;
+using School.Application.Handlers.Files;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,15 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseList
 
         public string? Title { get; set; }
         public string? Description { get; set; }
-        public string? PhotoPath { get; set; }
+
+        public FileLookupDto? Photo { get; set; }
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Course, CourseLookupDto>()
                 .ForMember(dto => dto.Id, opt => opt.MapFrom(c => c.Id))
                 .ForMember(dto => dto.Title, opt => opt.MapFrom(c => c.Title))
-                .ForMember(dto => dto.Description, opt => opt.MapFrom(c => c.Description))
-                .ForMember(dto => dto.PhotoPath, opt => opt.MapFrom(c => c.PhotoPath));
+                .ForMember(dto => dto.Description, opt => opt.MapFrom(c => c.Description));
         }
     }
 }

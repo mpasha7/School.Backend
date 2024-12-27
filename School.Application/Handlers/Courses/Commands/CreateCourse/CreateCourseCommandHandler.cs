@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using School.Application.Interfaces;
 using School.Application.Interfaces.Repository;
+using School.Application.Interfaces.Services;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace School.Application.Handlers.Courses.Commands.CreateCourse
     public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, int>
     {
         private readonly ICourseRepository _repository;
+        private readonly IFileService _fileService;
 
-        public CreateCourseCommandHandler(ICourseRepository repository)
+        public CreateCourseCommandHandler(ICourseRepository repository, IFileService fileService)
         {
             this._repository = repository;
+            this._fileService = fileService;
         }
 
         public async Task<int> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
@@ -30,10 +33,12 @@ namespace School.Application.Handlers.Courses.Commands.CreateCourse
                 Description = request.Description,
                 ShortDescription = request.ShortDescription,
                 PublicDescription = request.PublicDescription,
-                PhotoPath = request.PhotoPath,
                 BeginQuestionnaire = request.BeginQuestionnaire,
                 EndQuestionnaire = request.EndQuestionnaire
             };
+
+            if (request.FormFile != null)
+                await _fileService.SaveFileAsync(request.FormFile, FileTypes.Photo, FileOwners.Course, course.Id, cancellationToken);
 
             await _repository.AddAsync(course, cancellationToken);
             return course.Id;

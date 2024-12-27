@@ -28,7 +28,7 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseList
         {
             var courses = (await _repository.GetAllAsync(cancellationToken, filter: c => c.CoachGuid == request.CoachGuid))
                 .AsQueryable()
-                .ProjectTo<CourseLookupDto>(_mapper.ConfigurationProvider)
+                .ProjectTo<CourseLookupDto>(_mapper.ConfigurationProvider)////////////////////////////////////////////////////////////
                 .ToList();
 
             return new CourseListVm { Courses = courses };
