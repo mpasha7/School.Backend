@@ -17,7 +17,6 @@ namespace School.WebApi.Models.Course
         public string? Description { get; set; }
         public string? ShortDescription { get; set; }
         public string? PublicDescription { get; set; }
-        public string? PhotoPath { get; set; }
         public string? BeginQuestionnaire { get; set; }
         public string? EndQuestionnaire { get; set; }
 
@@ -29,7 +28,6 @@ namespace School.WebApi.Models.Course
                 .ForMember(comm => comm.Description, opt => opt.MapFrom(dto => dto.Description))
                 .ForMember(comm => comm.ShortDescription, opt => opt.MapFrom(dto => dto.ShortDescription))
                 .ForMember(comm => comm.PublicDescription, opt => opt.MapFrom(dto => dto.PublicDescription))
-                .ForMember(comm => comm.PhotoPath, opt => opt.MapFrom(dto => dto.PhotoPath))
                 .ForMember(comm => comm.BeginQuestionnaire, opt => opt.MapFrom(dto => dto.BeginQuestionnaire))
                 .ForMember(comm => comm.EndQuestionnaire, opt => opt.MapFrom(dto => dto.EndQuestionnaire));
         }

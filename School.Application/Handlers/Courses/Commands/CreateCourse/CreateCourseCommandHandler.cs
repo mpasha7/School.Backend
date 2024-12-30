@@ -37,10 +37,11 @@ namespace School.Application.Handlers.Courses.Commands.CreateCourse
                 EndQuestionnaire = request.EndQuestionnaire
             };
 
+            await _repository.AddAsync(course, cancellationToken);
+
             if (request.FormFile != null)
                 await _fileService.SaveFileAsync(request.FormFile, FileTypes.Photo, FileOwners.Course, course.Id, cancellationToken);
 
-            await _repository.AddAsync(course, cancellationToken);
             return course.Id;
         }
     }

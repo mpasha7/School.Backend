@@ -6,8 +6,6 @@ using School.Application.Handlers.Courses.Commands.DeleteCourse;
 using School.Application.Handlers.Courses.Commands.UpdateCourse;
 using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
-using School.Application.Handlers.Files.Commands.CreateFile;
-using School.Application.Handlers.Files.Commands.DeleteFile;
 using School.Domain;
 using School.WebApi.Models;
 using School.WebApi.Models.Course;
@@ -106,11 +104,12 @@ namespace School.WebApi.Controllers
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
         [HttpPost(Name = nameof(CreateCourse))]
-        public async Task<ActionResult<ResponseDto>> CreateCourse([FromBody] CreateCourseDto createCourseDto)
+        public async Task<ActionResult<ResponseDto>> CreateCourse([FromForm] CreateCourseDto createCourseDto)
         {
             var command = _mapper.Map<CreateCourseCommand>(createCourseDto);
             command.CoachGuid = UserGuid;
-            command.FormFile = HttpContext.Request.Form.Files[0];
+            if (HttpContext.Request.Form.Files.Count > 0)
+                command.FormFile = HttpContext.Request.Form.Files[0];
             var courseId = await Mediator!.Send(command);
 
             var response = new ResponseDto();
@@ -136,11 +135,12 @@ namespace School.WebApi.Controllers
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
         [HttpPut(Name = nameof(UpdateCourse))]
-        public async Task<ActionResult<ResponseDto>> UpdateCourse([FromBody] UpdateCourseDto updateCourseDto) // TODO: Id in Sample request
+        public async Task<ActionResult<ResponseDto>> UpdateCourse([FromForm] UpdateCourseDto updateCourseDto) // TODO: Id in Sample request
         {
             var command = _mapper.Map<UpdateCourseCommand>(updateCourseDto);
             command.CoachGuid = UserGuid;
-            command.FormFile = HttpContext.Request.Form.Files[0];
+            if (HttpContext.Request.Form.Files.Count > 0)
+                command.FormFile = HttpContext.Request.Form.Files[0];
             await Mediator!.Send(command);
 
             var response = new ResponseDto();

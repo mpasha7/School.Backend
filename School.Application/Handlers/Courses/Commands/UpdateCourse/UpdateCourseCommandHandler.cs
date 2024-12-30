@@ -40,13 +40,13 @@ namespace School.Application.Handlers.Courses.Commands.UpdateCourse
             course.BeginQuestionnaire = request.BeginQuestionnaire;
             course.EndQuestionnaire = request.EndQuestionnaire;
 
+            await _repository.UpdateAsync(course, cancellationToken);
+
             if (request.FormFile != null)
             {
                 await _fileService.DeleteFileAsync(course.Photo.Id, FileTypes.Photo, cancellationToken);
                 await _fileService.SaveFileAsync(request.FormFile, FileTypes.Photo, FileOwners.Course, course.Id, cancellationToken);
             }
-
-            await _repository.UpdateAsync(course, cancellationToken);
         }
     }
 }

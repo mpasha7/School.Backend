@@ -21,12 +21,12 @@ export class CoursesService {
     return this.http.get<CourseDetailsVm>(`${this.baseUrl}/${id}`);
   }
 
-  createCourse(createCourseDto: any): Observable<ResponseDto> {
-    return this.http.post<ResponseDto>(this.baseUrl, createCourseDto);
+  createCourse(createCourseFormData: FormData): Observable<ResponseDto> {
+    return this.http.post<ResponseDto>(this.baseUrl, createCourseFormData);
   }
 
-  updateCourse(updateCourseDto: any): Observable<ResponseDto> {
-    return this.http.put<ResponseDto>(this.baseUrl, updateCourseDto);
+  updateCourse(updateCourseFormData: FormData): Observable<ResponseDto> {
+    return this.http.put<ResponseDto>(this.baseUrl, updateCourseFormData);
   }
 
   deleteCourse(id: number): Observable<ResponseDto> {

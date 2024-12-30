@@ -32,7 +32,7 @@ namespace School.WebApi.Services
             if (formFile == null)
                 throw new ArgumentNullException("formFile");
 
-            var rootPath = _environment.ContentRootPath;
+            var rootPath = _environment.WebRootPath;
             var uploadPath = Path.Combine(rootPath, "uploads", fileTypes[fileType]);
 
             if (!Directory.Exists(uploadPath))
@@ -40,7 +40,7 @@ namespace School.WebApi.Services
 
             var fileName = formFile.FileName;
             var fileNameExt = Path.GetExtension(fileName);
-            var uniqueFileName = $"{Guid.NewGuid().ToString()}_{fileName}{fileNameExt}";
+            var uniqueFileName = $"{Guid.NewGuid().ToString()}_{fileName}";
             var fileSize = formFile.Length;
 
             var fileNameWithPath = Path.Combine(uploadPath, uniqueFileName);
@@ -78,19 +78,19 @@ namespace School.WebApi.Services
             return file.Id;
         }
 
-        public async Task DeleteFileAsync(int requestId, FileTypes fileType, CancellationToken cancellationToken)
+        public async Task DeleteFileAsync(int id, FileTypes fileType, CancellationToken cancellationToken)
         {
-            FileObject? file = await _fileRepository.GetByIdAsync(requestId, cancellationToken);
+            FileObject? file = await _fileRepository.GetByIdAsync(id, cancellationToken);
 
             if (file == null)
-                throw new NotFoundException(nameof(File), requestId);
+                throw new NotFoundException(nameof(File), id);
 
-            var rootPath = _environment.ContentRootPath;
+            var rootPath = _environment.WebRootPath;
             var uploadPath = Path.Combine(rootPath, "uploads", fileTypes[fileType]);
 
             var fileNameWithPath = Path.Combine(uploadPath, file.UniqueFileName);
-            if (Directory.Exists(fileNameWithPath))
-                Directory.Delete(fileNameWithPath);
+            if (File.Exists(fileNameWithPath))
+                File.Delete(fileNameWithPath);
 
             await _fileRepository.DeleteAsync(file, cancellationToken);
         }

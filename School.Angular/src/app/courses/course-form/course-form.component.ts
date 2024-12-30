@@ -21,6 +21,7 @@ export class CourseFormComponent implements OnInit {
   courseForm: FormGroup;
   pageTitle: string = '';
   courseId!: number;
+  file: File | null = null;
 
   constructor(
     private store: Store<AppState>,
@@ -32,12 +33,11 @@ export class CourseFormComponent implements OnInit {
       description: new FormControl<string>(''),
       shortDescription: new FormControl<string | null>(null),
       publicDescription: new FormControl<string | null>(null),
-      photoPath: new FormControl<string | null>(null),
+      // photoPath: new FormControl<string | null>(null),
       beginQuestionnaire: new FormControl<string | null>(null),
       endQuestionnaire: new FormControl<string | null>(null),
     });
     this.courseId = this.activatedRoute.snapshot.params["id"];
-    // this.activatedRoute.parent?.params.subscribe(params => this.courseId = params["courseid"]);
   }
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class CourseFormComponent implements OnInit {
           description: data?.description,
           shortDescription: data?.shortDescription,
           publicDescription: data?.publicDescription,
-          photoPath: data?.photoPath,
+          // photoPath: data?.photoPath,
           beginQuestionnaire: data?.beginQuestionnaire,
           endQuestionnaire: data?.endQuestionnaire
         });
@@ -63,23 +63,31 @@ export class CourseFormComponent implements OnInit {
     }
   }
 
+  onFileChange(event: any) {
+    const formFile = event.target.files[0];
+    if (formFile) {
+      this.file = formFile;
+    }
+  }
+
   saveCourseData() {
-    const createCourseDto = {
-      title: this.courseForm.value.title,
-      description: this.courseForm.value.description,
-      shortDescription: this.courseForm.value.shortDescription,
-      publicDescription: this.courseForm.value.publicDescription,
-      photoPath: this.courseForm.value.photoPath,
-      beginQuestionnaire: this.courseForm.value.beginQuestionnaire,
-      endQuestionnaire: this.courseForm.value.endQuestionnaire
-    };
+    const formData = new FormData();
+    if (this.file){
+      formData.append('file', this.file, this.file.name);
+    }
+    formData.append('title', this.courseForm.value.title);
+    formData.append('description', this.courseForm.value.description);
+    formData.append('shortdescription', this.courseForm.value.shortDescription);
+    formData.append('publicdescription', this.courseForm.value.publicDescription);
+    formData.append('beginquestionnaire', this.courseForm.value.beginQuestionnaire);
+    formData.append('endquestionnaire', this.courseForm.value.endQuestionnaire);
 
     if (this.courseId > 0) {
-      const updateCourseDto = {id: this.courseId, ...createCourseDto};
-      this.store.dispatch(updateCourse({updateCourseDto: updateCourseDto}));
+      formData.append('id', this.courseId.toString());
+      this.store.dispatch(updateCourse({updateCourseDto: formData}));
     }
     else {
-      this.store.dispatch(createCourse({createCourseDto: createCourseDto}));
+      this.store.dispatch(createCourse({createCourseDto: formData}));
     }
     this.router.navigate([""]);
   }

@@ -29,7 +29,7 @@ namespace School.Persistence.EntityTypeConfigurations
             builder.HasOne(c => c.Photo)
                    .WithOne(p => p.Course)
                    .HasForeignKey<FileObject>(p => p.CourseId)
-                   .IsRequired()
+                   .IsRequired()              // TODO: Сделать не обязательным
                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(c => c.Title).HasMaxLength(200); // TODO: Лучше HasMaxLength(256)  // .IsRequired()

@@ -1,3 +1,5 @@
+import { FileLookupDto } from "./file.model";
+
 export interface CourseListVm {
     courses: CourseLookupDto[];
 }
@@ -7,7 +9,8 @@ export interface CourseLookupDto {
 
     title: string | null;
     description: string | null;
-    photoPath: string | null;
+
+    photo: FileLookupDto | null;
 }
 
 export interface CourseDetailsVm {
@@ -17,17 +20,19 @@ export interface CourseDetailsVm {
     description: string | null;
     shortDescription: string | null;
     publicDescription: string | null;
-    photoPath: string | null;
     beginQuestionnaire: string | null;
     endQuestionnaire: string | null;
+
+    photo: FileLookupDto | null;
 }
+
+
 
 export interface CreateCourseDto {
     title: string;
     description: string;
     shortDescription: string | null;
     publicDescription: string | null;
-    photoPath: string | null;
     beginQuestionnaire: string | null;
     endQuestionnaire: string | null;
 }
@@ -39,7 +44,6 @@ export interface UpdateCourseDto {
     description: string;
     shortDescription: string | null;
     publicDescription: string | null;
-    photoPath: string | null;
     beginQuestionnaire: string | null;
     endQuestionnaire: string | null;
 }
