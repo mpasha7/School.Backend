@@ -32,6 +32,7 @@ namespace School.WebApi
             builder.Services.AddScoped<ILessonRepository, LessonRepository>();
             builder.Services.AddScoped<IFileRepository, FileRepository>();
             builder.Services.AddScoped<IFileService, FileService>();
+            builder.Services.AddScoped<ILessonNumbersService, LessonNumbersService>();
             builder.Services.AddControllers();
 
             builder.Services.AddCors(opts =>

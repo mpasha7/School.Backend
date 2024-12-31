@@ -37,12 +37,25 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonList
             else if (course.CoachGuid != request.CoachGuid)
                 throw new NoAccessException(nameof(Course), request.CourseId);
 
-            var lessons = (await _lessonRepository.GetAllAsync(cancellationToken, filter: les => les.CourseId == request.CourseId))
+            var lessons = (await _lessonRepository.GetAllAsync(
+                cancellationToken,
+                filter: les => les.CourseId == request.CourseId,
+                orderBy: x => x.OrderBy(les => les.Number)
+                ))
                 .AsQueryable()
                 .ProjectTo<LessonLookupDto>(_mapper.ConfigurationProvider)
                 .ToList();
 
-            return new LessonListVm { Lessons = lessons, Course = _mapper.Map<CourseLookupDto>(course) };
+            int maxLessonNumber = lessons.Count > 0 
+                ? lessons.Max(les => les.Number)
+                : 0;
+
+            return new LessonListVm 
+            { 
+                Lessons = lessons,
+                Course = _mapper.Map<CourseLookupDto>(course),
+                MaxLessonNumber = maxLessonNumber
+            };
         }
     }
 }

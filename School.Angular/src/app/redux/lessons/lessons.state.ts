@@ -4,8 +4,9 @@ import { LessonDetailsVm, LessonLookupDto } from "../../core/models/lesson.model
 
 export interface LessonsState {
     lessonsList: LessonLookupDto[];
-    selectedLesson: LessonDetailsVm | null;
     containingCourse: CourseLookupDto | null;
+    maxLessonNumber: number;
+    selectedLesson: LessonDetailsVm | null;
     loading: boolean;
     error: any;
 }
@@ -13,6 +14,7 @@ export interface LessonsState {
 export const initialLessonsState: LessonsState = {
     lessonsList: [],
     containingCourse: null,
+    maxLessonNumber: 0,
     selectedLesson: null,
     loading: false,
     error: null

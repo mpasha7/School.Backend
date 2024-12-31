@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces;
 using School.Application.Interfaces.Repository;
+using School.Application.Interfaces.Services;
 using School.Domain;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,12 @@ namespace School.Application.Handlers.Lessons.Commands.DeleteLesson
     public class DeleteLessonCommandHandler : IRequestHandler<DeleteLessonCommand>
     {
         private readonly ILessonRepository _lessonRepository;
+        private readonly ILessonNumbersService _numbersService;
 
-        public DeleteLessonCommandHandler(ILessonRepository lessonRepository)
+        public DeleteLessonCommandHandler(ILessonRepository lessonRepository, ILessonNumbersService numbersService)
         {
             this._lessonRepository = lessonRepository;
+            this._numbersService = numbersService;
         }
 
         public async Task Handle(DeleteLessonCommand request, CancellationToken cancellationToken)
@@ -33,6 +36,8 @@ namespace School.Application.Handlers.Lessons.Commands.DeleteLesson
                 throw new NotContainsException(nameof(Course), request.CourseId, nameof(Lesson), request.Id);
             else if (lesson.Course.CoachGuid != request.CoachGuid)
                 throw new NoAccessException(nameof(Lesson), request.Id);
+
+            await _numbersService.ShiftNumbersIfDeleteLesson(lesson.Number, lesson.CourseId, cancellationToken);
 
             await _lessonRepository.DeleteAsync(lesson, cancellationToken);
         }

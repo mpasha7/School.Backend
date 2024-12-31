@@ -14,6 +14,11 @@ export const selectContainingCourse = createSelector(
     (state: LessonsState) => state.containingCourse
 );
 
+export const selectMaxLessonNumber = createSelector(
+    selectLessonsState,
+    (state: LessonsState) => state.maxLessonNumber
+);
+
 export const selectLesson = createSelector(
     selectLessonsState,
     (state: LessonsState) => state.selectedLesson

@@ -17,6 +17,7 @@ export const lessonsReducer = createReducer(
             ...state,
             lessonsList: [...action.lessonList.lessons],
             containingCourse: action.lessonList.course,
+            maxLessonNumber: action.lessonList.maxLessonNumber,
             loading: false
         }
     }),
@@ -25,6 +26,7 @@ export const lessonsReducer = createReducer(
             ...state,
             lessonsList: [],
             containingCourse: null,
+            maxLessonNumber: 0,
             loading: false,
             error: action.errorObject
         }

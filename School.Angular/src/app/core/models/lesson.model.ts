@@ -3,6 +3,7 @@ import { CourseLookupDto } from "./course.model";
 export interface LessonListVm {
     lessons: LessonLookupDto[];
     course: CourseLookupDto;
+    maxLessonNumber: number;
 }
 
 export interface LessonLookupDto {

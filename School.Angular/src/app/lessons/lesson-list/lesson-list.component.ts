@@ -4,7 +4,7 @@ import { AppState } from '../../redux/store';
 import { Store } from '@ngrx/store';
 import { deleteLesson, loadLessonList } from '../../redux/lessons/lessons.actions';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { selectContainingCourse, selectLessonList } from '../../redux/lessons/lessons.selector';
+import { selectContainingCourse, selectLessonList, selectMaxLessonNumber } from '../../redux/lessons/lessons.selector';
 import { selectCourseList } from '../../redux/courses/courses.selector';
 import { JsonPipe } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -20,6 +20,7 @@ export class LessonListComponent implements OnInit {
   lessonList!: LessonLookupDto[];
   courseId!: number;
   courseTitle!: string | null;
+  maxLessonNumber!: number;
 
   constructor(
     private store: Store<AppState>,
@@ -33,10 +34,14 @@ export class LessonListComponent implements OnInit {
     this.store.select(selectLessonList).subscribe((data) => {
       this.lessonList = data;
     });
+    // this.lessonList.sort((a, b) => a.number - b.number);
+
     this.store.select(selectContainingCourse).subscribe((data) => {
       this.courseTitle = data?.title ? data.title : "";
     });
-    
+    this.store.select(selectMaxLessonNumber).subscribe((data) => {
+      this.maxLessonNumber = data
+    });
   }
 
   onDeleteLesson(id: number) {

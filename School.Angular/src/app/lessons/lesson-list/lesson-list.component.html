@@ -1,7 +1,7 @@
 <h1>{{courseTitle}}</h1>
 <h2>Уроки курса</h2>
 
-<button type="button" routerLink="/lessons/{{courseId}}/form/0">Добавить</button>
+<button type="button" routerLink="/lessons/{{courseId}}/form/0" [queryParams]="{'maxNumber': maxLessonNumber}">Добавить</button>
 
 @if (lessonList && lessonList.length > 0){
   <table>
@@ -18,7 +18,9 @@
         <tr>
           <td>{{item.id}}</td>
           <td>{{item.number}}</td>
-          <td>{{item.title}}</td>
+          <td>
+            <button type="button" routerLink="/lessons/{{courseId}}/details/{{item.id}}">{{item.title}}</button>
+          </td>
           <td>
             <button type="button" routerLink="/lessons/{{courseId}}/form/{{item.id}}">Редактировать</button>
             <button type="button" (click)="onDeleteLesson(item.id)">Удалить</button>

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../redux/store';
 import { createLesson, loadLesson, updateLesson } from '../../redux/lessons/lessons.actions';
 import { selectContainingCourse, selectLesson } from '../../redux/lessons/lessons.selector';
 import { selectCourse, selectCourseList } from '../../redux/courses/courses.selector';
 import { loadCourse } from '../../redux/courses/courses.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lesson-form',
@@ -21,6 +22,7 @@ export class LessonFormComponent implements OnInit {
   pageTitle: string = '';
   courseId!: number;
   courseTitle!: string | null;
+  maxLessonNumber!: number;
 
   constructor(
     private store: Store<AppState>,
@@ -55,6 +57,13 @@ export class LessonFormComponent implements OnInit {
     else {
       this.pageTitle = "Создание урока";
 
+      this.activatedRoute.queryParams.subscribe((queryParams) => {
+        this.maxLessonNumber = queryParams["maxNumber"];
+      });
+      this.maxLessonNumber++;
+      this.lessonForm.patchValue({
+        number: this.maxLessonNumber
+      });
       this.store.dispatch(loadCourse({id: this.courseId}));
       this.store.select(selectCourse).subscribe(data => this.courseTitle = data?.title ? data.title : ""); // TODO:
     }
