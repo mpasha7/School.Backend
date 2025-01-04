@@ -1,46 +1,88 @@
-<form [formGroup]="courseForm" (ngSubmit)="saveCourseData()">
-    <h2>{{pageTitle}}</h2>
+<div class="container">
+  <div class="page-title">
+    <h1>{{pageTitle}}</h1>
+  </div>
+
+  <form [formGroup]="courseForm" (ngSubmit)="saveCourseData()">
+    <mat-form-field appearance="fill">
+      <mat-label>Название:</mat-label>
+      <input matInput formControlName="title">
+      <mat-icon *ngIf="courseForm.controls['title'].invalid && courseForm.controls['title'].touched" matSuffix color="warn">
+        sentiment_dissatisfied
+      </mat-icon>
+      <mat-icon *ngIf="courseForm.controls['title'].valid && courseForm.controls['title'].touched" matSuffix color="primary">
+        sentiment_very_satisfied
+      </mat-icon>
+      <mat-hint *ngIf="courseForm.controls['title'].invalid && courseForm.controls['title'].touched">
+        Введите название курса (до 200 символов)
+      </mat-hint>
+    </mat-form-field>
   
-    <div>
-      <label for="title">Название:</label><br/>
-      <input formControlName="title">
+    <mat-form-field appearance="fill">
+      <mat-label>Описание:</mat-label>
+      <textarea matInput formControlName="description" rows="5"></textarea>
+      <mat-icon *ngIf="courseForm.controls['description'].invalid && courseForm.controls['description'].touched" matSuffix color="warn">
+        sentiment_dissatisfied
+      </mat-icon>
+      <mat-icon *ngIf="courseForm.controls['description'].valid && courseForm.controls['description'].touched" matSuffix color="primary">
+        sentiment_very_satisfied
+      </mat-icon>
+      <mat-hint *ngIf="courseForm.controls['description'].invalid && courseForm.controls['description'].touched">
+        Введите описание курса
+      </mat-hint>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Краткое описание:</mat-label>
+      <textarea matInput formControlName="shortDescription" rows="3"></textarea>
+      <mat-icon *ngIf="courseForm.controls['shortDescription'].invalid && courseForm.controls['shortDescription'].touched" matSuffix color="warn">
+        sentiment_dissatisfied
+      </mat-icon>
+      <mat-icon *ngIf="courseForm.controls['shortDescription'].valid && courseForm.controls['shortDescription'].touched" matSuffix color="primary">
+        sentiment_very_satisfied
+      </mat-icon>
+      <mat-hint *ngIf="courseForm.controls['shortDescription'].invalid && courseForm.controls['shortDescription'].touched">
+        Введите описание курса
+      </mat-hint>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Публичное описание:</mat-label>
+      <textarea matInput formControlName="publicDescription" rows="5"></textarea>
+      <mat-icon *ngIf="courseForm.controls['publicDescription'].invalid && courseForm.controls['publicDescription'].touched" matSuffix color="warn">
+        sentiment_dissatisfied
+      </mat-icon>
+      <mat-icon *ngIf="courseForm.controls['publicDescription'].valid && courseForm.controls['publicDescription'].touched" matSuffix color="primary">
+        sentiment_very_satisfied
+      </mat-icon>
+      <mat-hint *ngIf="courseForm.controls['publicDescription'].invalid && courseForm.controls['publicDescription'].touched">
+        Введите описание курса
+      </mat-hint>
+    </mat-form-field>
+  
+    <div>      
+      <input type="file" id="photo" name="photo" (change)="onFileChange($event)"
+             #photoInput hidden="true" onclick="this.value=null" accept="image/*" />
+      <button mat-raised-button (click)="photoInput.click()" type="button">Выбрать фото</button>
+      <label for="photo">{{fileLabel}}</label><br/>
     </div>
   
-    <div>
-      <label for="description">Описание:</label><br/>
-      <textarea formControlName="description"></textarea>
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Анкета в начало курса:</mat-label>
+      <input matInput formControlName="beginQuestionnaire">
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Анкета в конец курса:</mat-label>
+      <input matInput formControlName="beginQuestionnaire">
+    </mat-form-field>
   
     <div>
-      <label for="shortDescription">Краткое описание:</label><br/>
-      <textarea formControlName="shortDescription"></textarea>
-    </div>
-  
-    <div>
-      <label for="publicDescription">Публичное описание:</label><br/>
-      <textarea formControlName="publicDescription"></textarea>
-    </div>
-  
-    <div>
-      <label for="photo">Фото:</label><br/>
-      <input type="file" id="photo" name="photo" (change)="onFileChange($event)" >
-    </div>
-  
-    <div>
-      <label for="beginQuestionnaire">Анкета в начало:</label><br/>
-      <input formControlName="beginQuestionnaire">
-    </div>
-  
-    <div>
-      <label for="endQuestionnaire">Анкета в конец:</label><br/>
-      <input formControlName="endQuestionnaire">
-    </div>
-  
-    <div>
-      <button type="submit">Сохранить</button>
-      <button type="button" routerLink="/">Назад</button>
+      <button mat-raised-button color="primary" type="submit">Сохранить</button>
+      <button mat-raised-button type="button" routerLink="/">Назад</button>
     </div>
   </form>
-  
+</div>
+
   
   

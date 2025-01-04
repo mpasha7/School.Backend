@@ -1,34 +1,63 @@
-<h1>{{courseTitle}}</h1>
-<h2>{{pageTitle}}</h2>
+<div class="container">
+  <div class="page-title">
+    <h1>{{courseTitle}}</h1>
+    <h2>{{pageTitle}}</h2>
+  </div>
 
-<form [formGroup]="lessonForm" (ngSubmit)="saveLessonData()">
+  <form [formGroup]="lessonForm" (ngSubmit)="saveLessonData()">
+    <mat-form-field appearance="fill">
+      <mat-label>Порядковый номер:</mat-label>
+      <input matInput type="number" formControlName="number" min="0">
+      <mat-icon *ngIf="lessonForm.controls['number'].invalid && lessonForm.controls['number'].touched" matSuffix color="warn">
+        sentiment_dissatisfied
+      </mat-icon>
+      <mat-icon *ngIf="lessonForm.controls['number'].valid && lessonForm.controls['number'].touched" matSuffix color="primary">
+        sentiment_very_satisfied
+      </mat-icon>
+      <mat-hint *ngIf="lessonForm.controls['number'].invalid && lessonForm.controls['number'].touched">
+        Введите порядковый номер урока
+      </mat-hint>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Название:</mat-label>
+      <input matInput formControlName="title">
+      <mat-icon *ngIf="lessonForm.controls['title'].invalid && lessonForm.controls['title'].touched" matSuffix color="warn">
+        sentiment_dissatisfied
+      </mat-icon>
+      <mat-icon *ngIf="lessonForm.controls['title'].valid && lessonForm.controls['title'].touched" matSuffix color="primary">
+        sentiment_very_satisfied
+      </mat-icon>
+      <mat-hint *ngIf="lessonForm.controls['title'].invalid && lessonForm.controls['title'].touched">
+        Введите название урока (до 200 символов)
+      </mat-hint>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Описание:</mat-label>
+      <textarea matInput formControlName="description" rows="5"></textarea>
+      <mat-icon *ngIf="lessonForm.controls['description'].invalid && lessonForm.controls['description'].touched" matSuffix color="warn">
+        sentiment_dissatisfied
+      </mat-icon>
+      <mat-icon *ngIf="lessonForm.controls['description'].valid && lessonForm.controls['description'].touched" matSuffix color="primary">
+        sentiment_very_satisfied
+      </mat-icon>
+      <mat-hint *ngIf="lessonForm.controls['description'].invalid && lessonForm.controls['description'].touched">
+        Введите описание урока
+      </mat-hint>
+    </mat-form-field>
 
-    <div>
-        <label for="number">Порядковый номер:</label><br/>
-        <input type="number" formControlName="number" >
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Ссылка на видео:</mat-label>
+      <input matInput formControlName="videoLink">
+    </mat-form-field>
   
     <div>
-      <label for="title">Название:</label><br/>
-      <input formControlName="title">
-    </div>
-  
-    <div>
-      <label for="description">Описание:</label><br/>
-      <textarea formControlName="description"></textarea>
-    </div>
-
-    <div>
-        <label for="videoLink">Ссылка на видео:</label><br/>
-        <input formControlName="videoLink">
-    </div>
-  
-    <div>
-      <button type="submit">Сохранить</button>
-      <button type="button" routerLink="/lessons/{{courseId}}/list">Назад</button>
+      <button mat-raised-button color="primary" type="submit">Сохранить</button>
+      <button mat-raised-button type="button" routerLink="/lessons/{{courseId}}/list">Назад</button>
     </div>
   </form>
-  
+</div>
   
   
 

@@ -9,5 +9,5 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'School.Angular';
+  title = 'Gymnastyc School';
 }

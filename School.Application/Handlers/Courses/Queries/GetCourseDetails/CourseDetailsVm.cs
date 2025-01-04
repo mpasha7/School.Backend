@@ -14,12 +14,12 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
     {
         public int Id { get; set; }
 
-        public string? Title { get; set; }
-        public string? Description { get; set; }
-        public string? ShortDescription { get; set; }
-        public string? PublicDescription { get; set; }
-        public string? BeginQuestionnaire { get; set; }
-        public string? EndQuestionnaire { get; set; }
+        public string Title { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public string ShortDescription { get; set; } = string.Empty;
+        public string PublicDescription { get; set; } = string.Empty;
+        public string BeginQuestionnaire { get; set; } = string.Empty;
+        public string EndQuestionnaire { get; set; } = string.Empty;
 
         public FileLookupDto? Photo { get; set; }
 
@@ -27,12 +27,17 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
         {
             profile.CreateMap<Course, CourseDetailsVm>()
                 .ForMember(vm => vm.Id, opt => opt.MapFrom(c => c.Id))
-                .ForMember(vm => vm.Title, opt => opt.MapFrom(c => c.Title))
-                .ForMember(vm => vm.Description, opt => opt.MapFrom(c => c.Description))
-                .ForMember(vm => vm.ShortDescription, opt => opt.MapFrom(c => c.ShortDescription))
-                .ForMember(vm => vm.PublicDescription, opt => opt.MapFrom(c => c.PublicDescription))
-                .ForMember(vm => vm.BeginQuestionnaire, opt => opt.MapFrom(c => c.BeginQuestionnaire))
-                .ForMember(vm => vm.EndQuestionnaire, opt => opt.MapFrom(c => c.EndQuestionnaire));
+                .ForMember(vm => vm.Title, opt => opt.MapFrom(c => FixNull(c.Title)))
+                .ForMember(vm => vm.Description, opt => opt.MapFrom(c => FixNull(c.Description)))
+                .ForMember(vm => vm.ShortDescription, opt => opt.MapFrom(c => FixNull(c.ShortDescription)))
+                .ForMember(vm => vm.PublicDescription, opt => opt.MapFrom(c => FixNull(c.PublicDescription)))
+                .ForMember(vm => vm.BeginQuestionnaire, opt => opt.MapFrom(c => FixNull(c.BeginQuestionnaire)))
+                .ForMember(vm => vm.EndQuestionnaire, opt => opt.MapFrom(c => FixNull(c.EndQuestionnaire)));
+        }
+
+        private string FixNull(string? value)
+        {
+            return (value == null || value == "null") ? "" : value;
         }
     }
 }

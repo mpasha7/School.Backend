@@ -1,37 +1,68 @@
-<h1>{{courseTitle}}</h1>
-<h2>Уроки курса</h2>
+<div class="container">
+  <div class="page-title">
+    <h1>{{courseTitle}}</h1>
+    <h2>Уроки курса</h2>
+  </div>
 
-<button type="button" routerLink="/lessons/{{courseId}}/form/0" [queryParams]="{'maxNumber': maxLessonNumber}">Добавить</button>
+  <button mat-raised-button color="primary" type="button" 
+      routerLink="/lessons/{{courseId}}/form/0" 
+      [queryParams]="{'maxNumber': maxLessonNumber}">
+    Добавить
+  </button>
+  <button mat-raised-button type="button" routerLink="/">
+    Назад
+  </button>
 
-@if (lessonList && lessonList.length > 0){
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Number</th>
-        <th>Title</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (item of lessonList; track $index) {
+  <div *ngIf="lessonList && lessonList.length > 0">
+    <mat-card *ngFor="let item of lessonList">
+      <mat-card-header>
+        <div class="title-link">
+          <button mat-button type="button" routerLink="/lessons/{{courseId}}/details/{{item.id}}">
+            <h2>{{item.number}}. {{item.title}}</h2>
+          </button>
+        </div>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-fab color="primary" type="button" routerLink="/lessons/{{courseId}}/form/{{item.id}}">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-fab color="accent" type="button" (click)="onDeleteLesson(item.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- <table>
+      <thead>
         <tr>
-          <td>{{item.id}}</td>
-          <td>{{item.number}}</td>
-          <td>
-            <button type="button" routerLink="/lessons/{{courseId}}/details/{{item.id}}">{{item.title}}</button>
-          </td>
-          <td>
-            <button type="button" routerLink="/lessons/{{courseId}}/form/{{item.id}}">Редактировать</button>
-            <button type="button" (click)="onDeleteLesson(item.id)">Удалить</button>
-          </td>
+          <th>Id</th>
+          <th>Number</th>
+          <th>Title</th>
+          <th></th>
         </tr>
-      }
-    </tbody>
-  </table>
-}
-@else {
-  <p>Здесь пока нет уроков</p>
-}
-
-<button type="button" routerLink="/">Назад</button>
+      </thead>
+      <tbody>
+        @for (item of lessonList; track $index) {
+          <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.number}}</td>
+            <td>
+              <button type="button" routerLink="/lessons/{{courseId}}/details/{{item.id}}">{{item.title}}</button>
+            </td>
+            <td>
+              <button type="button" routerLink="/lessons/{{courseId}}/form/{{item.id}}">Редактировать</button>
+              <button type="button" (click)="onDeleteLesson(item.id)">Удалить</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table> -->
+  </div>
+  <div *ngIf="lessonList && lessonList.length == 0">
+    <mat-card >
+      <div class="title-link">
+        <h2>Здесь пока нет уроков</h2>
+      </div>
+    </mat-card>
+  </div>  
+</div>

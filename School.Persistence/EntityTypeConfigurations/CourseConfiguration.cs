@@ -32,7 +32,7 @@ namespace School.Persistence.EntityTypeConfigurations
                    .IsRequired()              // TODO: Сделать не обязательным
                    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Property(c => c.Title).HasMaxLength(200); // TODO: Лучше HasMaxLength(256)  // .IsRequired()
+            builder.Property(c => c.Title).HasMaxLength(200); // TODO: Лучше HasMaxLength(256)?  // .IsRequired()
             //builder.Property(c => c.Description).IsRequired();
             //builder.Property(c => c.CreatedDate).HasDefaultValueSql("GETDATE()"); // Реализовано в ...Handler
 

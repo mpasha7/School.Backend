@@ -27,9 +27,14 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonDetails
             profile.CreateMap<Lesson, LessonDetailsVm>()
                 .ForMember(vm => vm.Id, opt => opt.MapFrom(les => les.Id))
                 .ForMember(vm => vm.Number, opt => opt.MapFrom(les => les.Number))
-                .ForMember(vm => vm.Title, opt => opt.MapFrom(les => les.Title))
-                .ForMember(vm => vm.Description, opt => opt.MapFrom(les => les.Description))
-                .ForMember(vm => vm.VideoLink, opt => opt.MapFrom(les => les.VideoLink));
+                .ForMember(vm => vm.Title, opt => opt.MapFrom(les => FixNull(les.Title)))
+                .ForMember(vm => vm.Description, opt => opt.MapFrom(les => FixNull(les.Description)))
+                .ForMember(vm => vm.VideoLink, opt => opt.MapFrom(les => FixNull(les.VideoLink)));
+        }
+
+        private string FixNull(string? value)
+        {
+            return (value == null || value == "null") ? "" : value;
         }
     }
 }

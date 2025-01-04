@@ -4,17 +4,19 @@ import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../redux/store';
 import { deleteCourse, loadCourseList } from '../../redux/courses/courses.actions';
-import { selectCourseList } from '../../redux/courses/courses.selector';
+import { selectCourseError, selectCourseList } from '../../redux/courses/courses.selector';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-course-list',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SharedModule],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })
 export class CourseListComponent implements OnInit {
   courseList!: CourseLookupDto[];
+  errorObject!: any;
 
   constructor(private store: Store<AppState>) {}
 
@@ -22,6 +24,9 @@ export class CourseListComponent implements OnInit {
     this.store.dispatch(loadCourseList());
     this.store.select(selectCourseList).subscribe((data) => {
       this.courseList = data;
+    });
+    this.store.select(selectCourseError).subscribe((data) => {
+      this.errorObject = data;
     });
   }
 

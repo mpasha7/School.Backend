@@ -8,11 +8,12 @@ import { selectContainingCourse, selectLessonList, selectMaxLessonNumber } from 
 import { selectCourseList } from '../../redux/courses/courses.selector';
 import { JsonPipe } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-lesson-list',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SharedModule],
   templateUrl: './lesson-list.component.html',
   styleUrl: './lesson-list.component.css'
 })

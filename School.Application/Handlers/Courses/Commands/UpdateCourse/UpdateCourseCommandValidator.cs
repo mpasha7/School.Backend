@@ -13,7 +13,7 @@ namespace School.Application.Handlers.Courses.Commands.UpdateCourse
         {
             RuleFor(comm => comm.Id).GreaterThan(0);
             //RuleFor(comm => comm.CoachGuid).NotEmpty();
-            RuleFor(comm => comm.Title).NotEmpty().MaximumLength(256);
+            RuleFor(comm => comm.Title).NotEmpty().MaximumLength(200);
             RuleFor(comm => comm.Description).NotEmpty();
         }
     }

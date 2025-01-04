@@ -1,0 +1,22 @@
+.mat-mdc-card {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.mdc-button {
+    margin: 2px;
+}
+
+button[mat-fab] {
+    margin: 20px;
+}
+button[mat-raised-button] {
+    margin: 10px 20px;
+}
+
+.mat-mdc-card-header {
+    justify-content: center;
+}
+.mat-mdc-card-actions {
+    justify-content: center;
+}

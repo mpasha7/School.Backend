@@ -1,0 +1,23 @@
+.mat-mdc-card {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.mdc-button {
+    margin: 2px;
+}
+
+button[mat-fab] {
+    margin: 20px;
+}
+
+.mat-mdc-card-header {
+    justify-content: center;
+}
+.mat-mdc-card-actions {
+    justify-content: center;
+}
+.mat-mdc-card-content {
+    display: flex;
+}
+

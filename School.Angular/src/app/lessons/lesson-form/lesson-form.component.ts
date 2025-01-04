@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../redux/store';
@@ -8,11 +8,12 @@ import { selectContainingCourse, selectLesson } from '../../redux/lessons/lesson
 import { selectCourse, selectCourseList } from '../../redux/courses/courses.selector';
 import { loadCourse } from '../../redux/courses/courses.actions';
 import { Observable } from 'rxjs';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-lesson-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterLink],
+  imports: [SharedModule, FormsModule, ReactiveFormsModule, RouterLink],
   templateUrl: './lesson-form.component.html',
   styleUrl: './lesson-form.component.css'
 })
@@ -30,9 +31,9 @@ export class LessonFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.lessonForm = new FormGroup({
-      number: new FormControl<number>(0),
-      title: new FormControl<string>(''),
-      description: new FormControl<string | null>(null),
+      number: new FormControl<number>(0, [Validators.required]),
+      title: new FormControl<string>('', [Validators.required, Validators.maxLength(200)]),
+      description: new FormControl<string | null>('', [Validators.required]),
       videoLink: new FormControl<string | null>(null)
     });
     this.activatedRoute.params.subscribe(params => this.lessonId = params["id"]);

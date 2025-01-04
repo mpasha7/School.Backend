@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CoursesService } from '../../core/services/courses.service';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AppState } from '../../redux/store';
 import { Store } from '@ngrx/store';
@@ -9,11 +9,12 @@ import { CourseDetailsVm, CreateCourseDto, UpdateCourseDto } from '../../core/mo
 import { selectCourse } from '../../redux/courses/courses.selector';
 import { JsonPipe } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-course-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, RouterLink, SharedModule],
   templateUrl: './course-form.component.html',
   styleUrl: './course-form.component.css'
 })
@@ -22,6 +23,7 @@ export class CourseFormComponent implements OnInit {
   pageTitle: string = '';
   courseId!: number;
   file: File | null = null;
+  fileLabel: string = 'Файл не выбран';
 
   constructor(
     private store: Store<AppState>,
@@ -29,11 +31,10 @@ export class CourseFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.courseForm = new FormGroup({
-      title: new FormControl<string>(''),
-      description: new FormControl<string>(''),
-      shortDescription: new FormControl<string | null>(null),
-      publicDescription: new FormControl<string | null>(null),
-      // photoPath: new FormControl<string | null>(null),
+      title: new FormControl<string>('', [Validators.required, Validators.maxLength(200)]),
+      description: new FormControl<string>('', [Validators.required]),
+      shortDescription: new FormControl<string | null>('', [Validators.required]),
+      publicDescription: new FormControl<string | null>('', [Validators.required]),
       beginQuestionnaire: new FormControl<string | null>(null),
       endQuestionnaire: new FormControl<string | null>(null),
     });
@@ -67,6 +68,7 @@ export class CourseFormComponent implements OnInit {
     const formFile = event.target.files[0];
     if (formFile) {
       this.file = formFile;
+      this.fileLabel = formFile.name;
     }
   }
 

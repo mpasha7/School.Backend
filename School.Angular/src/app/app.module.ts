@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { appEffects, store } from './redux/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AsyncPipe, 
     FormsModule, 
     ReactiveFormsModule,
-    LayoutModule,
+    LayoutModule,    
     StoreModule.forRoot(store),
     EffectsModule.forRoot(appEffects),
 
@@ -37,7 +38,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
       }
     })
   ],
-  providers: [provideHttpClient()],
+  providers: [provideHttpClient(), provideAnimationsAsync()],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

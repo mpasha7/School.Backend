@@ -6,11 +6,12 @@ import { loadLesson } from '../../redux/lessons/lessons.actions';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { selectLesson } from '../../redux/lessons/lessons.selector';
 import { selectCourseList } from '../../redux/courses/courses.selector';
+import { SharedModule } from '../../shared/shared.module';
 
 @Component({
   selector: 'app-lesson-details',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, SharedModule],
   templateUrl: './lesson-details.component.html',
   styleUrl: './lesson-details.component.css'
 })

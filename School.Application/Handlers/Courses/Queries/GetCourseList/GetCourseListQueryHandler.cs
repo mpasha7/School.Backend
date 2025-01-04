@@ -26,9 +26,14 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseList
 
         public async Task<CourseListVm> Handle(GetCourseListQuery request, CancellationToken cancellationToken)
         {
-            var courses = (await _repository.GetAllAsync(cancellationToken, filter: c => c.CoachGuid == request.CoachGuid, includeProperties: "Photo"))
+            var courses = (await _repository.GetAllAsync(
+                cancellationToken,
+                filter: c => c.CoachGuid == request.CoachGuid,
+                orderBy: x => x.OrderByDescending(c => c.CreatedDate),
+                includeProperties: "Photo"
+                ))
                 .AsQueryable()
-                .ProjectTo<CourseLookupDto>(_mapper.ConfigurationProvider)////////////////////////////////////////////////////////////
+                .ProjectTo<CourseLookupDto>(_mapper.ConfigurationProvider)
                 .ToList();
 
             return new CourseListVm { Courses = courses };

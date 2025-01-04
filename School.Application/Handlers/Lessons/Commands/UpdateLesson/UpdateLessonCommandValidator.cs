@@ -15,7 +15,7 @@ namespace School.Application.Handlers.Lessons.Commands.UpdateLesson
             RuleFor(comm => comm.CourseId).GreaterThan(0);
             //RuleFor(comm => comm.CoachGuid).NotEmpty();
             RuleFor(comm => comm.Number).GreaterThan(0);
-            RuleFor(comm => comm.Title).NotEmpty().MaximumLength(256);
+            RuleFor(comm => comm.Title).NotEmpty().MaximumLength(200);
         }
     }
 }

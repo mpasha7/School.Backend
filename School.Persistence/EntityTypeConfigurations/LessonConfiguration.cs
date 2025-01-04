@@ -20,7 +20,7 @@ namespace School.Persistence.EntityTypeConfigurations
             // TODO: Использовать fill_factor для снижения частоты реорганизации индексов
 
             //builder.Property(les => les.Number).IsRequired();
-            builder.Property(les => les.Title).HasMaxLength(200); // TODO: Лучше HasMaxLength(256)  // .IsRequired()
+            builder.Property(les => les.Title).HasMaxLength(200); // TODO: Лучше HasMaxLength(256)?  // .IsRequired()
 
             // TODO: Некластеризованные индексы для столбцов, которые часто используются в WHERE и JION
             // builder.HasIndex(les => les.CourseId);

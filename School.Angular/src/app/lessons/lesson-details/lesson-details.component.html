@@ -1,8 +1,15 @@
-<h1>{{selectedLesson?.course?.title}}</h1>
-<h2>{{selectedLesson?.title}}</h2>
+<div class="container">
+    <div class="page-title">
+        <h1>{{selectedLesson?.course?.title}}</h1>
+        <h2>{{selectedLesson?.title}}</h2>
+    </div>
 
-<p>Описание: {{selectedLesson?.description}}</p>
-<p>Ссылка на видео: {{selectedLesson?.videoLink}}</p>
+    <p>Описание: {{selectedLesson?.description}}</p>
+    <p>Ссылка на видео: {{selectedLesson?.videoLink}}</p>
 
-<button type="button" routerLink="/lessons/{{courseId}}/form/{{lessonId}}">Редактировать</button>
-<button type="button" routerLink="/lessons/{{courseId}}/list">Назад</button>
+
+    <div>
+        <button mat-raised-button color="primary" type="button" routerLink="/lessons/{{courseId}}/form/{{lessonId}}">Редактировать</button>
+        <button mat-raised-button type="button" routerLink="/lessons/{{courseId}}/list">Назад</button>
+    </div>
+</div>
