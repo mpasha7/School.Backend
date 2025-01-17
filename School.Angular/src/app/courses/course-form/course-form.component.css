@@ -7,9 +7,13 @@
 }
 
 button[mat-raised-button] {
-    margin: 20px;
+    margin: 0 25px;
 }
 
 .mat-mdc-form-field {
     margin-bottom: 20px;
+}
+
+.file-input {
+    margin-bottom: 40px;
 }

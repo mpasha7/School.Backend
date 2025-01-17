@@ -1,2 +1,5 @@
+server: https://localhost:7125/
 client: https://127.0.0.1:49824/
-server: https://localhost:7125
+identity: https://localhost:7171/
+
+

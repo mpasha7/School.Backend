@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{813B2D
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "School.Angular", "School.Angular\School.Angular.esproj", "{496B5016-5C79-4D6B-81B0-B5922FFB1D59}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{7E32D232-504F-4E02-B156-0FDCD98AA93E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Auth", "School.Auth\School.Auth.csproj", "{0616F1BA-6C79-43E3-9160-13227F4FB9D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +60,10 @@ Global
 		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Release|Any CPU.Build.0 = Release|Any CPU
 		{496B5016-5C79-4D6B-81B0-B5922FFB1D59}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0616F1BA-6C79-43E3-9160-13227F4FB9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0616F1BA-6C79-43E3-9160-13227F4FB9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0616F1BA-6C79-43E3-9160-13227F4FB9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0616F1BA-6C79-43E3-9160-13227F4FB9D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +75,7 @@ Global
 		{93617A9D-E239-4E8D-A165-CE8394FAC5D5} = {149595B8-029B-4C00-8C69-BF8DDDF25F16}
 		{7A1AF66F-C681-40B2-8230-8F4B3C9B6CFE} = {664E0DF6-F953-40AA-8F3E-9F050758176A}
 		{496B5016-5C79-4D6B-81B0-B5922FFB1D59} = {813B2DF5-4D80-4D52-99E9-1D75EE687CB6}
+		{0616F1BA-6C79-43E3-9160-13227F4FB9D4} = {7E32D232-504F-4E02-B156-0FDCD98AA93E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16D74DAB-6149-4284-BDDB-7ABD8DD76104}

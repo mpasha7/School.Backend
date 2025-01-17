@@ -19,7 +19,6 @@ namespace School.WebApi.Controllers
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    //[Authorize]
     public class CoursesController : BaseController
     {
         private readonly IMapper _mapper;
@@ -44,6 +43,7 @@ namespace School.WebApi.Controllers
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
         [HttpGet(Name = nameof(GetCoursesList))]
+        [Authorize(Roles = "Coach,Student")]
         public async Task<ActionResult<CourseListVm>> GetCoursesList()
         {
             var query = new GetCourseListQuery
@@ -69,6 +69,7 @@ namespace School.WebApi.Controllers
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
         [HttpGet("{id}", Name = nameof(GetCourse))]
+        [Authorize(Roles = "Coach,Student")]
         public async Task<ActionResult<CourseDetailsVm>> GetCourse(int id)
         {
             var query = new GetCourseDetailsQuery
@@ -104,6 +105,7 @@ namespace School.WebApi.Controllers
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
         [HttpPost(Name = nameof(CreateCourse))]
+        [Authorize(Roles = "Coach")]
         public async Task<ActionResult<ResponseDto>> CreateCourse([FromForm] CreateCourseDto createCourseDto)
         {
             var command = _mapper.Map<CreateCourseCommand>(createCourseDto);
@@ -135,6 +137,7 @@ namespace School.WebApi.Controllers
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
         [HttpPut(Name = nameof(UpdateCourse))]
+        [Authorize(Roles = "Coach")]
         public async Task<ActionResult<ResponseDto>> UpdateCourse([FromForm] UpdateCourseDto updateCourseDto) // TODO: Id in Sample request
         {
             var command = _mapper.Map<UpdateCourseCommand>(updateCourseDto);
@@ -162,6 +165,7 @@ namespace School.WebApi.Controllers
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
         [HttpDelete("{id}", Name = nameof(DeleteCourse))]
+        [Authorize(Roles = "Coach")]
         public async Task<ActionResult<ResponseDto>> DeleteCourse(int id)
         {
             var command = new DeleteCourseCommand

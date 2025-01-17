@@ -7,24 +7,38 @@ import { CourseFormComponent } from './courses/course-form/course-form.component
 import { LessonListComponent } from './lessons/lesson-list/lesson-list.component';
 import { LessonFormComponent } from './lessons/lesson-form/lesson-form.component';
 import { LessonDetailsComponent } from './lessons/lesson-details/lesson-details.component';
+import { NotFoundComponent } from './error-pages/not-found/not-found.component';
+import { UnauthorizedComponent } from './error-pages/unauthorized/unauthorized.component';
+import { SigninRedirectCallbackComponent } from './redirects/signin-redirect-callback/signin-redirect-callback.component';
+import { SignoutRedirectCallbackComponent } from './redirects/signout-redirect-callback/signout-redirect-callback.component';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const courseRoutes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "/list"},
-  { path: "list", component: CourseListComponent },
-  { path: "form/:id", component: CourseFormComponent }
+  { path: 'list', component: CourseListComponent },
+  { path: 'form/:id', component: CourseFormComponent },
+  { path: '', redirectTo: '/courses/list', pathMatch: 'full'},
+  { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ]
 
 const lessonRoutes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "/list"},
-  { path: "list", component: LessonListComponent },
-  { path: "form/:id", component: LessonFormComponent },
-  { path: "details/:id", component: LessonDetailsComponent }
+  { path: 'list', component: LessonListComponent },
+  { path: 'form/:id', component: LessonFormComponent },
+  { path: 'details/:id', component: LessonDetailsComponent },
+  { path: '', redirectTo: '/lessons/list', pathMatch: 'full'},
+  { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ]
 
 const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "/courses/list"},
-  { path: "courses", component: CoursesComponent, children: courseRoutes },
-  { path: "lessons/:courseid", component: LessonsComponent, children: lessonRoutes }
+  { path: 'courses', component: CoursesComponent, children: courseRoutes, 
+        canActivate: [AuthGuard], data: { roles: ['Coach', 'Student'] } },
+  { path: 'lessons/:courseid', component: LessonsComponent, children: lessonRoutes, 
+        canActivate: [AuthGuard], data: { roles: ['Coach', 'Student'] } },
+  { path: 'signin-callback', component: SigninRedirectCallbackComponent },
+  { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
+  { path: '404', component: NotFoundComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: '', redirectTo: '/courses/list', pathMatch: 'full'},
+  { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ];
 
 @NgModule({

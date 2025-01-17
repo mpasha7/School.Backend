@@ -45,22 +45,24 @@ namespace School.WebApi
                 });
             });
 
-            builder.Services.AddAuthentication(opts =>
-            {
-                opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
+            //builder.Services.AddAuthentication(opts =>
+            //{
+            //    //opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // TODO: "Bearer"???
+            //    //opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //})
+            builder.Services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", opts =>
                 {
-                    opts.Authority = "https://localhost:44393";
-                    opts.Audience = "CoursesWebApi";
                     opts.RequireHttpsMetadata = false; // TODO: HTTPS????
+                    opts.Authority = "https://localhost:7171"; // URL IdentityServer
+                    opts.Audience = "SchoolWebApi";
                 });
 
+            builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             builder.Services.AddSwaggerGen(opts =>
             {
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"; // TODO: ???
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 opts.IncludeXmlComments(xmlPath);
             });
@@ -82,21 +84,28 @@ namespace School.WebApi
                 }
             }
 
+            // TEST
+            app.Use(async (context, next) =>
+            {
+                var headers = context.Request.Headers;
+                await next.Invoke();
+            });
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseStaticFiles();
-            app.UseDefaultFiles();
-            app.UseCustomExceptionHandler();
             app.UseSwagger();
             app.UseSwaggerUI(opts =>
             {
                 //opts.RoutePrefix = string.Empty;
                 //opts.SwaggerEndpoint("swagger/v1/swagger.json", "School API");
             });
-            app.UseRouting();
+            app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseRouting();
             app.UseCors("AllowAll");
             app.UseAuthentication();
             app.UseAuthorization();

@@ -60,7 +60,7 @@
       </mat-hint>
     </mat-form-field>
   
-    <div>      
+    <div class="file-input">      
       <input type="file" id="photo" name="photo" (change)="onFileChange($event)"
              #photoInput hidden="true" onclick="this.value=null" accept="image/*" />
       <button mat-raised-button (click)="photoInput.click()" type="button">Выбрать фото</button>
