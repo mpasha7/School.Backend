@@ -26,3 +26,10 @@ mat-toolbar a {
 .header-logo img{
     height: 35px;
 }
+
+.nav_header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}

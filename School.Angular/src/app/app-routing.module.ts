@@ -12,6 +12,8 @@ import { UnauthorizedComponent } from './error-pages/unauthorized/unauthorized.c
 import { SigninRedirectCallbackComponent } from './redirects/signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from './redirects/signout-redirect-callback/signout-redirect-callback.component';
 import { AuthGuard } from './core/guards/auth.guard';
+import { HomeComponent } from './public-pages/home/home.component';
+import { PublicCourseComponent } from './public-pages/public-course/public-course.component';
 
 const courseRoutes: Routes = [
   { path: 'list', component: CourseListComponent },
@@ -33,11 +35,13 @@ const routes: Routes = [
         canActivate: [AuthGuard], data: { roles: ['Coach', 'Student'] } },
   { path: 'lessons/:courseid', component: LessonsComponent, children: lessonRoutes, 
         canActivate: [AuthGuard], data: { roles: ['Coach', 'Student'] } },
+  { path: 'home', component: HomeComponent },
+  { path: 'home/:id', component: PublicCourseComponent },
   { path: 'signin-callback', component: SigninRedirectCallbackComponent },
   { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
   { path: '404', component: NotFoundComponent },
   { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: '', redirectTo: '/courses/list', pathMatch: 'full'},
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ];
 

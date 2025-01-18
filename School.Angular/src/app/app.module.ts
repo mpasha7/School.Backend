@@ -19,13 +19,14 @@ import { SignoutRedirectCallbackComponent } from './redirects/signout-redirect-c
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
     UnauthorizedComponent,
     SigninRedirectCallbackComponent,
-    SignoutRedirectCallbackComponent
+    SignoutRedirectCallbackComponent,
   ],
   imports: [
     BrowserModule,

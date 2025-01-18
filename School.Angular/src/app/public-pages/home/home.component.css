@@ -1,0 +1,24 @@
+/* .for_pattern {
+    background: url();
+} */
+
+.home_title {
+    color: #7d2ba6;
+    margin-top: 140px;
+}
+
+.home_card {
+    display: inline-block;
+}
+
+.mat-mdc-card {
+    /* justify-content: center; */
+}
+
+.mat-mdc-card-content {
+    display: flex;
+    justify-content: center;
+}
+.mat-mdc-card-header {
+    justify-content: center;
+}

@@ -25,9 +25,10 @@ export class LessonDetailsComponent implements OnInit {
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute
   ) {
-    this.activatedRoute.params.subscribe(params => this.lessonId = params["id"]);
-    this.activatedRoute.parent?.params.subscribe(params => this.courseId = params["courseid"]);
+    this.activatedRoute.params.subscribe(params => this.lessonId = params['id']);
+    this.activatedRoute.parent?.params.subscribe(params => this.courseId = params['courseid']);
   }
+  
   ngOnInit(): void {
     this.store.dispatch(loadLesson({id: this.lessonId, courseId: this.courseId}));
     this.store.select(selectLesson).subscribe((data) => {

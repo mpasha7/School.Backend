@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LessonDetailsVm, LessonListVm } from '../models/lesson.model';
-import { ResponseDto } from '../models/response.model';
-import { EnvironmentUrlService } from './environment-url/environment-url.service';
+import { LessonDetailsVm, LessonListVm } from '../../models/lesson.model';
+import { ResponseDto } from '../../models/response.model';
+import { EnvironmentUrlService } from '../environment-url/environment-url.service';
 
 @Injectable({
   providedIn: 'root'

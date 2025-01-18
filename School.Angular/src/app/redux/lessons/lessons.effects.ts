@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { LessonsService } from "../../core/services/lessons.service";
+import { LessonsService } from "../../core/services/lessons/lessons.service";
 import { createLesson, deleteLesson, loadLesson, loadLessonFailure, loadLessonList, loadLessonListFailure, loadLessonListSuccess, loadLessonSuccess, updateLesson } from "./lessons.actions";
 import { catchError, map, mergeMap, of, switchMap } from "rxjs";
 

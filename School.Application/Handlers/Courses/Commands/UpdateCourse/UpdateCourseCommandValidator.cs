@@ -12,7 +12,7 @@ namespace School.Application.Handlers.Courses.Commands.UpdateCourse
         public UpdateCourseCommandValidator()
         {
             RuleFor(comm => comm.Id).GreaterThan(0);
-            //RuleFor(comm => comm.CoachGuid).NotEmpty();
+            RuleFor(comm => comm.CoachGuid).NotEmpty();
             RuleFor(comm => comm.Title).NotEmpty().MaximumLength(200);
             RuleFor(comm => comm.Description).NotEmpty();
         }

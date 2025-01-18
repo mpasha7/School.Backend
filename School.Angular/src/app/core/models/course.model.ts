@@ -1,9 +1,9 @@
 import { FileLookupDto } from "./file.model";
 
+
 export interface CourseListVm {
     courses: CourseLookupDto[];
 }
-
 export interface CourseLookupDto {
     id: number;
 
@@ -12,7 +12,6 @@ export interface CourseLookupDto {
 
     photo: FileLookupDto | null;
 }
-
 export interface CourseDetailsVm {
     id: number;
 
@@ -28,6 +27,28 @@ export interface CourseDetailsVm {
 
 
 
+export interface PublicCourseListVm {
+    courses: PublicCourseLookupDto[];
+}
+export interface PublicCourseLookupDto {
+    id: number;
+
+    title: string | null;
+    shortDescription: string | null;
+
+    photo: FileLookupDto | null;
+}
+export interface PublicCourseDetailsVm {
+    id: number;
+
+    title: string | null;
+    publicDescription: string | null;
+
+    photo: FileLookupDto | null;
+}
+
+
+
 export interface CreateCourseDto {
     title: string;
     description: string;
@@ -36,7 +57,6 @@ export interface CreateCourseDto {
     beginQuestionnaire: string | null;
     endQuestionnaire: string | null;
 }
-
 export interface UpdateCourseDto {
     id: number;
     

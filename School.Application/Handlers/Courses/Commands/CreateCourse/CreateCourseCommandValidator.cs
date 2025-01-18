@@ -11,7 +11,7 @@ namespace School.Application.Handlers.Courses.Commands.CreateCourse
     {
         public CreateCourseCommandValidator()
         {
-            //RuleFor(comm => comm.CoachGuid).NotEmpty();
+            RuleFor(comm => comm.CoachGuid).NotEmpty();
             RuleFor(comm => comm.Title).NotEmpty().MaximumLength(200);
             RuleFor(comm => comm.Description).NotEmpty();
         }

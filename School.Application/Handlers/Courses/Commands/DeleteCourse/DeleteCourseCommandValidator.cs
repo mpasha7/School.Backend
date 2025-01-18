@@ -12,7 +12,7 @@ namespace School.Application.Handlers.Courses.Commands.DeleteCourse
         public DeleteCourseCommandValidator()
         {
             RuleFor(comm => comm.Id).GreaterThan(0);
-            //RuleFor(comm => comm.CoachGuid).NotEmpty();
+            RuleFor(comm => comm.CoachGuid).NotEmpty();
         }
     }
 }

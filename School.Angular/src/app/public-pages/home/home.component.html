@@ -1,0 +1,32 @@
+<div class="container">
+    <section class="for_pattern pb-2">
+        <div class="row">
+            <div class="col-12 text-center home_title">
+                <h1 class="fs-1 text-uppercase">Онлайн-школа</h1>
+                <h2 class="fs-2 text-uppercase">гимнастики</h2>
+            </div>
+        </div>
+    </section>
+
+    <section *ngIf="courseList && courseList.length > 0" class="">
+        <div class="row">
+            <div *ngFor="let item of courseList" class="col-md-6 col-sm-12 text-center mt-3 p-5">
+
+                <mat-card >
+                    <mat-card-header>
+                        <div class="title-link">
+                            <button mat-button type="button" routerLink="/home/{{item.id}}">
+                                <h2>{{item.title}}</h2>
+                            </button>
+                        </div>
+                    </mat-card-header>
+                    <img mat-card-image src="https://localhost:7125/uploads/Photo/{{item.photo?.uniqueFileName}}" alt="No Photo" />
+                    <mat-card-content class="mt-3">
+                        <p>{{item.shortDescription}}</p>
+                    </mat-card-content>
+                </mat-card>
+                
+            </div>
+        </div>
+    </section>
+</div>

@@ -14,6 +14,7 @@ namespace School.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
+    [ApiController]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -27,7 +28,6 @@ namespace School.WebApi.Controllers
         {
             _mapper = mapper;
         }
-        // TODO: Дописать возможные статус-коды ошибок
 
         /// <summary>
         /// Gets the list of courses
@@ -42,9 +42,9 @@ namespace School.WebApi.Controllers
         /// <response code="401">User is unauthorized</response>
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
-        [HttpGet(Name = nameof(GetCoursesList))]
+        [HttpGet(Name = nameof(GetCourseList))]
         [Authorize(Roles = "Coach,Student")]
-        public async Task<ActionResult<CourseListVm>> GetCoursesList()
+        public async Task<ActionResult<CourseListVm>> GetCourseList()
         {
             var query = new GetCourseListQuery
             {

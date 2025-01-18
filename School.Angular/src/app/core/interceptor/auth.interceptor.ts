@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (req.url.startsWith(Constants.apiRoot)) {
+    if (req.url.startsWith(Constants.apiRoot) && !req.url.startsWith(Constants.apiRoot + '/home')) {
       return from(this._authService.getAccessToken().then(async token => {
         const headers = req.headers.set('Authorization', `Bearer ${token}`);
         const authRequest = req.clone({ headers });

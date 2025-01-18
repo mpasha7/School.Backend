@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { CourseDetailsVm, CourseLookupDto, CreateCourseDto, UpdateCourseDto } from "../../core/models/course.model";
+import { CourseDetailsVm, CourseLookupDto } from "../../core/models/course.model";
 
 
 export enum ECourseActions {
@@ -14,7 +14,9 @@ export enum ECourseActions {
     DeleteCourse = "[Course] Delete Course"
 }
 
-export const loadCourseList = createAction(ECourseActions.GetCourseList);
+export const loadCourseList = createAction(
+    ECourseActions.GetCourseList
+);
 export const loadCourseListSuccess = createAction(
     ECourseActions.GetCourseListSuccess,
     props<{courseList: CourseLookupDto[]}>()
