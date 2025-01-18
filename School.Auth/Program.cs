@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.WebEncoders;
 using School.Auth.Configuration;
 using School.Auth.Extensions;
 using School.Auth.Services;
@@ -35,6 +36,13 @@ namespace School.Auth
 
             builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+            builder.Services.Configure<WebEncoderOptions>(opts =>
+            {
+                opts.TextEncoderSettings = new System.Text.Encodings.Web
+                        .TextEncoderSettings(System.Text.Unicode.UnicodeRanges.All);
+                    
+            });
             var app = builder.Build();
 
 
@@ -49,6 +57,11 @@ namespace School.Auth
             app.UseIdentityServer();
             app.UseAuthorization();
 
+            //app.MapGet("/", async (context, next) =>
+            //{
+            //    context.Response.Headers["Content-Type"] = "text/plain; charset=utf-8";
+            //    return await next.Invoke(context);
+            //});
             app.MapDefaultControllerRoute();
             app.MapRazorPages();
             app.Run();

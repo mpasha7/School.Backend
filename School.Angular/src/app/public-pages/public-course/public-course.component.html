@@ -1,9 +1,16 @@
 <div class="container">
     <div class="page-title">
-        {{selectedCourse?.title}}
+        <h1>{{selectedCourse?.title}}</h1>
     </div>
 
-    <img src="https://localhost:7125/uploads/Photo/{{selectedCourse?.photo?.uniqueFileName}}" alt="No Photo">
+    
 
-    <p>{{selectedCourse?.publicDescription}}</p>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <img src="https://localhost:7125/uploads/Photo/{{selectedCourse?.photo?.uniqueFileName}}" alt="No Photo" width="100%" />
+        </div>
+        <div class="col-md-6 col-sm-12 text-start">
+            <p class="ms-4">{{selectedCourse?.publicDescription}}</p>
+        </div>
+    </div>
 </div>

@@ -9,11 +9,16 @@
 }
 
 <div class="nav-page">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
-        <a href="~/" class="navbar-brand">
-            <img src="~/duende-logo.svg" class="icon-banner">
-            Duende IdentityServer
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2">
+        @* <a href="~/" class="navbar-brand"> *@
+        @*     <img src="~/duende-logo.svg" class="icon-banner"> *@
+        @*     Duende IdentityServer *@
+        @* </a> *@
+        <a class="nav-link" routerLink="/">
+            <span class="ms-4 me-2" style="margin-right: 10px;">
+                <img src="~/gimnastic_white.png" alt="no" height="35px" />
+            </span>
+            <span class="text-white me-5">Gymnastic School</span>
         </a>
 
         @if (!string.IsNullOrWhiteSpace(name))
