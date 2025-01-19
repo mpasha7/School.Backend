@@ -24,12 +24,12 @@ namespace School.Domain
 
         [JsonIgnore]
         public virtual IEnumerable<Lesson> Lessons { get; set; }
-        //public virtual IEnumerable<StudentOfCourse> Students { get; set; }
+        public virtual IEnumerable<StudentOfCourse> Students { get; set; }
 
         public Course()
         {
             Lessons = new List<Lesson>();
-            //Students = new List<StudentOfCourse>();
+            Students = new List<StudentOfCourse>();
         }
     }
 }

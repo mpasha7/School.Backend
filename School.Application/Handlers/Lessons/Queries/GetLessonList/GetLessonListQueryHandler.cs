@@ -1,17 +1,10 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
-using School.Application.Interfaces;
 using School.Application.Interfaces.Repository;
 using School.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.Application.Handlers.Lessons.Queries.GetLessonList
 {
@@ -30,12 +23,22 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonList
 
         public async Task<LessonListVm> Handle(GetLessonListQuery request, CancellationToken cancellationToken)
         {
-            var course = await _courseRepository.GetByIdAsync(request.CourseId, cancellationToken);
+            if (request.UserRole != UserRoles.Coach && request.UserRole != UserRoles.Student)
+                throw new ArgumentNullException(nameof(request.UserRole));
+
+            var course = await _courseRepository.GetByIdAsync(
+                request.CourseId,
+                cancellationToken,
+                includeProperty: "Students");
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.CourseId);
-            else if (course.CoachGuid != request.CoachGuid)
-                throw new NoAccessException(nameof(Course), request.CourseId);
+            else if (request.UserRole == UserRoles.Coach 
+                && course.CoachGuid != request.UserGuid)
+                    throw new NoAccessException(nameof(Course), request.CourseId);
+            else if (request.UserRole == UserRoles.Student
+                && !course.Students.Where(s => s.StudentGuid == request.UserGuid).Any())
+                    throw new NoAccessException(nameof(Course), request.CourseId);
 
             var lessons = (await _lessonRepository.GetAllAsync(
                 cancellationToken,

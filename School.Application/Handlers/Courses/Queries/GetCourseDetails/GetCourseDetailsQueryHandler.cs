@@ -21,15 +21,36 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
 
         public async Task<CourseDetailsVm> Handle(GetCourseDetailsQuery request, CancellationToken cancellationToken)
         {
+            string includeProperty = "";
+
+            switch (request.UserRole)
+            {
+                case UserRoles.Admin:
+                    throw new ArgumentNullException(nameof(request.UserRole));
+                case UserRoles.Coach:
+                    includeProperty = "Photo";
+                    break;
+                case UserRoles.Student:
+                    includeProperty = "Photo,Students";
+                    break;
+                default:
+                    throw new ArgumentNullException(nameof(request.UserRole));
+            }
+
             var course = await _coursesRepository.GetByIdAsync(
                 request.Id,
                 cancellationToken,
-                includeProperty: "Photo");
+                includeProperty: includeProperty
+            );
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.Id);
-            else if (course.CoachGuid != request.CoachGuid)
-                throw new NoAccessException(nameof(Course), request.Id);
+            else if (request.UserRole == UserRoles.Coach 
+                && course.CoachGuid != request.UserGuid)
+                    throw new NoAccessException(nameof(Course), request.Id);
+            else if (request.UserRole == UserRoles.Student 
+                && !course.Students.Where(s => s.StudentGuid == request.UserGuid).Any())
+                    throw new NoAccessException(nameof(Course), request.Id);
 
             var vm = _mapper.Map<CourseDetailsVm>(course);
             vm.Photo = _mapper.Map<FileLookupDto>(course.Photo);

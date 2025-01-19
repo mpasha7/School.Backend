@@ -34,7 +34,7 @@ namespace School.Tests.Handlers.Courses.Queries
                 new GetCourseDetailsQuery
                 {
                     Id = 2,
-                    CoachGuid = CoursesContextFactory.UserBGuid
+                    UserGuid = CoursesContextFactory.UserBGuid
                 },
                 CancellationToken.None);
 

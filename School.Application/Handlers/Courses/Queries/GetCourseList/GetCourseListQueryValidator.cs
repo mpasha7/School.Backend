@@ -6,7 +6,7 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseList
     {
         public GetCourseListQueryValidator()
         {
-            RuleFor(q => q.CoachGuid).NotEmpty();
+            RuleFor(q => q.UserGuid).NotEmpty();
         }
     }
 }

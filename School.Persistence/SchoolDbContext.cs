@@ -19,6 +19,7 @@ namespace School.Persistence
         public DbSet<Course> Courses { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<FileObject> Files { get; set; }
+        public DbSet<StudentOfCourse> Students { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,7 +27,7 @@ namespace School.Persistence
             modelBuilder.ApplyConfiguration(new CourseConfiguration());
             modelBuilder.ApplyConfiguration(new LessonConfiguration());
 
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder.SeedDatabase());
         }
 
     }

@@ -48,7 +48,8 @@ namespace School.WebApi.Controllers
             var query = new GetLessonListQuery
             {
                 CourseId = courseid,
-                CoachGuid = UserGuid
+                UserGuid = UserGuid,
+                UserRole = GetUserRole()
             };
             var vm = await Mediator!.Send(query);   // TODO: Нужен ли "!" ?
             return Ok(vm);
@@ -77,7 +78,8 @@ namespace School.WebApi.Controllers
             {
                 Id = id,
                 CourseId = courseid,
-                CoachGuid = UserGuid
+                UserGuid = UserGuid,
+                UserRole = GetUserRole()
             };
             var vm = await Mediator!.Send(query);
             return Ok(vm);

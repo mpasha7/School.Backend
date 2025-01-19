@@ -33,7 +33,7 @@ namespace School.Tests.Handlers.Courses.Queries
             var result = await handler.Handle(
                 new GetCourseListQuery
                 {
-                    CoachGuid = CoursesContextFactory.UserBGuid
+                    UserGuid = CoursesContextFactory.UserBGuid
                 },
                 CancellationToken.None);
 

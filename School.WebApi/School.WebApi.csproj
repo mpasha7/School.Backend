@@ -30,8 +30,4 @@
     <ProjectReference Include="..\School.Persistence\School.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>

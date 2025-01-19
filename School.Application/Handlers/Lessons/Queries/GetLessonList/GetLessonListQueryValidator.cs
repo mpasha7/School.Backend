@@ -12,7 +12,7 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonList
         public GetLessonListQueryValidator()
         {
             RuleFor(comm => comm.CourseId).GreaterThan(0);
-            RuleFor(comm => comm.CoachGuid).NotEmpty();
+            RuleFor(comm => comm.UserGuid).NotEmpty();
         }
     }
 }

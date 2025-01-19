@@ -7,7 +7,7 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
         public GetCourseDetailsQueryValidator()
         {
             RuleFor(q => q.Id).GreaterThan(0);
-            RuleFor(q => q.CoachGuid).NotEmpty();
+            RuleFor(q => q.UserGuid).NotEmpty();
         }
     }
 }

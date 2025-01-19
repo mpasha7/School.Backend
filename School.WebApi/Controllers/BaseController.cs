@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using School.Domain;
 using System.Security.Claims;
 
 namespace School.WebApi.Controllers
@@ -15,5 +16,18 @@ namespace School.WebApi.Controllers
             ? string.Empty
             : User.FindFirst(ClaimTypes.NameIdentifier)!.Value; // TODO: Перевести на Guid (Почему в Identity применяется string, а не UUID?)
             //: Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)!.Value);
+
+        protected UserRoles GetUserRole()
+        {
+            UserRoles role;
+            if (User.IsInRole("Coach"))
+                role = UserRoles.Coach;
+            else if (User.IsInRole("Student"))
+                role = UserRoles.Student;
+            else
+                throw new Exception("Unknown User Role");
+            return role;
+        }
+        
     }
 }
