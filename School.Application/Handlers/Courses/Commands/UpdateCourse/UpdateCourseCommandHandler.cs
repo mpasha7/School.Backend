@@ -26,7 +26,7 @@ namespace School.Application.Handlers.Courses.Commands.UpdateCourse
 
         public async Task Handle(UpdateCourseCommand request, CancellationToken cancellationToken)
         {
-            var course = await _repository.GetByIdAsync(request.Id, cancellationToken, includeProperty: "Photo");
+            var course = await _repository.GetByIdAsync(request.Id, cancellationToken, includeReference: "Photo");
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.Id);

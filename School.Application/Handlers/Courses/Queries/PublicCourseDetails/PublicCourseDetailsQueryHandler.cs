@@ -24,7 +24,7 @@ namespace School.Application.Handlers.Courses.Queries.PublicCourseDetails
             var course = await _coursesRepository.GetByIdAsync(
                 request.Id,
                 cancellationToken,
-                includeProperty: "Photo");
+                includeReference: "Photo");
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.Id);

@@ -37,7 +37,7 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonDetails
             var lesson = await _lessonRepository.GetByIdAsync(
                 request.Id,
                 cancellationToken,
-                includeProperty: "Course"
+                includeReference: "Course"
             );
 
             if (lesson == null)

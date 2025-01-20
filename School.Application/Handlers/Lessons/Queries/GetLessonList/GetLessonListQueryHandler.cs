@@ -29,7 +29,7 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonList
             var course = await _courseRepository.GetByIdAsync(
                 request.CourseId,
                 cancellationToken,
-                includeProperty: "Students");
+                includeCollection: "Students");
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.CourseId);

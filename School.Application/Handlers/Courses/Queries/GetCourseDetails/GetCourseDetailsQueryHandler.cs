@@ -21,17 +21,16 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
 
         public async Task<CourseDetailsVm> Handle(GetCourseDetailsQuery request, CancellationToken cancellationToken)
         {
-            string includeProperty = "";
+            string includeCollection = "";
 
             switch (request.UserRole)
             {
                 case UserRoles.Admin:
                     throw new ArgumentNullException(nameof(request.UserRole));
                 case UserRoles.Coach:
-                    includeProperty = "Photo";
                     break;
                 case UserRoles.Student:
-                    includeProperty = "Photo,Students";
+                    includeCollection = "Students";
                     break;
                 default:
                     throw new ArgumentNullException(nameof(request.UserRole));
@@ -40,7 +39,8 @@ namespace School.Application.Handlers.Courses.Queries.GetCourseDetails
             var course = await _coursesRepository.GetByIdAsync(
                 request.Id,
                 cancellationToken,
-                includeProperty: includeProperty
+                includeReference: "Photo",
+                includeCollection: includeCollection
             );
 
             if (course == null)

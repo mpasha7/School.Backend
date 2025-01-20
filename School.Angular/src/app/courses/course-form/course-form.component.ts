@@ -91,6 +91,6 @@ export class CourseFormComponent implements OnInit {
     else {
       this.store.dispatch(createCourse({createCourseDto: formData}));
     }
-    this.router.navigate([""]);
+    this.router.navigate(["courses/list"]);
   }
 }

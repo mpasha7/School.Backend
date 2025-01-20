@@ -44,12 +44,18 @@ namespace School.WebApi.Repository
         public async Task<T?> GetByIdAsync(
             int id, 
             CancellationToken cancellationToken,
-            string includeProperty = "")
+            string includeReference = "",
+            string includeCollection = "")
         {
-            var res = await _dbSet.FindAsync(id, cancellationToken);
-            if (!string.IsNullOrEmpty(includeProperty) && res != null)
-                _context.Entry(res).Reference(includeProperty).Load();
-            return res;
+            var result = await _dbSet.FindAsync(id, cancellationToken);
+
+            if (!string.IsNullOrEmpty(includeReference) && result != null)
+                await _context.Entry(result).Reference(includeReference).LoadAsync();
+
+            if (!string.IsNullOrEmpty(includeCollection) && result != null)
+                await _context.Entry(result).Collection(includeCollection).LoadAsync();
+
+            return result;
         }
 
         public async Task<T> AddAsync(T entity, CancellationToken cancellationToken)

@@ -19,7 +19,8 @@ namespace School.Application.Interfaces.Repository
         Task<T?> GetByIdAsync(
             int id,
             CancellationToken cancellationToken,
-            string includeProperty = "");
+            string includeReference = "",
+            string includeCollection = "");
         Task<T> AddAsync(T entity, CancellationToken cancellationToken);
         Task<T> UpdateAsync(T entity, CancellationToken cancellationToken);
         Task DeleteAsync(T entity, CancellationToken cancellationToken);
