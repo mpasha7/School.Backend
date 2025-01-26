@@ -34,14 +34,13 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// GET /courses
+        /// GET /api/courses
         /// </remarks>
         /// <returns>Returns CourseListVm</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>
         /// <response code="403">No access to object</response>
-        /// <response code="404">Object is not found</response>
         [HttpGet(Name = nameof(GetCourseList))]
         [Authorize(Roles = "Coach,Student")]
         public async Task<ActionResult<CourseListVm>> GetCourseList()
@@ -60,7 +59,7 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Simple request:
-        /// GET /courses/5
+        /// GET /api/courses/5
         /// </remarks>
         /// <param name="id">Course id (int)</param>
         /// <returns>Returns CourseDetailsVm</returns>
@@ -88,7 +87,7 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// POST /courses
+        /// POST /api/courses
         /// {
         ///     Title: "course title",
         ///     Description: "course description",
@@ -100,12 +99,11 @@ namespace School.WebApi.Controllers
         /// }
         /// </remarks>
         /// <param name="createCourseDto">CreateCourseDto object</param>
-        /// <returns>Returns course id (int)</returns>
+        /// <returns>Returns success phrase with course id</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>
         /// <response code="403">No access to object</response>
-        /// <response code="404">Object is not found</response>
         [HttpPost(Name = nameof(CreateCourse))]
         [Authorize(Roles = "Coach")]
         public async Task<ActionResult<ResponseDto>> CreateCourse([FromForm] CreateCourseDto createCourseDto)
@@ -125,14 +123,14 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// PUT /courses
+        /// PUT /api/courses
         /// {
         ///     Description: "updated course description",
         ///     PhotoPath: "updated course photo path"
         /// }
         /// </remarks>
         /// <param name="updateCourseDto">UpdateCourseDto object</param>
-        /// <returns>Returns NoContent</returns>
+        /// <returns>Returns success phrase with course id</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>
@@ -157,10 +155,10 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// DELETE /courses/5
+        /// DELETE /api/courses/5
         /// </remarks>
         /// <param name="id">Course id (int)</param>
-        /// <returns>Returns NoContent</returns>
+        /// <returns>Returns success phrase with course id</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>

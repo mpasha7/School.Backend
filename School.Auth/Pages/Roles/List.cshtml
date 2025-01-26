@@ -1,0 +1,48 @@
+﻿@page
+@model School.Auth.Pages.Roles.ListModel
+@{
+    ViewData["Title"] = "Роли";
+}
+
+<div class="container">
+    <h2 class="bg-primary text-center text-white p-1 mb-2">@ViewData["Title"]</h2>
+
+    <table class="table table-sm table-bordered my-3">
+        <thead>
+            <tr class="text-center">
+                <th>Название</th>
+                <th>Представители</th>
+                <th class="col-4"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Roles.Count() == 0)
+            {
+                <tr>
+                    <td colspan="4" class="text-center">Нет ролей</td>
+                </tr>
+            }
+            else
+            {
+                foreach (IdentityRole role in Model.Roles)
+                {
+                    <tr class="cell_justify">
+                        <td>@role.Name</td>
+                        <td>@(await Model.GetMembersString(role.Name))</td>
+                        <td class="text-center">
+                            <form asp-page="List" method="post">
+                                <input type="hidden" name="Id" value="@role.Id" />
+                                <a class="btn btn-sm btn-primary mx-2" asp-page="Editor" asp-route-id="@role.Id" asp-route-mode="edit">Редактировать</a>
+                                <button type="submit" class="btn btn-sm btn-danger mx-2">Удалить</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center mb-5">
+        <a class="btn btn-primary" asp-page="Create">Создать</a>
+    </div>
+</div>

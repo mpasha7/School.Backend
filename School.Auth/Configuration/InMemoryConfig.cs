@@ -119,7 +119,8 @@ namespace School.Auth.Configuration
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.Phone,
                         "roles",
-                        "SchoolWebApi"
+                        "SchoolWebApi",
+                        "StudentsWebApi"
                     },
                     AllowedCorsOrigins = { "https://localhost:49824" },
                     RequireClientSecret = false,
@@ -137,7 +138,8 @@ namespace School.Auth.Configuration
         {
             return new List<ApiScope>
             {
-                new ApiScope("SchoolWebApi", "School Web API")
+                new ApiScope("SchoolWebApi", "School Web API"),
+                new ApiScope("StudentsWebApi", "Students Web API")
             };
         }
 
@@ -148,6 +150,10 @@ namespace School.Auth.Configuration
                 new ApiResource("SchoolWebApi", "School Web API")
                 {
                     Scopes = { "SchoolWebApi" }
+                },
+                new ApiResource("StudentsWebApi", "Students Web API")
+                {
+                    Scopes = { "StudentsWebApi" }
                 }
             };
         }

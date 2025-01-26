@@ -1,52 +1,46 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-3 nav_header">
     <a class="nav-link" routerLink="/">
-        <span class="header-logo ms-4 me-2">
+        <span class="header-logo ms-5 me-2">
             <img src="logo.png" alt="no" />
         </span>
         <span class="text-white me-5 fs-5">Gymnastic School</span>
     </a>
 
-    <div *ngIf="isUserAuthenticated" class="collapse navbar-collapse">
+    <div *ngIf="isUserAuthenticated" class="collapse navbar-collapse pb-1">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="active" 
+            <li class="nav-item me-3">
+                <a class="btn text-white" [routerLink]="['/profile']" routerLinkActive="active" 
                         [routerLinkActiveOptions]="{exact: true}">
-                    Профиль
+                    Profile
                 </a>
             </li>
 
             @if (userRole == 'Admin') {
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin/roles']" routerLinkActive="active" 
-                            [routerLinkActiveOptions]="{exact: true}">
-                        Роли
-                    </a>
+                    <button class="btn text-white me-3" type="button" (click)="goToAdminPanel('/roles/list')">Roles</button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin/users']" routerLinkActive="active" 
-                            [routerLinkActiveOptions]="{exact: true}">
-                        Пользователи
-                    </a>
+                    <button class="btn text-white me-3" type="button" (click)="goToAdminPanel('/users/list')">Users</button>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/admin/courses']" routerLinkActive="active" 
-                            [routerLinkActiveOptions]="{exact: true}">
-                        Курсы
-                    </a>
+                    <button class="btn text-white me-3" type="button" (click)="goToAdminPanel('/homelist/list')">Courses</button>
                 </li>
             }
 
             <li class="nav-item">
-                <a *ngIf="userRole != 'Admin'" class="nav-link" [routerLink]="['/courses/list']" routerLinkActive="active" 
+                <a *ngIf="userRole != 'Admin'" class="btn text-white me-3" [routerLink]="['/courses/list']" routerLinkActive="active" 
                         [routerLinkActiveOptions]="{exact: true}">
-                    Курсы
+                    Courses
                 </a>
             </li>
 
+            <!-- <li class="nav-item">
+                <button class="btn text-white me-3" type="button" (click)="goToAdminPanel('/students/list')">Courses</button>
+            </li> -->
             <li class="nav-item">
-                <a *ngIf="userRole == 'Coach'" class="nav-link" [routerLink]="['/students']" routerLinkActive="active" 
+                <a *ngIf="userRole == 'Coach'" class="btn text-white me-3" [routerLink]="['/students/list']" routerLinkActive="active" 
                         [routerLinkActiveOptions]="{exact: true}">
-                    Ученики
+                    Students
                 </a>
             </li>
         </ul>
@@ -55,8 +49,8 @@
     <span class="spacer"></span>
 
     <section>
-        <button *ngIf="!isUserAuthenticated" class="btn text-white me-3" type="button" (click)="login()">Вход</button>
-        <button *ngIf="isUserAuthenticated" class="btn text-white me-3" type="button" (click)="logout()">Выход</button>
+        <button *ngIf="!isUserAuthenticated" class="btn text-white me-3" type="button" (click)="login()">Login</button>
+        <button *ngIf="isUserAuthenticated" class="btn text-white me-3" type="button" (click)="logout()">Logout</button>
     </section>    
 </nav>
 

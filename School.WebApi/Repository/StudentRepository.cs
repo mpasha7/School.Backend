@@ -15,11 +15,11 @@ namespace School.WebApi.Repository
             this.context = context;
         }
 
-        public async Task<bool> IsStudentOfThisCourse(string studentGuid, int courseId)
+        public async Task<bool> IsStudentOfThisCourse(string studentGuid, int courseId, CancellationToken cancellationToken)
         {
             return await context.Students
                 .Where(s => s.StudentGuid == studentGuid && s.CourseId == courseId)
-                .AnyAsync();
+                .AnyAsync(cancellationToken);
         }
     }
 }

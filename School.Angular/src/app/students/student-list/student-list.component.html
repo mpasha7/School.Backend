@@ -1,0 +1,61 @@
+<div></div>
+
+<!-- <div class="container" style="margin-top: 100px;">
+    <div class="row">
+        <div class="col-12 my-2">
+            <form (ngSubmit)="getStudents()">
+                <div class="form-group text-start">
+                    <label asp-for="Search"><h5 class="color1">Поиск по Email среди всех учеников:</h5></label>
+                    <input type="search" [(ngModel)]="search" name="search" class="form-control" placeholder="Поиск..." />
+                    <button mat-raised-button color="primary" class="mt-2" type="submit">Найти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 my-2">
+            <div class="title-link">
+                <h2>Ваши ученики</h2>
+            </div>
+
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>Имя</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th class="col-3"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!studentList || studentList.length == 0">
+                        <td colspan="4" class="text-center">Нет студентов</td>
+                    </tr>
+                    <div *ngIf="studentList && studentList.length > 0">
+                        <tr *ngFor="let student of studentList" class="cell_justify">
+                            <td><h6 class="color2 ps-3">{{student.username}}</h6></td>
+                            <td><h6 class="color2 ps-3">{{student.email}}</h6></td>
+                            <td><h6 class="color2 ps-3">{{student.phone}}</h6></td>
+                            <td class="text-center">
+                                <button mat-raised-button color="primary" type="button">Редактировать</button>
+                            </td>
+                        </tr>
+                    </div>
+                </tbody>
+            </table>
+        </div>
+
+        <div mat-raised-button color="primary" type="button">
+            <button mat-raised-button color="primary" type="button" (click)="getStudents()">Загрузить</button>
+        </div>
+
+        <div mat-raised-button color="primary" type="button">
+            <button mat-raised-button color="primary" type="button">Создать</button>
+        </div>
+    </div>
+    <div>
+        <p>{{studentIds|json}}</p>
+    </div>
+
+</div> -->

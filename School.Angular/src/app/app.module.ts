@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AsyncPipe } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LayoutModule } from './layout/layout.module';
 import { StoreModule } from '@ngrx/store';
@@ -18,6 +18,7 @@ import { SigninRedirectCallbackComponent } from './redirects/signin-redirect-cal
 import { SignoutRedirectCallbackComponent } from './redirects/signout-redirect-callback/signout-redirect-callback.component';
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UnauthorizedComponent,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

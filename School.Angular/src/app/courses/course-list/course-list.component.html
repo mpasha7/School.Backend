@@ -1,9 +1,9 @@
 <div class="container">
   <div class="page-title">
-    <h1>Курсы</h1>
+    <h1>Ваши курсы</h1>
   </div>
 
-  <button mat-raised-button color="primary" type="button" routerLink="/courses/form/0">
+  <button *ngIf="isCoach" mat-raised-button color="primary" type="button" routerLink="/courses/form/0">
     Добавить
   </button>
 
@@ -22,7 +22,7 @@
           <img src="https://localhost:7125/uploads/Photo/{{item.photo?.uniqueFileName}}" alt="No Photo" />
         </div>
       </mat-card-content>
-      <mat-card-actions>
+      <mat-card-actions *ngIf="isCoach">
         <button mat-fab color="primary" type="button" routerLink="/courses/form/{{item.id}}">
           <mat-icon>edit</mat-icon>
         </button>

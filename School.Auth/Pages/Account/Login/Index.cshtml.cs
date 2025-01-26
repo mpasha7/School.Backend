@@ -117,6 +117,7 @@ public class Index : PageModel
                     return Redirect(Input.ReturnUrl);
                 }
                 return Redirect("~/");
+                //return Redirect("https://localhost:49824/courses/list");
             }
         }
 

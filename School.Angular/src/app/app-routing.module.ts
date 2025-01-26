@@ -14,6 +14,11 @@ import { SignoutRedirectCallbackComponent } from './redirects/signout-redirect-c
 import { AuthGuard } from './core/guards/auth.guard';
 import { HomeComponent } from './public-pages/home/home.component';
 import { PublicCourseComponent } from './public-pages/public-course/public-course.component';
+import { LogoutComponent } from './logout/logout.component';
+import { StudentsComponent } from './students/students.component';
+import { StudentListComponent } from './students/student-list/student-list.component';
+import { StudentToCourseComponent } from './students/student-to-course/student-to-course.component';
+import { StudentFromCourseComponent } from './students/student-from-course/student-from-course.component';
 
 const courseRoutes: Routes = [
   { path: 'list', component: CourseListComponent },
@@ -30,15 +35,26 @@ const lessonRoutes: Routes = [
   { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ]
 
+const studentRoutes: Routes = [
+  { path: 'list', component: StudentListComponent },
+  { path: 'to-course', component: StudentToCourseComponent },  
+  { path: 'from-course', component: StudentFromCourseComponent },
+  { path: '', redirectTo: '/students/list', pathMatch: 'full'},
+  { path: '**', redirectTo: '/404', pathMatch: 'full' }
+]
+
 const routes: Routes = [
   { path: 'courses', component: CoursesComponent, children: courseRoutes, 
         canActivate: [AuthGuard], data: { roles: ['Coach', 'Student'] } },
   { path: 'lessons/:courseid', component: LessonsComponent, children: lessonRoutes, 
         canActivate: [AuthGuard], data: { roles: ['Coach', 'Student'] } },
+  { path: 'students', component: StudentsComponent, children: studentRoutes,
+        canActivate: [AuthGuard], data: { roles: ['Coach'] } },
   { path: 'home', component: HomeComponent },
   { path: 'home/:id', component: PublicCourseComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'signin-callback', component: SigninRedirectCallbackComponent },
-  { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
+  { path: 'signout-callback', component: SignoutRedirectCallbackComponent },  
   { path: '404', component: NotFoundComponent },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full'},

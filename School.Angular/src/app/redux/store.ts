@@ -7,22 +7,28 @@ import { HomeState } from "./home/home.state";
 import { LessonEffects } from "./lessons/lessons.effects";
 import { lessonsReducer } from "./lessons/lessons.reducer";
 import { LessonsState } from "./lessons/lessons.state";
+import { StudentEffects } from "./students/students.effects";
+import { studentsReducer } from "./students/students.reducer";
+import { StudentsState } from "./students/students.state";
 
 
 export interface AppState {
     coursesState: CoursesState;
     lessonsState: LessonsState;
     homeState: HomeState;
+    studentsState: StudentsState;
 }
 
 export const store = {
     coursesStore: coursesReducer,
     lessonsStore: lessonsReducer,
-    homeStore: homeReducer
+    homeStore: homeReducer,
+    studentsStore: studentsReducer
 }
 
 export const appEffects = [
     CourseEffects,
     LessonEffects,
-    HomeEffects
+    HomeEffects,
+    StudentEffects
 ]

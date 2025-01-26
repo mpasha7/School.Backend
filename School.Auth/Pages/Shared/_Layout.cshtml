@@ -12,9 +12,67 @@
     
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap4-glyphicons/css/bootstrap-glyphicons.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .title_font {
+            font-family: "Noto Sans", serif;
+            color: #7d2ba6;
+            font-size: 30px;
+            font-weight: 700;
+        }
+        .subtitle_font {
+            font-family: "Noto Sans", serif;
+            color: #7d2ba6;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .btn_itd {
+            display: inline-flex;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 4px 12px;
+            color: white;
+            background-color: #3d55b4;
+        }
+            .btn_itd:hover {
+                color: white;
+                background-color: #3d55b4;
+            }
+
+        .btn_del {
+            display: inline-flex;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 4px 12px;
+            color: white;
+            background-color: #fb4685;
+        }
+            .btn_del:hover {
+                color: white;
+                background-color: #fb4685;
+            }
+        .btn_itd_outline {
+            display: inline-flex;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 3px 12px;
+            color: #3d55b4;
+            border: 3px solid #3d55b4;
+        }
+            .btn_itd_outline:hover {
+                color: #3d55b4;
+                border: 3px solid #3d55b4;
+            }
+        td h6 {
+            margin-top: 0.5rem;
+        }
+    </style>
 </head>
-<body>
+<body style="font-family: Roboto, 'Helvetica Neue', sans-serif;">
     <partial name="_Nav" />
    
     <div class="container body-container">

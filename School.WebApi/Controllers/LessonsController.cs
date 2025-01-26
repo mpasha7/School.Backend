@@ -99,7 +99,7 @@ namespace School.WebApi.Controllers
         /// }
         /// </remarks>
         /// <param name="createLessonDto">CreateLessonDto object</param>
-        /// <returns>Returns lesson id (int)</returns>
+        /// <returns>Returns success phrase with lesson id</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>
@@ -128,7 +128,7 @@ namespace School.WebApi.Controllers
         /// }
         /// </remarks>
         /// <param name="updateLessonDto">UpdateLessonDto object</param>
-        /// <returns>Returns NoContent</returns>
+        /// <returns>Returns success phrase with lesson id</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>
@@ -154,7 +154,7 @@ namespace School.WebApi.Controllers
         /// </remarks>
         /// <param name="id">Lesson id (int)</param>
         /// <param name="courseid">Course id (int)</param>
-        /// <returns>Returns NoContent</returns>
+        /// <returns>Returns success phrase with lesson id</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>

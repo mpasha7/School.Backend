@@ -1,4 +1,5 @@
 @using Duende.IdentityServer.Extensions
+@inject UserManager<IdentityUser> userManager
 @{
     #nullable enable
     string? name = null;
@@ -9,30 +10,82 @@
 }
 
 <div class="nav-page">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2">
-        @* <a href="~/" class="navbar-brand"> *@
-        @*     <img src="~/duende-logo.svg" class="icon-banner"> *@
-        @*     Duende IdentityServer *@
-        @* </a> *@
-        <a class="nav-link" routerLink="/">
-            <span class="ms-4 me-2" style="margin-right: 10px;">
-                <img src="~/gimnastic_white.png" alt="no" height="35px" />
-            </span>
-            <span class="text-white me-5">Gymnastic School</span>
-        </a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary py-2" style="height: 70px">
+        <div class="container-fluid">
+            @* <a href="~/" class="navbar-brand"> *@
+            @*     <img src="~/duende-logo.svg" class="icon-banner"> *@
+            @*     Duende IdentityServer *@
+            @* </a> *@
+            <a class="nav-link navbar-brand" style="margin-right: 2.5rem" href="https://localhost:49824/">
+                <span class="" style="margin-right: 5px;">
+                    <img src="~/gimnastic_white.png" alt="no" height="35px" />
+                </span>
+                <span class="text-white text-left me-5">Gymnastic School</span>
+            </a>
 
-        @* @if (!string.IsNullOrWhiteSpace(name)) *@
-        @* { *@
-        @*     <ul class="navbar-nav mr-auto"> *@
-        @*         <li class="nav-item dropdown"> *@
-        @*             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@name <b class="caret"></b></a> *@
-                    
-        @*             <div class="dropdown-menu"> *@
-        @*                 <a class="dropdown-item" asp-page="/Account/Logout/Index">Logout</a> *@
-        @*             </div> *@
-        @*       </li> *@
-        @*     </ul> *@
-        @* } *@
-    
+            @* @if (!string.IsNullOrWhiteSpace(name)) *@
+            @* { *@
+            @*     <ul class="navbar-nav mr-auto"> *@
+            @*         <li class="nav-item dropdown"> *@
+            @*             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@name <b class="caret"></b></a> *@
+
+            @*             <div class="dropdown-menu"> *@
+            @*                 <a class="dropdown-item" asp-page="/Account/Logout/Index">Logout</a> *@
+            @*             </div> *@
+            @*       </li> *@
+            @*     </ul> *@
+            @* } *@
+
+            <div class="navbar-collapse text-start collapse">
+                <ul class="navbar-nav text-start pt-2">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item mr-4">
+                            <a class="nav-link text-white" asp-controller="Account" asp-action="Profile"><h6>Profile</h6></a>
+                        </li>
+
+                        IdentityUser? user = await userManager.FindByNameAsync(User.Identity.Name);
+                        @if (await userManager.IsInRoleAsync(user, "Admin"))
+                        {
+                            <li class="nav-item mr-4">
+                                <a class="nav-link text-white" asp-page="/Roles/List"><h6>Roles</h6></a>
+                            </li>
+                            <li class="nav-item mr-4">
+                                <a class="nav-link text-white" asp-page="/Users/List"><h6>Users</h6></a>
+                            </li>
+                            @* <li class="nav-item mr-4"> *@
+                            @*     <a class="nav-link text-white" asp-page="/HomeList/List"><h6>Courses</h6></a> *@
+                            @* </li> *@
+                        }
+                        else if (await userManager.IsInRoleAsync(user, "Coach"))
+                        {
+                            <li class="nav-item mr-4">
+                                <a class="nav-link text-white" href="https://localhost:49824/courses/list"><h6>Courses</h6></a>
+                            </li>
+                            <li class="nav-item mr-4">
+                                <a class="nav-link text-white" href="https://localhost:49824/students/list"><h6>Students</h6></a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>        
+
+        <div class="text-end me-5">
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav pt-2">
+                    <li class="nav-item">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="nav-link text-white" href="https://localhost:49824/logout"><h6>Logout</h6></a>
+                        }
+                        @* else *@
+                        @* { *@
+                        @*     <a class="nav-link text-white" asp-page="/Account/Login"><h5>Login</h5></a> *@
+                        @* } *@
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
 </div>

@@ -25,7 +25,7 @@ export class AuthService {
       authority: Constants.idpAuthority,
       client_id: Constants.clientId,
       redirect_uri: `${Constants.clientRoot}/signin-callback`,
-      scope: 'openid profile email phone roles SchoolWebApi',
+      scope: 'openid profile email phone roles SchoolWebApi StudentsWebApi',
       response_type: 'code',
       post_logout_redirect_uri: `${Constants.clientRoot}/signout-callback`,
       // refresh

@@ -46,11 +46,6 @@ namespace School.WebApi
                 });
             });
 
-            //builder.Services.AddAuthentication(opts =>
-            //{
-            //    //opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; // TODO: "Bearer"???
-            //    //opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
             builder.Services.AddAuthentication("Bearer")
                 .AddJwtBearer("Bearer", opts =>
                 {
@@ -97,11 +92,7 @@ namespace School.WebApi
                 app.UseDeveloperExceptionPage();
             }
             app.UseSwagger();
-            app.UseSwaggerUI(opts =>
-            {
-                //opts.RoutePrefix = string.Empty;
-                //opts.SwaggerEndpoint("swagger/v1/swagger.json", "School API");
-            });
+            app.UseSwaggerUI();
             app.UseCustomExceptionHandler();
             app.UseHttpsRedirection();
             app.UseDefaultFiles();

@@ -1,7 +1,3 @@
-/* .for_pattern {
-    background: url();
-} */
-
 .home_title {
     color: #7d2ba6;
     margin-top: 140px;
@@ -11,9 +7,9 @@
     display: inline-block;
 }
 
-.mat-mdc-card {
-    /* justify-content: center; */
-}
+/* .mat-mdc-card {
+    justify-content: center;
+} */
 
 .mat-mdc-card-content {
     display: flex;

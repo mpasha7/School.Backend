@@ -1,0 +1,62 @@
+﻿@page "{ids}"
+@model School.Auth.Pages.Students.ListModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 mb-2">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Search"><p style="color: #7d2ba6; margin-bottom: 0;">Поиск по Email среди всех учеников:</p></label>
+                    <input type="search" asp-for="Search" class="form-control" placeholder="Поиск..." />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 my-2">
+            <div class="text-center my-4">
+                <h2 class="title_font">Ваши ученики</h2>
+            </div>
+
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>Имя</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th class="col-3"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Students.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">Нет студентов</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (IdentityUser student in Model.Students)
+                        {
+                            <tr>
+                                <td><h6 class="color2 ps-3">@student.UserName</h6></td>
+                                <td><h6 class="color2 ps-3">@student.Email</h6></td>
+                                <td><h6 class="color2 ps-3">@student.PhoneNumber</h6></td>
+                                <td class="text-center">
+                                    <a class="btn btn-sm btn_itd_outline text-center" 
+                                        asp-page="Editor" asp-route-id="@student.Id" asp-route-ids="@Model.ids" 
+                                        asp-route-mode="edit">Редактировать</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-12 text-center mb-5">
+            <a class="btn btn_itd text-center" asp-page="Create" asp-route-ids="@Model.ids">Создать</a>
+        </div>
+    </div>
+</div>
