@@ -70,12 +70,21 @@
         td h6 {
             margin-top: 0.5rem;
         }
+        li h6 {
+            font-size: 17px;
+        }
+        .nav_header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+        }
     </style>
 </head>
-<body style="font-family: Roboto, 'Helvetica Neue', sans-serif;">
+<body>
     <partial name="_Nav" />
    
-    <div class="container body-container">
+    <div class="container body-container" style="margin-top: 130px;">
         @RenderBody()
     </div>
 

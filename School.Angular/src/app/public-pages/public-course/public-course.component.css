@@ -1,0 +1,37 @@
+.messages_header {
+    color: #7d2ba6;
+    margin-top: 16px;
+    margin-left: 15px;
+}
+
+.just_content {
+    align-items: center;
+}
+
+.sender_name {    
+    color: #7d2ba6;    
+}
+
+.mat-mdc-card-header {
+    justify-content: center;
+}
+
+.mat-mdc-card-content {
+    display: flex;
+}
+
+.mat-mdc-mini-fab {
+    justify-self: end;
+}
+
+.text_bold {
+    font-weight: 700;
+}
+
+.text_right {
+    margin: 0 0 0 auto;
+}
+
+.blue_undo .mat-icon-no-color {
+    color: #3d55b4;
+}

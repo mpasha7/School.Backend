@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CoursesService } from '../../core/services/courses/courses.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AppState } from '../../redux/store';
 import { Store } from '@ngrx/store';
 import { createCourse, loadCourse, updateCourse } from '../../redux/courses/courses.actions';
-import { CourseDetailsVm, CreateCourseDto, UpdateCourseDto } from '../../core/models/course.model';
 import { selectCourse } from '../../redux/courses/courses.selector';
-import { JsonPipe } from '@angular/common';
-import { Subscription } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
 
 @Component({

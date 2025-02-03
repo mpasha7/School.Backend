@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace School.Domain
 {
@@ -11,8 +6,8 @@ namespace School.Domain
     {
         public int Id { get; set; }
         public string? CoachGuid { get; set; }
-        public DateTime CreatedDate { get; set; }
-        
+
+        public DateTime CreatedDate { get; set; }        
         public string? Title { get; set; }
         public string? Description { get; set; }
         public string? ShortDescription { get; set; }
@@ -24,12 +19,25 @@ namespace School.Domain
 
         [JsonIgnore]
         public virtual IEnumerable<Lesson> Lessons { get; set; }
+        [JsonIgnore]
         public virtual IEnumerable<StudentOfCourse> Students { get; set; }
+        [JsonIgnore]
+        public virtual IEnumerable<Message> Messages { get; set; }
+        [JsonIgnore]
+        public virtual IEnumerable<Apply> Applies { get; set; }
+        [JsonIgnore]
+        public virtual IEnumerable<Assessment> Assessments { get; set; }
+        [JsonIgnore]
+        public virtual IEnumerable<Comment> Comments { get; set; }
 
         public Course()
         {
             Lessons = new List<Lesson>();
             Students = new List<StudentOfCourse>();
+            Messages = new List<Message>();
+            Applies = new List<Apply>();
+            Assessments = new List<Assessment>();
+            Comments = new List<Comment>();
         }
     }
 }

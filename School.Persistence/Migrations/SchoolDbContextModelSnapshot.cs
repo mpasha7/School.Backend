@@ -22,6 +22,92 @@ namespace School.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("School.Domain.Apply", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAssepted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StudentGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Applies");
+                });
+
+            modelBuilder.Entity("School.Domain.Assessment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("StudentGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Assessments");
+                });
+
+            modelBuilder.Entity("School.Domain.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StudentGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("School.Domain.Course", b =>
                 {
                     b.Property<int>("Id")
@@ -67,7 +153,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 1,
                             CoachGuid = "3a3b611c-1185-445d-99c5-7f347675ec6e",
-                            CreatedDate = new DateTime(2025, 1, 19, 21, 9, 29, 383, DateTimeKind.Local).AddTicks(7282),
+                            CreatedDate = new DateTime(2025, 2, 1, 17, 50, 53, 835, DateTimeKind.Local).AddTicks(7817),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                             PublicDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                             ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -77,7 +163,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 2,
                             CoachGuid = "0b869d28-ab51-4310-ba0c-a3934e1de6de",
-                            CreatedDate = new DateTime(2025, 1, 19, 21, 9, 29, 390, DateTimeKind.Local).AddTicks(5056),
+                            CreatedDate = new DateTime(2025, 2, 1, 17, 50, 53, 840, DateTimeKind.Local).AddTicks(8969),
                             Description = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem",
                             PublicDescription = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem",
                             ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -87,7 +173,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 3,
                             CoachGuid = "3a3b611c-1185-445d-99c5-7f347675ec6e",
-                            CreatedDate = new DateTime(2025, 1, 19, 21, 9, 29, 390, DateTimeKind.Local).AddTicks(5136),
+                            CreatedDate = new DateTime(2025, 2, 1, 17, 50, 53, 840, DateTimeKind.Local).AddTicks(9028),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                             PublicDescription = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem",
                             ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -97,12 +183,38 @@ namespace School.Persistence.Migrations
                         {
                             Id = 4,
                             CoachGuid = "3a3b611c-1185-445d-99c5-7f347675ec6e",
-                            CreatedDate = new DateTime(2025, 1, 19, 21, 9, 29, 390, DateTimeKind.Local).AddTicks(5140),
+                            CreatedDate = new DateTime(2025, 2, 1, 17, 50, 53, 840, DateTimeKind.Local).AddTicks(9037),
                             Description = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem",
                             PublicDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                             ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                             Title = "Нейрогимнастика"
                         });
+                });
+
+            modelBuilder.Entity("School.Domain.Feedback", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReportId")
+                        .IsUnique();
+
+                    b.ToTable("Feedbacks");
                 });
 
             modelBuilder.Entity("School.Domain.FileObject", b =>
@@ -113,7 +225,7 @@ namespace School.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CourseId")
+                    b.Property<int?>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -134,13 +246,24 @@ namespace School.Persistence.Migrations
                     b.Property<int>("FileType")
                         .HasColumnType("int");
 
+                    b.Property<int?>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReportId")
+                        .HasColumnType("int");
+
                     b.Property<string>("UniqueFileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[CourseId] IS NOT NULL");
+
+                    b.HasIndex("LessonId");
+
+                    b.HasIndex("ReportId");
 
                     b.ToTable("Files");
 
@@ -149,7 +272,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 1,
                             CourseId = 1,
-                            CreatedAt = new DateTime(2025, 1, 19, 21, 9, 29, 392, DateTimeKind.Local).AddTicks(5795),
+                            CreatedAt = new DateTime(2025, 2, 1, 17, 50, 53, 842, DateTimeKind.Local).AddTicks(7221),
                             FileNameExt = ".jpg",
                             FileOwner = 0,
                             FileSize = 1000L,
@@ -160,7 +283,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 2,
                             CourseId = 2,
-                            CreatedAt = new DateTime(2025, 1, 19, 21, 9, 29, 392, DateTimeKind.Local).AddTicks(9676),
+                            CreatedAt = new DateTime(2025, 2, 1, 17, 50, 53, 843, DateTimeKind.Local).AddTicks(3643),
                             FileNameExt = ".jpg",
                             FileOwner = 0,
                             FileSize = 1000L,
@@ -171,7 +294,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 3,
                             CourseId = 3,
-                            CreatedAt = new DateTime(2025, 1, 19, 21, 9, 29, 392, DateTimeKind.Local).AddTicks(9688),
+                            CreatedAt = new DateTime(2025, 2, 1, 17, 50, 53, 843, DateTimeKind.Local).AddTicks(3666),
                             FileNameExt = ".jpg",
                             FileOwner = 0,
                             FileSize = 1000L,
@@ -182,7 +305,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 4,
                             CourseId = 4,
-                            CreatedAt = new DateTime(2025, 1, 19, 21, 9, 29, 392, DateTimeKind.Local).AddTicks(9691),
+                            CreatedAt = new DateTime(2025, 2, 1, 17, 50, 53, 843, DateTimeKind.Local).AddTicks(3669),
                             FileNameExt = ".jpg",
                             FileOwner = 0,
                             FileSize = 1000L,
@@ -335,6 +458,94 @@ namespace School.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("School.Domain.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RecipientGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SenredRole")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Theme")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("School.Domain.Report", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.HasIndex("LessonId");
+
+                    b.ToTable("Reports");
+                });
+
             modelBuilder.Entity("School.Domain.StudentOfCourse", b =>
                 {
                     b.Property<int>("Id")
@@ -382,15 +593,72 @@ namespace School.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("School.Domain.Apply", b =>
+                {
+                    b.HasOne("School.Domain.Course", "Course")
+                        .WithMany("Applies")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("School.Domain.Assessment", b =>
+                {
+                    b.HasOne("School.Domain.Course", "Course")
+                        .WithMany("Assessments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("School.Domain.Comment", b =>
+                {
+                    b.HasOne("School.Domain.Course", "Course")
+                        .WithMany("Comments")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("School.Domain.Feedback", b =>
+                {
+                    b.HasOne("School.Domain.Report", "Report")
+                        .WithOne("Feedback")
+                        .HasForeignKey("School.Domain.Feedback", "ReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Report");
+                });
+
             modelBuilder.Entity("School.Domain.FileObject", b =>
                 {
                     b.HasOne("School.Domain.Course", "Course")
                         .WithOne("Photo")
                         .HasForeignKey("School.Domain.FileObject", "CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("School.Domain.Lesson", "Lesson")
+                        .WithMany("Files")
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("School.Domain.Report", "Report")
+                        .WithMany("Files")
+                        .HasForeignKey("ReportId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Course");
+
+                    b.Navigation("Lesson");
+
+                    b.Navigation("Report");
                 });
 
             modelBuilder.Entity("School.Domain.Lesson", b =>
@@ -402,6 +670,27 @@ namespace School.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("School.Domain.Message", b =>
+                {
+                    b.HasOne("School.Domain.Course", "Course")
+                        .WithMany("Messages")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("School.Domain.Report", b =>
+                {
+                    b.HasOne("School.Domain.Lesson", "Lesson")
+                        .WithMany("Reports")
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lesson");
                 });
 
             modelBuilder.Entity("School.Domain.StudentOfCourse", b =>
@@ -417,11 +706,33 @@ namespace School.Persistence.Migrations
 
             modelBuilder.Entity("School.Domain.Course", b =>
                 {
+                    b.Navigation("Applies");
+
+                    b.Navigation("Assessments");
+
+                    b.Navigation("Comments");
+
                     b.Navigation("Lessons");
+
+                    b.Navigation("Messages");
 
                     b.Navigation("Photo");
 
                     b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("School.Domain.Lesson", b =>
+                {
+                    b.Navigation("Files");
+
+                    b.Navigation("Reports");
+                });
+
+            modelBuilder.Entity("School.Domain.Report", b =>
+                {
+                    b.Navigation("Feedback");
+
+                    b.Navigation("Files");
                 });
 #pragma warning restore 612, 618
         }

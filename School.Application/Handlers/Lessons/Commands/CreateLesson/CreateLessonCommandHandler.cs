@@ -41,12 +41,12 @@ namespace School.Application.Handlers.Lessons.Commands.CreateLesson
 
             var lesson = new Lesson
             {
-                CourseId = request.CourseId,
-
                 Number = request.Number,
                 Title = request.Title,
                 Description = request.Description,
-                VideoLink = request.VideoLink
+                VideoLink = request.VideoLink,
+
+                CourseId = request.CourseId
             };
 
             await _lessonRepository.AddAsync(lesson, cancellationToken);

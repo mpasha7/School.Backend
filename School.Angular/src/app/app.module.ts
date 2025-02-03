@@ -36,7 +36,7 @@ import { LogoutComponent } from './logout/logout.component';
     AsyncPipe, 
     FormsModule, 
     ReactiveFormsModule,
-    LayoutModule,    
+    LayoutModule,
     StoreModule.forRoot(store),
     EffectsModule.forRoot(appEffects),
 

@@ -19,10 +19,12 @@ import { StudentsComponent } from './students/students.component';
 import { StudentListComponent } from './students/student-list/student-list.component';
 import { StudentToCourseComponent } from './students/student-to-course/student-to-course.component';
 import { StudentFromCourseComponent } from './students/student-from-course/student-from-course.component';
+import { CourseMessagesComponent } from './courses/course-messages/course-messages.component';
 
 const courseRoutes: Routes = [
   { path: 'list', component: CourseListComponent },
   { path: 'form/:id', component: CourseFormComponent },
+  { path: 'messages/:id', component: CourseMessagesComponent },
   { path: '', redirectTo: '/courses/list', pathMatch: 'full'},
   { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ]

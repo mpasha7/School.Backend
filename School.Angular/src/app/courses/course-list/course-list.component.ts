@@ -23,7 +23,9 @@ export class CourseListComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private authService: AuthService
-  ) {}
+  ) {
+    this.getRole();
+  }
 
   ngOnInit(): void {
     this.store.dispatch(loadCourseList());

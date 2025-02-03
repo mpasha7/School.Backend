@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace School.Domain
 {
@@ -23,9 +18,13 @@ namespace School.Domain
         public virtual Course? Course { get; set; }
         public int? CourseId { get; set; }
 
-        //[JsonIgnore]
-        //public virtual Lesson? Lesson { get; set; }
-        //public int? LessonId { get; set; }
+        [JsonIgnore]
+        public virtual Lesson? Lesson { get; set; }
+        public int? LessonId { get; set; }
+
+        [JsonIgnore]
+        public virtual Report? Report { get; set; }
+        public int? ReportId { get; set; }
     }
 
     public enum FileTypes

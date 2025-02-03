@@ -28,17 +28,39 @@ namespace School.Persistence.EntityTypeConfigurations
 
             builder.HasOne(c => c.Photo)
                    .WithOne(p => p.Course)
-                   .HasForeignKey<FileObject>(p => p.CourseId)
-                   .IsRequired()              // TODO: Сделать не обязательным
-                   .OnDelete(DeleteBehavior.Cascade);
+                   .HasForeignKey<FileObject>(p => p.CourseId) // Файл может относиться не только к курсу
+                   .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(c => c.Students)
-                    .WithOne(s => s.Course)
-                    .HasForeignKey(s => s.CourseId)
-                    .IsRequired()
-                    .OnDelete(DeleteBehavior.Cascade);
+                   .WithOne(s => s.Course)
+                   .HasForeignKey(s => s.CourseId)
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Property(c => c.Title).HasMaxLength(200); // TODO: Лучше HasMaxLength(256)?  // .IsRequired()
+            builder.HasMany(c => c.Messages)
+                   .WithOne(m => m.Course)
+                   .HasForeignKey(m => m.CourseId)            // Сообщение может быть не связано с курсом
+                   .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(c => c.Applies)
+                   .WithOne(a => a.Course)
+                   .HasForeignKey(a => a.CourseId)
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(c => c.Assessments)
+                   .WithOne(a => a.Course)
+                   .HasForeignKey(a => a.CourseId)
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(c => c.Comments)
+                   .WithOne(a => a.Course)
+                   .HasForeignKey(a => a.CourseId)
+                   .IsRequired()
+                   .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Property(c => c.Title).HasMaxLength(200);  // .IsRequired()
             //builder.Property(c => c.Description).IsRequired();
             //builder.Property(c => c.CreatedDate).HasDefaultValueSql("GETDATE()"); // Реализовано в ...Handler
 

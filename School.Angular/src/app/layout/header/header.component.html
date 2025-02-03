@@ -22,9 +22,9 @@
                 <li class="nav-item">
                     <button class="btn text-white me-3" type="button" (click)="goToAdminPanel('/users/list')">Users</button>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <button class="btn text-white me-3" type="button" (click)="goToAdminPanel('/homelist/list')">Courses</button>
-                </li>
+                </li> -->
             }
 
             <li class="nav-item">
@@ -34,9 +34,6 @@
                 </a>
             </li>
 
-            <!-- <li class="nav-item">
-                <button class="btn text-white me-3" type="button" (click)="goToAdminPanel('/students/list')">Courses</button>
-            </li> -->
             <li class="nav-item">
                 <a *ngIf="userRole == 'Coach'" class="btn text-white me-3" [routerLink]="['/students/list']" routerLinkActive="active" 
                         [routerLinkActiveOptions]="{exact: true}">

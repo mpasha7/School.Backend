@@ -26,7 +26,10 @@ namespace School.Application.Handlers.Lessons.Commands.DeleteLesson
 
         public async Task Handle(DeleteLessonCommand request, CancellationToken cancellationToken)
         {
-            var lesson = await _lessonRepository.GetByIdAsync(request.Id, cancellationToken, includeReference: "Course");
+            var lesson = await _lessonRepository.GetByIdAsync(
+                request.Id,
+                cancellationToken,
+                includeReference: "Course");
 
             if (lesson == null)
                 throw new NotFoundException(nameof(Lesson), request.Id);

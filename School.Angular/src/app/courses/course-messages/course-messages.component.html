@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="page-title">
+        <h1>{{courseTitle}}</h1>
+        <h2>Сообщения курса</h2>
+    </div>    
+
+    <div class="row just_content mb-4">
+        <div class="col-4 sender_name"><h2>Вопросы</h2></div>
+        <div class="col-4">
+            <button *ngIf="!isCoach" mat-fab color="primary" class="mx-3" type="button" (click)="onSendQuestion()">
+                <mat-icon>edit_square</mat-icon>
+            </button>
+            <button mat-fab color="none" type="button" class="mb-3" class="mx-3" routerLink="/lessons/{{courseId}}/list">
+                <div class="blue_undo">
+                    <mat-icon>undo</mat-icon>
+                </div>
+            </button>
+        </div>
+        <div class="col-4 sender_name"><h2>Ответы</h2></div>
+    </div>
+    
+    <div *ngIf="messageList && messageList.length > 0">
+        <div class="row mb-4" *ngFor="let question of messageList">
+            <div class="col-6">
+                <mat-card>
+                    <mat-card-header>
+                        <h4 class="sender_name">
+                            {{question.senderName}}
+                        </h4>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="me-3">
+                            {{question.text}}
+                        </div>
+                        <div class="text_right">
+                            <button *ngIf="isCoach" mat-mini-fab color="primary" type="button" (click)="onSendAnswer(question)">
+                                <mat-icon>edit_square</mat-icon>
+                            </button>
+                            <button *ngIf="!isCoach" mat-mini-fab color="accent" type="button" (click)="onDeleteMessage(question.id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-content>
+                    <!-- <mat-card-actions *ngIf="isCoach">
+                        
+                    </mat-card-actions> -->
+                </mat-card>
+            </div>
+            <div class="col-6">
+                <mat-card *ngFor="let answer of question.answers">
+                    <mat-card-header>
+                        <h4 class="sender_name">
+                            {{answer.senderName}}
+                        </h4>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="me-3">
+                            {{answer.text}}
+                        </div>
+                        <div class="text_right">
+                            <button *ngIf="isCoach" mat-mini-fab color="accent" type="button" (click)="onDeleteMessage(answer.id)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                        </div>
+                    </mat-card-content>
+                    <!-- <mat-card-actions *ngIf="isCoach">
+                        
+                    </mat-card-actions> -->
+                </mat-card>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="messageList && messageList.length == 0">
+        <mat-card >
+            <div class="title-link">
+                <h2>Здесь пока нет сообщений</h2>
+            </div>
+        </mat-card>
+    </div>
+
+    <div class="bottom-filler"></div>
+</div>

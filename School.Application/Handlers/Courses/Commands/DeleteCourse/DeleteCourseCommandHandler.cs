@@ -14,18 +14,23 @@ namespace School.Application.Handlers.Courses.Commands.DeleteCourse
 {
     public class DeleteCourseCommandHandler : IRequestHandler<DeleteCourseCommand>
     {
-        private readonly ICourseRepository _repository;
+        private readonly ICourseRepository _courseRepository;
+        private readonly IFileRepository _fileRepository;
         private readonly IFileService _fileService;
 
-        public DeleteCourseCommandHandler(ICourseRepository repository, IFileService fileService)
+        public DeleteCourseCommandHandler(
+            ICourseRepository courseRepository,
+            IFileRepository fileRepository,
+            IFileService fileService)
         {
-            this._repository = repository;
+            this._courseRepository = courseRepository;
+            this._fileRepository = fileRepository;
             this._fileService = fileService;
         }
 
         public async Task Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
-            var course = await _repository.GetByIdAsync(request.Id, cancellationToken, includeReference: "Photo");
+            var course = await _courseRepository.GetByIdAsync(request.Id, cancellationToken, includeReference: "Photo");
 
             if (course == null)
                 throw new NotFoundException(nameof(Course), request.Id);
@@ -33,8 +38,9 @@ namespace School.Application.Handlers.Courses.Commands.DeleteCourse
                 throw new NoAccessException(nameof(Course), request.Id);
 
             await _fileService.DeleteFileAsync(course.Photo.Id, FileTypes.Photo, cancellationToken);
+            await _fileRepository.DeleteAsync(course.Photo, cancellationToken);
 
-            await _repository.DeleteAsync(course, cancellationToken);
+            await _courseRepository.DeleteAsync(course, cancellationToken);
         }
     }
 }

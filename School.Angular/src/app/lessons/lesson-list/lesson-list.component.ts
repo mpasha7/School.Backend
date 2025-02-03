@@ -9,6 +9,7 @@ import { selectCourseList } from '../../redux/courses/courses.selector';
 import { JsonPipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
+import { AuthService } from '../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-lesson-list',
@@ -22,12 +23,15 @@ export class LessonListComponent implements OnInit {
   courseId!: number;
   courseTitle!: string | null;
   maxLessonNumber!: number;
+  isCoach: boolean = false;
 
   constructor(
     private store: Store<AppState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.activatedRoute.parent?.params.subscribe(params => this.courseId = params["courseid"]);
+    this.getRole();
   }
 
   ngOnInit(): void {
@@ -35,8 +39,6 @@ export class LessonListComponent implements OnInit {
     this.store.select(selectLessonList).subscribe((data) => {
       this.lessonList = data;
     });
-    // this.lessonList.sort((a, b) => a.number - b.number);
-
     this.store.select(selectContainingCourse).subscribe((data) => {
       this.courseTitle = data?.title ? data.title : "";
     });
@@ -49,5 +51,13 @@ export class LessonListComponent implements OnInit {
     if (confirm("Вы хотите удалить этот урок?")) {
       this.store.dispatch(deleteLesson({id: id, courseId: this.courseId}));
     }
+  }
+
+  getRole() {
+    return this.authService.getUserRole().then(role => {
+      if (role === 'Coach'){
+        this.isCoach = true;
+      }
+    });
   }
 }

@@ -1,0 +1,36 @@
+<form [formGroup]="messageForm" (ngSubmit)="saveMessage()">
+    <mat-card>
+        <mat-card-header>
+            <h3 *ngIf="question">
+                Ответ ученику {{question.senderName}} на вопрос по курсу "{{course.title}}""
+            </h3>
+            <h3 *ngIf="!question">
+                Вопрос тренеру курса "{{course.title}}"
+            </h3>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field *ngIf="!isAuthenticated">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" />
+            </mat-form-field>
+            <mat-form-field *ngIf="!isAuthenticated">
+                <mat-label>Номер телефона</mat-label>
+                <input matInput formControlName="phone" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Текст</mat-label>
+                <textarea matInput formControlName="text" ></textarea>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="container-fliud text-center">
+                <button mat-fab color="primary" class="mx-3" type="submit" >
+                    <mat-icon>send</mat-icon>
+                </button>
+                <a mat-fab color="accent" class="mx-3" (click)="closePopup()">
+                    <mat-icon>cancel</mat-icon>
+                </a>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</form>

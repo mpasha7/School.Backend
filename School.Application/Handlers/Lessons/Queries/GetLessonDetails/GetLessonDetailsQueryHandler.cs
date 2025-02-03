@@ -50,7 +50,7 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonDetails
                 && lesson.Course.CoachGuid != request.UserGuid)
                     throw new NoAccessException(nameof(Lesson), request.Id);
             else if (request.UserRole == UserRoles.Student
-                && await _studentRepository.IsStudentOfThisCourse(request.UserGuid, lesson.CourseId, cancellationToken))
+                && !(await _studentRepository.IsStudentOfThisCourse(request.UserGuid, lesson.CourseId, cancellationToken)))
                     throw new NoAccessException(nameof(Lesson), request.Id);
 
             var lessonDto = _mapper.Map<LessonDetailsVm>(lesson);

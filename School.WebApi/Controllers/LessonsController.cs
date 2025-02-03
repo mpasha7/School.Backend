@@ -35,6 +35,7 @@ namespace School.WebApi.Controllers
         /// Sample request:
         /// GET /lessons?courseid=5
         /// </remarks>
+        /// <param name="courseid">Course id (int)</param>
         /// <returns>Returns LessonListVm</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
@@ -136,7 +137,7 @@ namespace School.WebApi.Controllers
         /// <response code="404">Object is not found</response>
         [HttpPut(Name = nameof(UpdateLesson))]
         [Authorize(Roles = "Coach")]
-        public async Task<IActionResult> UpdateLesson([FromBody] UpdateLessonDto updateLessonDto) // TODO: Id in Sample request
+        public async Task<ActionResult<ResponseDto>> UpdateLesson([FromBody] UpdateLessonDto updateLessonDto) // TODO: Id in Sample request
         {
             var command = _mapper.Map<UpdateLessonCommand>(updateLessonDto);
             command.CoachGuid = UserGuid;
@@ -162,7 +163,7 @@ namespace School.WebApi.Controllers
         /// <response code="404">Object is not found</response>
         [HttpDelete("{id}", Name = nameof(DeleteLesson))]
         [Authorize(Roles = "Coach")]
-        public async Task<IActionResult> DeleteLesson(int id, [FromQuery]int courseid)
+        public async Task<ActionResult<ResponseDto>> DeleteLesson(int id, [FromQuery]int courseid)
         {
             var command = new DeleteLessonCommand
             {

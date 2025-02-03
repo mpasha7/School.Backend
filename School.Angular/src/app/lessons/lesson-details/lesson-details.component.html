@@ -7,9 +7,8 @@
     <p>Описание: {{selectedLesson?.description}}</p>
     <p>Ссылка на видео: {{selectedLesson?.videoLink}}</p>
 
-
     <div>
-        <button mat-raised-button color="primary" type="button" routerLink="/lessons/{{courseId}}/form/{{lessonId}}">Редактировать</button>
+        <button mat-raised-button color="primary" type="button" *ngIf="isCoach" routerLink="/lessons/{{courseId}}/form/{{lessonId}}">Редактировать</button>
         <button mat-raised-button type="button" routerLink="/lessons/{{courseId}}/list">Назад</button>
     </div>
 </div>
