@@ -13,11 +13,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SendMessageComponent } from './components/send-message/send-message.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ShowResultComponent } from './components/show-result/show-result.component';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 
 @NgModule({
   declarations: [
-    SendMessageComponent
+    SendMessageComponent,
+    ShowResultComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +31,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    CdkAccordionModule
   ],
   exports: [
     CommonModule,
@@ -42,7 +46,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatGridListModule,
     MatSidenavModule,
     MatDialogModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    CdkAccordionModule
   ]
 })
 export class SharedModule { }

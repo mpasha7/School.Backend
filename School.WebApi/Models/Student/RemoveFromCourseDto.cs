@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using School.Application.Common.Mappings;
-using School.Application.Handlers.Lessons.Commands.CreateLesson;
 using School.Application.Handlers.Students.Commands.RemoveStudentFromCourse;
 using System.ComponentModel.DataAnnotations;
 

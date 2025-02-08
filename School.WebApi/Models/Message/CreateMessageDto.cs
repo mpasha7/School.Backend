@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using School.Application.Common.Mappings;
-using School.Application.Handlers.Courses.Commands.CreateCourse;
 using School.Application.Handlers.Messages.Commands.CreateMessage;
-using School.Domain;
-using School.WebApi.Models.Course;
 
 namespace School.WebApi.Models.Message
 {

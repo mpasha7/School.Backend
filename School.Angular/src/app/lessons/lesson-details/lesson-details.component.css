@@ -1,3 +1,22 @@
+.mat-mdc-form-field {
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.mat-mdc-form-field-hint {
+    color: red;
+}
+
 button[mat-raised-button] {
-    margin: 20px;
+    margin: 0 25px;
+}
+
+.file-input {
+    margin-bottom: 40px;
+}
+
+.report_header {
+    color: #7d2ba6;
+    margin-top: 16px;
+    margin-left: 15px;
 }

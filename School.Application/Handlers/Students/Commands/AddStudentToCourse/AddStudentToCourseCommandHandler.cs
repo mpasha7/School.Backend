@@ -27,7 +27,7 @@ namespace School.Application.Handlers.Students.Commands.AddStudentToCourse
             else if (course.CoachGuid != request.CoachGuid)
                 throw new NoAccessException(nameof(Course), request.CourseId);
             else if (await _studentRepository.IsStudentOfThisCourse(request.StudentGuid, request.CourseId, cancellationToken))
-                throw new Exception($"Student (guid = {request.StudentGuid}) already has this course (id = {request.CourseId})");
+                throw new ActionAlreadyCompletedException("Student", request.StudentGuid, "already has", nameof(Course), request.CourseId);
 
             var studentOfCourse = new StudentOfCourse
             {

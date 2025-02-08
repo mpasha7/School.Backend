@@ -1,4 +1,5 @@
 import { CourseLookupDto } from "./course.model";
+import { ReportDetailsVm, ReportLookupDto } from "./report.model";
 
 export interface LessonListVm {
     lessons: LessonLookupDto[];
@@ -22,6 +23,7 @@ export interface LessonDetailsVm {
     videoLink: string | null;
 
     course: CourseLookupDto;
+    report: ReportDetailsVm | null;
 }
 
 export interface CreateLessonDto {

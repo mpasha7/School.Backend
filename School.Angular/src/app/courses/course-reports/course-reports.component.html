@@ -1,0 +1,64 @@
+<div class="container">
+    <div class="page-title">
+        <h1>{{courseTitle}}</h1>
+        <h2>Отчеты курса</h2>
+    </div>
+
+    <div class="row just_content mb-4">
+        <button mat-fab color="none" type="button" class="mb-3" class="mx-3" routerLink="/lessons/{{courseId}}/list">
+            <div class="blue_undo">
+                <mat-icon>undo</mat-icon>
+            </div>
+        </button>
+    </div>
+
+    <cdk-accordion>
+        @for (report of reportList; track report; let index = $index) {
+            <cdk-accordion-item (opened)="getReport(report)"
+                #accordionItem="cdkAccordionItem"
+                class="example-accordion-item"
+                role="button"
+                tabindex="0"
+                [attr.id]="'accordion-header-' + index"
+                [attr.aria-expanded]="accordionItem.expanded"
+                [attr.aria-controls]="'accordion-body-' + index">
+                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                    <span class="col-2 text-start">{{ report.createdAt | date: 'dd.MM.yyyy  H:mm' }}</span>
+                    <span class="col-3 text-start">{{report.studentName}}</span>
+                    <span class="col-6 text-start">{{report.lessonNumber}}.{{report.lessonTitle}}</span>                    
+                    <span class="example-accordion-item-description col-1 text-end">
+                        <mat-icon *ngIf="accordionItem.expanded">arrow_drop_up</mat-icon>
+                        <mat-icon *ngIf="!accordionItem.expanded">arrow_drop_down</mat-icon>
+                    </span>
+                </div>
+                <div class="example-accordion-item-body"
+                    role="region"
+                    [style.display]="accordionItem.expanded ? '' : 'none'"
+                    [attr.id]="'accordion-body-' + index"
+                    [attr.aria-labelledby]="'accordion-header-' + index">
+                    <div *ngIf="selectedReport">
+                        <div class="row">
+                            <p>{{selectedReport.text}}</p>
+                        </div>
+                        <div class="row">
+                            <div *ngFor="let photo of selectedReport?.photos" class="col-md-6 col-sm-12 text-center mt-2 p-3">
+                                <img mat-card-image src="https://localhost:7125/uploads/Photo/{{photo?.uniqueFileName}}" alt="No Photo" width="100%" />
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <button mat-raised-button color="primary" type="button" class="mx-3" 
+                                (click)="sendFeedback()">
+                                Обратная связь
+                            </button>
+                            <button *ngIf="report.lessonNumber == maxLessonNumber" 
+                                mat-raised-button color="primary" type="button" class="mx-3" 
+                                (click)="sendAssessment()">
+                                Оценка прогресса
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </cdk-accordion-item>
+        }
+    </cdk-accordion>
+</div>

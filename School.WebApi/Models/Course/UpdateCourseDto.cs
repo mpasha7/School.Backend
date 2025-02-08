@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using School.Application.Common.Mappings;
-using School.Application.Handlers.Courses.Commands.CreateCourse;
 using School.Application.Handlers.Courses.Commands.UpdateCourse;
 using System.ComponentModel.DataAnnotations;
 

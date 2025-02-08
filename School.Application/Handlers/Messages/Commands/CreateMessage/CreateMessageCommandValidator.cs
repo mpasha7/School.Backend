@@ -7,6 +7,7 @@ namespace School.Application.Handlers.Messages.Commands.CreateMessage
         public CreateMessageCommandValidator()
         {
             RuleFor(comm => comm.SenderGuid).NotEmpty();
+            RuleFor(comm => comm.SenderName).NotEmpty();
             //RuleFor(comm => comm.RecipientGuid).NotEmpty();
 
             RuleFor(comm => comm.Text).NotEmpty();

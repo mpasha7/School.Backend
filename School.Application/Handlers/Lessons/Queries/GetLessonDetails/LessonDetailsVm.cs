@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using School.Application.Common.Mappings;
-using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
+using School.Application.Handlers.Reports.Queries.GetReportDetails;
+using School.Application.Handlers.Reports.Queries.GetReportList;
 using School.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.Application.Handlers.Lessons.Queries.GetLessonDetails
 {
@@ -21,6 +17,7 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonDetails
         public string? VideoLink { get; set; }
 
         public CourseLookupDto Course { get; set; }
+        public ReportDetailsVm? Report { get; set; }
 
         public void Mapping(Profile profile)
         {

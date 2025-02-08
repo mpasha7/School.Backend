@@ -9,7 +9,7 @@ namespace School.Application.Common.Exceptions
     public class NotContainsException : Exception
     {
         public NotContainsException(string containerName, int containerKey, string name, int key) 
-            : base($"'{name}' (id = {key}) is not part of the '{containerName}' (id = {containerKey}).")
+            : base($"'{name}' (id = {key}) does not belong to the '{containerName}' (id = {containerKey}).")
         {
         }
     }

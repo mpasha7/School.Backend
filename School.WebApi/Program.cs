@@ -4,7 +4,6 @@ using School.Application;
 using School.Persistence;
 using System.Reflection;
 using School.WebApi.Middleware;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using School.Application.Interfaces.Repository;
@@ -32,6 +31,8 @@ namespace School.WebApi
             builder.Services.AddScoped<ILessonRepository, LessonRepository>();
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+            builder.Services.AddScoped<IApplyRepository, ApplyRepository>();
+            builder.Services.AddScoped<IReportRepository, ReportRepository>();
             builder.Services.AddScoped<IFileRepository, FileRepository>();
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddScoped<ILessonNumbersService, LessonNumbersService>();

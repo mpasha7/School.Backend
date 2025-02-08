@@ -31,7 +31,7 @@ namespace School.Application.Handlers.Students.Commands.RemoveStudentFromCourse
                 filter: s => s.StudentGuid == request.StudentGuid && s.CourseId == request.CourseId))
                 .SingleOrDefault();
             if (student == null)
-                throw new Exception($"Student (guid = {request.StudentGuid}) not has this course (id = {request.CourseId})");
+                throw new ActionAlreadyCompletedException("Student", request.StudentGuid, "not has", nameof(Course), request.CourseId);
 
             await _studentRepository.DeleteAsync(student, cancellationToken);
         }

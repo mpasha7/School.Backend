@@ -1,0 +1,20 @@
+.just_content {
+    justify-content: center;
+}
+
+.blue_undo .mat-icon-no-color {
+    color: #3d55b4;
+}
+
+.mat-mdc-card-content {
+    display: flex;
+}
+
+.sender_name {    
+    color: #7d2ba6;    
+}
+
+.text_right {
+    margin: 0 0 0 auto;
+    align-content: center;
+}

@@ -20,18 +20,26 @@ import { StudentListComponent } from './students/student-list/student-list.compo
 import { StudentToCourseComponent } from './students/student-to-course/student-to-course.component';
 import { StudentFromCourseComponent } from './students/student-from-course/student-from-course.component';
 import { CourseMessagesComponent } from './courses/course-messages/course-messages.component';
+import { CourseAppliesComponent } from './courses/course-applies/course-applies.component';
+import { CourseReportsComponent } from './courses/course-reports/course-reports.component';
 
 const courseRoutes: Routes = [
   { path: 'list', component: CourseListComponent },
-  { path: 'form/:id', component: CourseFormComponent },
+  { path: 'form/:id', component: CourseFormComponent,
+        canActivate: [AuthGuard], data: { roles: ['Coach'] } },
   { path: 'messages/:id', component: CourseMessagesComponent },
+  { path: 'applies/:id', component: CourseAppliesComponent,
+        canActivate: [AuthGuard], data: { roles: ['Coach'] } },
+  { path: 'reports/:id', component: CourseReportsComponent,
+        canActivate: [AuthGuard], data: { roles: ['Coach'] } },
   { path: '', redirectTo: '/courses/list', pathMatch: 'full'},
   { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ]
 
 const lessonRoutes: Routes = [
   { path: 'list', component: LessonListComponent },
-  { path: 'form/:id', component: LessonFormComponent },
+  { path: 'form/:id', component: LessonFormComponent,
+        canActivate: [AuthGuard], data: { roles: ['Coach'] } },
   { path: 'details/:id', component: LessonDetailsComponent },
   { path: '', redirectTo: '/lessons/list', pathMatch: 'full'},
   { path: '**', redirectTo: '/404', pathMatch: 'full' }

@@ -22,28 +22,32 @@ export class LessonsService {
 
     return this.http.get<LessonListVm>(
       this.createCompleteRoute(this.envUrl.urlAddress, this.basePath),
-      {params});
+      {params}
+    );
   }
 
   getLesson(id: number, courseId: number): Observable<LessonDetailsVm> {
     const params = new HttpParams()
-      .set("courseid", courseId.toString());
+      .set("courseid", courseId);
 
     return this.http.get<LessonDetailsVm>(      
       this.createCompleteRoute(this.envUrl.urlAddress, `${this.basePath}/${id}`),
-      {params});
+      {params}
+    );
   }
 
   createLesson(createLessonDto: any): Observable<ResponseDto> {
     return this.http.post<ResponseDto>(
       this.createCompleteRoute(this.envUrl.urlAddress, this.basePath),
-      createLessonDto);
+      createLessonDto
+    );
   }
 
   updateLesson(updateLessonDto: any): Observable<ResponseDto> {
     return this.http.put<ResponseDto>(
       this.createCompleteRoute(this.envUrl.urlAddress, this.basePath),
-      updateLessonDto);
+      updateLessonDto
+    );
   }
 
   deleteLesson(id: number, courseId: number): Observable<ResponseDto> {
@@ -52,7 +56,8 @@ export class LessonsService {
 
     return this.http.delete<ResponseDto>(    
       this.createCompleteRoute(this.envUrl.urlAddress, `${this.basePath}/${id}`),
-      {params});
+      {params}
+    );
   }
 
   private createCompleteRoute = (envAddress: string, route: string) => {

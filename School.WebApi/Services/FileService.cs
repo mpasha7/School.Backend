@@ -1,9 +1,7 @@
-﻿using Azure.Core;
-using School.Application.Common.Exceptions;
+﻿using School.Application.Common.Exceptions;
 using School.Application.Interfaces.Repository;
 using School.Application.Interfaces.Services;
 using School.Domain;
-using System;
 
 namespace School.WebApi.Services
 {
@@ -30,7 +28,7 @@ namespace School.WebApi.Services
             CancellationToken cancellationToken)
         {
             if (formFile == null)
-                throw new ArgumentNullException("formFile");
+                throw new ArgumentNullException(nameof(formFile));
 
             var rootPath = _environment.WebRootPath;
             var uploadPath = Path.Combine(rootPath, "uploads", fileTypes[fileType]);
@@ -67,11 +65,13 @@ namespace School.WebApi.Services
                     file.CourseId = ownerId;
                     break;
                 case FileOwners.Lesson:
+                    file.LessonId = ownerId;
                     break;
                 case FileOwners.Report:
+                    file.ReportId = ownerId;
                     break;
                 default:
-                    break;
+                    throw new ArgumentNullException(nameof(fileOwner));
             }
 
             await _fileRepository.AddAsync(file, cancellationToken);

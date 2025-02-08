@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Mappings;
 using School.Application.Handlers.Courses.Commands.CreateCourse;
-using School.Domain;
 using System.ComponentModel.DataAnnotations;
 
 namespace School.WebApi.Models.Course

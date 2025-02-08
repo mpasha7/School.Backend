@@ -14,6 +14,10 @@ import { deleteMessage, loadMessageList } from '../../redux/messages/messages.ac
 import { selectMessageList } from '../../redux/messages/messages.selector';
 import { FormsModule } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { createApply } from '../../redux/applies/applies.actions';
+import { selectApplyError, selectApplyIsSuccess, selectApplyLoading } from '../../redux/applies/applies.selector';
+import { ShowResultComponent } from '../../shared/components/show-result/show-result.component';
+import { last, lastValueFrom, skip, takeLast } from 'rxjs';
 
 @Component({
   selector: 'app-public-course',
@@ -28,6 +32,7 @@ export class PublicCourseComponent implements OnInit {
   userRole: string = '';
   messageList!: MessageLookupDto[];
   showMessages: boolean = false;
+  sendApplyResult: boolean = false;
 
   constructor(
     private store: Store<AppState>,
@@ -67,8 +72,43 @@ export class PublicCourseComponent implements OnInit {
     );
   }
 
-  sendApply() {
+  showSendApplyResult() {
+    this.dialog.open(
+      ShowResultComponent,
+      {
+        width: '50%',
+        data: {
+          result: this.sendApplyResult,
+          resultText: 'Создание заявки'
+        }
+      }
+    );
+  }
 
+  async sendApply() {
+    if (confirm("Вы хотите подать заявку на этот курс?")) {
+      const createApplyDto = {
+        courseId: this.courseId
+      };
+      this.store.dispatch(createApply({createApplyDto: createApplyDto}));
+      this.store.select(selectApplyError).subscribe((data) => {
+        this.sendApplyResult = data == null ? true : false;
+        this.showSendApplyResult();
+      });
+
+      // this.store.select(selectApplyLoading).subscribe((loading) => {
+      //   if (!loading) {
+      //     this.store.select(selectApplyIsSuccess).subscribe((isSuccess) => {
+      //       this.sendApplyResult = isSuccess;
+      //       this.showSendApplyResult();
+      //     })
+      //   }
+      // });
+
+      // const error = await lastValueFrom(this.store.select(selectApplyError));
+      // this.sendApplyResult = error == null ? true : false;
+      // this.showSendApplyResult();
+    }
   }
 
   onToggleChange($event: MatSlideToggleChange) {

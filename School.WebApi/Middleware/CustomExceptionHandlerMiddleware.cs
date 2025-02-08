@@ -46,6 +46,9 @@ namespace School.WebApi.Middleware
                 case NotFoundException:
                     code = HttpStatusCode.NotFound;    // 404
                     break;
+                case ActionAlreadyCompletedException:
+                    code = HttpStatusCode.MethodNotAllowed;  // 405
+                    break;
             }
 
             context.Response.ContentType = "application/json";

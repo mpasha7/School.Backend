@@ -1,7 +1,5 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
-using School.Application.Interfaces;
 using School.Application.Interfaces.Repository;
 using School.Application.Interfaces.Services;
 using School.Domain;

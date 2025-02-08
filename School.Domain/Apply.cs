@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public string StudentGuid { get; set; }
+        public string StudentName { get; set; }
 
         public bool IsAssepted { get; set; }
 

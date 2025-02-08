@@ -72,7 +72,7 @@ export class LessonFormComponent implements OnInit {
 
   saveLessonData() {
     const createLessonDto = {
-      courseId: this.courseId,      
+      courseId: this.courseId,
       number: this.lessonForm.value.number,
       title: this.lessonForm.value.title,
       description: this.lessonForm.value.description,

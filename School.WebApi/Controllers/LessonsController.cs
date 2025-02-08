@@ -33,7 +33,7 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// GET /lessons?courseid=5
+        /// GET api/lessons?courseid=5
         /// </remarks>
         /// <param name="courseid">Course id (int)</param>
         /// <returns>Returns LessonListVm</returns>
@@ -61,7 +61,7 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Simple request:
-        /// GET /lessons/2?courseid=5
+        /// GET api/lessons/2?courseid=5
         /// </remarks>
         /// <param name="id">Lesson id (int)</param>
         /// <param name="courseid">Course id (int)</param>
@@ -91,7 +91,7 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// POST /lessons
+        /// POST api/lessons
         /// {
         ///     Number: "lesson number in the course",
         ///     Title: "lesson title",
@@ -113,6 +113,7 @@ namespace School.WebApi.Controllers
             var command = _mapper.Map<CreateLessonCommand>(createLessonDto);
             command.CoachGuid = UserGuid;
             var lessonId = await Mediator!.Send(command);
+
             var response = new ResponseDto();
             return Ok(response.Success($"Create new Lesson (id = {lessonId}) is successful"));
         }
@@ -122,7 +123,7 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// PUT /lessons
+        /// PUT api/lessons
         /// {
         ///     Description: "updated lesson description",
         ///     VideoLink: "updated link to lesson video"
@@ -142,6 +143,7 @@ namespace School.WebApi.Controllers
             var command = _mapper.Map<UpdateLessonCommand>(updateLessonDto);
             command.CoachGuid = UserGuid;
             await Mediator!.Send(command);
+
             var response = new ResponseDto();
             return Ok(response.Success($"Update Lesson (id = {updateLessonDto.Id}) is successful"));
         }
@@ -151,7 +153,7 @@ namespace School.WebApi.Controllers
         /// </summary>
         /// <remarks>
         /// Sample request:
-        /// DELETE /lessons/2?courseid=5
+        /// DELETE api/lessons/2?courseid=5
         /// </remarks>
         /// <param name="id">Lesson id (int)</param>
         /// <param name="courseid">Course id (int)</param>
@@ -172,6 +174,7 @@ namespace School.WebApi.Controllers
                 CoachGuid = UserGuid
             };
             await Mediator!.Send(command);
+
             var response = new ResponseDto();
             return Ok(response.Success($"Delete Lesson (id = {id}) is successful"));
         }

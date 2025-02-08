@@ -2,7 +2,6 @@
 using School.Application.Common.Mappings;
 using School.Application.Handlers.Lessons.Commands.CreateLesson;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace School.WebApi.Models.Lesson
 {

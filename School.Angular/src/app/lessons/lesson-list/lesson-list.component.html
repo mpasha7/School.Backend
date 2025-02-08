@@ -1,14 +1,28 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav mode="side" opened>
-    <div class="container">
-      <div class="sidenav-title">
-        <h2>Управление курсом</h2>
-      </div>
-  
+    <div class="sidenav-title text-center">
+      <h2>Управление курсом</h2>
+    </div>
+
+    <div class="text-center">
       <button mat-raised-button color="primary" type="button" 
           routerLink="/courses/messages/{{courseId}}"
           [queryParams]="{'courseTitle': courseTitle}">
         Сообщения
+      </button>
+    </div>
+    <div *ngIf="isCoach" class="text-center">
+      <button mat-raised-button color="primary" type="button" 
+          routerLink="/courses/applies/{{courseId}}"
+          [queryParams]="{'courseTitle': courseTitle}">
+        Заявки
+      </button>
+    </div>
+    <div *ngIf="isCoach" class="text-center">
+      <button mat-raised-button color="primary" type="button" 
+          routerLink="/courses/reports/{{courseId}}"
+          [queryParams]="{'courseTitle': courseTitle}">
+        Отчеты
       </button>
     </div>
   </mat-sidenav>

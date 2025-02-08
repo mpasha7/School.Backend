@@ -39,3 +39,7 @@ button[mat-raised-button] {
     margin-top: 130px;
     margin-bottom: 40px;
 }
+
+.mat-drawer-inner-container {
+    justify-content: center;
+}

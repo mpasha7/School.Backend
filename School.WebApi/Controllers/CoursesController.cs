@@ -6,7 +6,6 @@ using School.Application.Handlers.Courses.Commands.DeleteCourse;
 using School.Application.Handlers.Courses.Commands.UpdateCourse;
 using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
-using School.Domain;
 using School.WebApi.Models;
 using School.WebApi.Models.Course;
 

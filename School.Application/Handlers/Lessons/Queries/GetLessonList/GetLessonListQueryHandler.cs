@@ -14,7 +14,10 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonList
         private readonly ICourseRepository _courseRepository;
         private readonly IMapper _mapper;
 
-        public GetLessonListQueryHandler(ILessonRepository lessonRepository, ICourseRepository courseRepository, IMapper mapper)
+        public GetLessonListQueryHandler(
+            ILessonRepository lessonRepository,
+            ICourseRepository courseRepository,
+            IMapper mapper)
         {
             this._lessonRepository = lessonRepository;
             this._courseRepository = courseRepository;

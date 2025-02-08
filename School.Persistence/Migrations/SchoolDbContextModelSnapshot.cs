@@ -40,6 +40,10 @@ namespace School.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StudentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
@@ -94,6 +98,10 @@ namespace School.Persistence.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("StudentGuid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -153,7 +161,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 1,
                             CoachGuid = "3a3b611c-1185-445d-99c5-7f347675ec6e",
-                            CreatedDate = new DateTime(2025, 2, 1, 17, 50, 53, 835, DateTimeKind.Local).AddTicks(7817),
+                            CreatedDate = new DateTime(2025, 2, 4, 20, 18, 31, 746, DateTimeKind.Local).AddTicks(8074),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                             PublicDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                             ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -163,7 +171,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 2,
                             CoachGuid = "0b869d28-ab51-4310-ba0c-a3934e1de6de",
-                            CreatedDate = new DateTime(2025, 2, 1, 17, 50, 53, 840, DateTimeKind.Local).AddTicks(8969),
+                            CreatedDate = new DateTime(2025, 2, 4, 20, 18, 31, 757, DateTimeKind.Local).AddTicks(5325),
                             Description = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem",
                             PublicDescription = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem",
                             ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -173,7 +181,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 3,
                             CoachGuid = "3a3b611c-1185-445d-99c5-7f347675ec6e",
-                            CreatedDate = new DateTime(2025, 2, 1, 17, 50, 53, 840, DateTimeKind.Local).AddTicks(9028),
+                            CreatedDate = new DateTime(2025, 2, 4, 20, 18, 31, 757, DateTimeKind.Local).AddTicks(5413),
                             Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                             PublicDescription = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem",
                             ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -183,7 +191,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 4,
                             CoachGuid = "3a3b611c-1185-445d-99c5-7f347675ec6e",
-                            CreatedDate = new DateTime(2025, 2, 1, 17, 50, 53, 840, DateTimeKind.Local).AddTicks(9037),
+                            CreatedDate = new DateTime(2025, 2, 4, 20, 18, 31, 757, DateTimeKind.Local).AddTicks(5418),
                             Description = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem",
                             PublicDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                             ShortDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
@@ -272,7 +280,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 1,
                             CourseId = 1,
-                            CreatedAt = new DateTime(2025, 2, 1, 17, 50, 53, 842, DateTimeKind.Local).AddTicks(7221),
+                            CreatedAt = new DateTime(2025, 2, 4, 20, 18, 31, 759, DateTimeKind.Local).AddTicks(9696),
                             FileNameExt = ".jpg",
                             FileOwner = 0,
                             FileSize = 1000L,
@@ -283,7 +291,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 2,
                             CourseId = 2,
-                            CreatedAt = new DateTime(2025, 2, 1, 17, 50, 53, 843, DateTimeKind.Local).AddTicks(3643),
+                            CreatedAt = new DateTime(2025, 2, 4, 20, 18, 31, 760, DateTimeKind.Local).AddTicks(4428),
                             FileNameExt = ".jpg",
                             FileOwner = 0,
                             FileSize = 1000L,
@@ -294,7 +302,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 3,
                             CourseId = 3,
-                            CreatedAt = new DateTime(2025, 2, 1, 17, 50, 53, 843, DateTimeKind.Local).AddTicks(3666),
+                            CreatedAt = new DateTime(2025, 2, 4, 20, 18, 31, 760, DateTimeKind.Local).AddTicks(4470),
                             FileNameExt = ".jpg",
                             FileOwner = 0,
                             FileSize = 1000L,
@@ -305,7 +313,7 @@ namespace School.Persistence.Migrations
                         {
                             Id = 4,
                             CourseId = 4,
-                            CreatedAt = new DateTime(2025, 2, 1, 17, 50, 53, 843, DateTimeKind.Local).AddTicks(3669),
+                            CreatedAt = new DateTime(2025, 2, 4, 20, 18, 31, 760, DateTimeKind.Local).AddTicks(4473),
                             FileNameExt = ".jpg",
                             FileOwner = 0,
                             FileSize = 1000L,
@@ -532,6 +540,10 @@ namespace School.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StudentName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -642,17 +654,17 @@ namespace School.Persistence.Migrations
                     b.HasOne("School.Domain.Course", "Course")
                         .WithOne("Photo")
                         .HasForeignKey("School.Domain.FileObject", "CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("School.Domain.Lesson", "Lesson")
                         .WithMany("Files")
                         .HasForeignKey("LessonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("School.Domain.Report", "Report")
                         .WithMany("Files")
                         .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Course");
 

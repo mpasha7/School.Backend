@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="page-title">
+        <h1>{{courseTitle}}</h1>
+        <h2>Заявки на курс</h2>
+    </div>
+
+    <div class="row just_content mb-4">
+        <button mat-fab color="none" type="button" class="mb-3" class="mx-3" routerLink="/lessons/{{courseId}}/list">
+            <div class="blue_undo">
+                <mat-icon>undo</mat-icon>
+            </div>
+        </button>
+    </div>
+
+    <div *ngIf="applyList && applyList.length > 0" class="row">
+        <div class="col-md-6 col-sm-12 text-center mb-4" *ngFor="let apply of applyList">                
+            <mat-card>
+                <mat-card-content>
+                    <div class="mx-3" style="margin-top: 16px;">
+                        <h4 class="sender_name">
+                            {{apply.studentName}}
+                        </h4>
+                    </div>
+                    <div class="text_right">
+                        <button mat-mini-fab color="primary" class="mx-3" type="button" (click)="onAcceptApply(apply)">
+                            <mat-icon>edit_square</mat-icon>
+                        </button>
+                        <button mat-mini-fab color="accent" class="mx-3" type="button" (click)="onRejectApply(apply)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

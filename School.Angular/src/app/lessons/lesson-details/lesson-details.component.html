@@ -7,8 +7,56 @@
     <p>Описание: {{selectedLesson?.description}}</p>
     <p>Ссылка на видео: {{selectedLesson?.videoLink}}</p>
 
-    <div>
+    <div class="mt-5">
         <button mat-raised-button color="primary" type="button" *ngIf="isCoach" routerLink="/lessons/{{courseId}}/form/{{lessonId}}">Редактировать</button>
         <button mat-raised-button type="button" routerLink="/lessons/{{courseId}}/list">Назад</button>
+    </div>
+
+    <!-- Отчет и Обратная связь -->
+    <div *ngIf="!isCoach" class="mt-3">
+        <mat-slide-toggle color="primary" [(ngModel)]="showReport"><h2 class="report_header">Ваш отчет по уроку</h2></mat-slide-toggle>
+    </div>
+
+    <div *ngIf="showReport">
+      <div *ngIf="report">
+          <div class="row">
+            <p>{{report.text}}</p>
+          </div>
+          <div class="row">
+            <div *ngFor="let photo of report?.photos" class="col-md-6 col-sm-12 text-center mt-2 p-3">
+                <img mat-card-image src="https://localhost:7125/uploads/Photo/{{photo?.uniqueFileName}}" alt="No Photo" width="100%" />
+            </div>
+          </div>
+      </div>
+
+      <div *ngIf="!report">
+          <form [formGroup]="reportForm" (ngSubmit)="saveReportData()">
+              <mat-form-field appearance="fill">
+                  <mat-label>Текст отчета:</mat-label>
+                  <textarea matInput formControlName="text" rows="7"></textarea>
+                  <mat-icon *ngIf="reportForm.controls['text'].invalid && reportForm.controls['text'].touched" matSuffix color="warn">
+                    sentiment_dissatisfied
+                  </mat-icon>
+                  <mat-icon *ngIf="reportForm.controls['text'].valid && reportForm.controls['text'].touched" matSuffix color="primary">
+                    sentiment_very_satisfied
+                  </mat-icon>
+                  <mat-hint *ngIf="reportForm.controls['text'].invalid && reportForm.controls['text'].touched">
+                    Введите текст отчета
+                  </mat-hint>
+                </mat-form-field>
+
+                <div class="file-input">      
+                  <input type="file" multiple id="photos" name="photos" (change)="onFileChange($event)"
+                        #photoInput hidden="true" onclick="this.value=null" accept="image/*" />
+                  <button mat-raised-button (click)="photoInput.click()" type="button">Добавить фото</button>
+                  <label for="photos">{{fileLabels}}</label><br/>
+                </div>
+
+                <div>
+                  <button mat-raised-button color="primary" type="submit">Сохранить</button>
+                  <button mat-raised-button color="accent" type="button" (click)="cancelForm()">Отменить</button>
+                </div>
+          </form>
+      </div>
     </div>
 </div>

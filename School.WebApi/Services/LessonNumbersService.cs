@@ -1,7 +1,5 @@
 ﻿using School.Application.Interfaces.Repository;
 using School.Application.Interfaces.Services;
-using School.Domain;
-using System.Security.Cryptography;
 
 namespace School.WebApi.Services
 {
