@@ -1,30 +1,36 @@
 ﻿using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using MediatR;
 using School.Application.Common.Exceptions;
-using School.Application.Handlers.Files;
 using School.Application.Interfaces.Repository;
 using School.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace School.Application.Handlers.Reports.Queries.GetReportDetails
+namespace School.Application.Handlers.Feedbacks.Queries.GetFeedbackDetails
 {
-    public class GetReportDetailsQueryHandler : IRequestHandler<GetReportDetailsQuery, ReportDetailsVm>
+    public class GetFeedbackDetailsQueryHandler : IRequestHandler<GetFeedbackDetailsQuery, FeedbackDetailsVm>
     {
         private readonly ILessonRepository _lessonRepository;
         private readonly IReportRepository _reportRepository;
+        private readonly IStudentRepository _studentRepository;
         private readonly IMapper _mapper;
 
-        public GetReportDetailsQueryHandler(
+        public GetFeedbackDetailsQueryHandler(
             ILessonRepository lessonRepository,
             IReportRepository reportRepository,
+            IStudentRepository studentRepository,
             IMapper mapper)
         {
             this._lessonRepository = lessonRepository;
             this._reportRepository = reportRepository;
+            this._studentRepository = studentRepository;
             this._mapper = mapper;
         }
 
-        public async Task<ReportDetailsVm> Handle(GetReportDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<FeedbackDetailsVm> Handle(GetFeedbackDetailsQuery request, CancellationToken cancellationToken)
         {
             var lesson = await _lessonRepository.GetByIdAsync(
                 request.LessonId,
@@ -37,26 +43,23 @@ namespace School.Application.Handlers.Reports.Queries.GetReportDetails
                 throw new NotFoundException(nameof(Course), request.CourseId);
             else if (lesson.CourseId != request.CourseId)
                 throw new NotContainsException(nameof(Course), request.CourseId, nameof(Lesson), request.LessonId);
-            else if (lesson.Course.CoachGuid != request.CoachGuid)
-                throw new NoAccessException(nameof(Course), request.Id);
+            else if (!(await _studentRepository.IsStudentOfThisCourse(
+                request.StudentGuid,
+                lesson.CourseId,
+                cancellationToken)))
+                throw new NoAccessException(nameof(Course), lesson.CourseId);
 
             var report = await _reportRepository.GetByIdAsync(
-                request.Id,
+                request.ReportId,
                 cancellationToken,
-                includeCollection: "Files");
+                includeReference: "Feedback");
 
             if (report == null)
-                throw new NotFoundException(nameof(Report), request.Id);
-            else if (report.LessonId != request.LessonId)
-                throw new NotContainsException(nameof(Lesson), request.LessonId, nameof(Report), request.Id);
+                throw new NotFoundException(nameof(Report), request.ReportId);
+            else if (report.Feedback == null)
+                throw new NotFoundException(nameof(Feedback), 0);
 
-            var reportVm = _mapper.Map<ReportDetailsVm>(report);
-            reportVm.Photos = report.Files
-                .AsQueryable()
-                .ProjectTo<FileLookupDto>(_mapper.ConfigurationProvider)
-                .ToList();
-
-            return reportVm;
+            return _mapper.Map<FeedbackDetailsVm>(report.Feedback);
         }
     }
 }

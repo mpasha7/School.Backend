@@ -91,7 +91,8 @@ namespace School.WebApi.Controllers
         /// POST /api/reports
         /// {
         ///     Text: "reports text",
-        ///     LessonId: 7
+        ///     LessonId: 7,
+        ///     CourseId: 2
         /// }
         /// </remarks>
         /// <param name="dto">CreateReportDto object</param>

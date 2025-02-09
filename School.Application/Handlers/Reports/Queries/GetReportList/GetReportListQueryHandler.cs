@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces.Repository;
 using School.Domain;
@@ -37,10 +38,11 @@ namespace School.Application.Handlers.Reports.Queries.GetReportList
             var reports = (await _lessonRepository.GetAllAsync(
                 cancellationToken,
                 filter: l => l.CourseId == request.CourseId,
-                includeProperties: "Reports"))
+                includeProperties: "Reports.Feedback"
+                ))
                 .AsQueryable()
                 .SelectMany(
-                    l => l.Reports,
+                    l => l.Reports.Where(r => r.Feedback == null).ToList(),
                     (l, r) => _mapper.Map<ReportLookupDto>(r))
                 .OrderByDescending(r => r.CreatedAt)
                 .ToList();

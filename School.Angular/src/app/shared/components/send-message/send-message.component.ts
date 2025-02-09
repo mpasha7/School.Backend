@@ -26,7 +26,7 @@ export class SendMessageComponent implements OnInit {
     this.messageForm = new FormGroup({
       email: new FormControl<string>('', [Validators.email]),
       phone: new FormControl<string>(''),  // , [Validators.pattern('\+7[0-9]{10}')] не работает RegEx
-      text: new FormControl<string>('', [Validators.required, Validators.maxLength(1000)])
+      text: new FormControl<string>('', [Validators.required, Validators.maxLength(2000)])
     });
   }
 

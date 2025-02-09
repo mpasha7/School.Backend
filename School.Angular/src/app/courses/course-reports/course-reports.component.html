@@ -25,7 +25,8 @@
                 <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
                     <span class="col-2 text-start">{{ report.createdAt | date: 'dd.MM.yyyy  H:mm' }}</span>
                     <span class="col-3 text-start">{{report.studentName}}</span>
-                    <span class="col-6 text-start">{{report.lessonNumber}}.{{report.lessonTitle}}</span>                    
+                    <span class="col-1"><mat-icon *ngIf="answeredReportsIds.includes(report.id)" color="primary">check</mat-icon></span>
+                    <span class="col-5 text-start">{{report.lessonNumber}}. {{report.lessonTitle}}</span>
                     <span class="example-accordion-item-description col-1 text-end">
                         <mat-icon *ngIf="accordionItem.expanded">arrow_drop_up</mat-icon>
                         <mat-icon *ngIf="!accordionItem.expanded">arrow_drop_down</mat-icon>
@@ -47,7 +48,7 @@
                         </div>
                         <div class="mt-2">
                             <button mat-raised-button color="primary" type="button" class="mx-3" 
-                                (click)="sendFeedback()">
+                                (click)="sendFeedback(report.studentName, report.lessonTitle, report.id, report.lessonId)">
                                 Обратная связь
                             </button>
                             <button *ngIf="report.lessonNumber == maxLessonNumber" 

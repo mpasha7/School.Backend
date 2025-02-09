@@ -15,12 +15,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ShowResultComponent } from './components/show-result/show-result.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { SendFeedbackComponent } from './components/send-feedback/send-feedback.component';
 
 
 @NgModule({
   declarations: [
     SendMessageComponent,
-    ShowResultComponent
+    ShowResultComponent,
+    SendFeedbackComponent
   ],
   imports: [
     CommonModule,

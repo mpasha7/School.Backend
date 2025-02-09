@@ -12,6 +12,10 @@ import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Va
 import { createReport } from '../../redux/reports/reports.actions';
 import { ReportDetailsVm } from '../../core/models/report.model';
 import { lastValueFrom, tap, timeout } from 'rxjs';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { loadFeedback } from '../../redux/feedbacks/feedbacks.actions';
+import { selectFeedback } from '../../redux/feedbacks/feedbacks.selector';
+import { FeedbackDetailsVm } from '../../core/models/feedback.model';
 
 @Component({
   selector: 'app-lesson-details',
@@ -30,6 +34,8 @@ export class LessonDetailsComponent implements OnInit {
   reportForm: FormGroup;
   files: File[] | null = null;
   fileLabels: string = 'Файлы не выбраны';
+  showFeedback: boolean = false;
+  feedback!: FeedbackDetailsVm | null;
 
   constructor(
     private store: Store<AppState>,
@@ -89,22 +95,6 @@ export class LessonDetailsComponent implements OnInit {
     this.ngOnInit();
     this.ngOnInit();
     this.showReport = true;
-
-    // this.store.select(selectLesson).subscribe((data) => {
-    //   this.selectedLesson = data;
-    //   this.report = this.selectedLesson?.report;
-    // });
-
-    // this.selectedLesson = await lastValueFrom(this.store.select(selectLesson));
-    // this.report = this.selectedLesson?.report;
-    // this.ngOnInit();
-
-    // this.store.select(selectLesson).pipe(tap({
-    //   next: (data) => {
-    //     this.selectedLesson = data;
-    //     this.report = this.selectedLesson?.report;
-    //   }
-    // }));
   }
 
   reloadCurrentRoute() {
@@ -112,7 +102,7 @@ export class LessonDetailsComponent implements OnInit {
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate([currentUrl]);
     });
-}
+  }
 
   cancelForm() {
     this.reportForm.patchValue({
@@ -120,5 +110,18 @@ export class LessonDetailsComponent implements OnInit {
     });
     this.files = null;
     this.fileLabels = 'Файлы не выбраны';
+  }
+
+  onLoadFeedback($event: MatSlideToggleChange) {
+    if (!this.isCoach && this.report && $event.checked) {
+      this.store.dispatch(loadFeedback({
+        courseId: this.courseId,
+        lessonId: this.lessonId,
+        reportId: this.report.id
+      }));
+      this.store.select(selectFeedback).subscribe((data) => {
+        this.feedback = data;
+      });
+    }
   }
 }

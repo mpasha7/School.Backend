@@ -12,7 +12,7 @@
         <button mat-raised-button type="button" routerLink="/lessons/{{courseId}}/list">Назад</button>
     </div>
 
-    <!-- Отчет и Обратная связь -->
+    <!-- Отчет -->
     <div *ngIf="!isCoach" class="mt-3">
         <mat-slide-toggle color="primary" [(ngModel)]="showReport"><h2 class="report_header">Ваш отчет по уроку</h2></mat-slide-toggle>
     </div>
@@ -58,5 +58,24 @@
                 </div>
           </form>
       </div>
+    </div>
+
+    <!-- Обратная связь -->
+    <div *ngIf="!isCoach" class="mt-3">
+      <mat-slide-toggle color="primary" [(ngModel)]="showFeedback" (change)="onLoadFeedback($event)"><h2 class="report_header">Обратная связь от тренера</h2></mat-slide-toggle>
+    </div>
+
+    <div *ngIf="showFeedback">
+      <mat-card *ngIf="feedback">
+        <div class="title-link">
+          <p>{{feedback.text}}</p>
+        </div>
+      </mat-card>
+
+      <mat-card *ngIf="!feedback">
+        <div class="title-link">
+          <h3>Для этого отчета пока нет обратной связи</h3>
+        </div>
+      </mat-card>
     </div>
 </div>

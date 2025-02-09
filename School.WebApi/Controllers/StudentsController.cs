@@ -21,6 +21,7 @@ namespace School.WebApi.Controllers
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status405MethodNotAllowed)]
     public class StudentsController : BaseController
     {
         private readonly IMapper _mapper;
@@ -72,6 +73,7 @@ namespace School.WebApi.Controllers
         /// <response code="401">User is unauthorized</response>
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
+        /// <response code="405">Action aleady completed</response>
         [HttpPost("add")]
         public async Task<ActionResult<ResponseDto>> AddStudentToCourse(AddToCourseDto dto)
         {
@@ -101,6 +103,7 @@ namespace School.WebApi.Controllers
         /// <response code="401">User is unauthorized</response>
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
+        /// <response code="405">Action aleady completed</response>
         [HttpPost("remove")]
         public async Task<ActionResult<ResponseDto>> RemoveStudentFromCourse(RemoveFromCourseDto dto)
         {
