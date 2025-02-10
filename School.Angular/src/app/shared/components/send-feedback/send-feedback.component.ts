@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../redux/store';
 import { createFeedback } from '../../../redux/feedbacks/feedbacks.actions';
+import { createAssessment } from '../../../redux/assessments/assessments.actions';
 
 @Component({
   selector: 'app-send-feedback',
@@ -17,6 +18,9 @@ export class SendFeedbackComponent implements OnInit {
   reportId!: number;
   lessonId!: number;
   courseId!: number;
+  isFinal!: boolean;
+  courseTitle!: string;
+  studentGuid!: string;
 
   constructor(
     private dialogRef: MatDialogRef<SendFeedbackComponent>,
@@ -24,7 +28,8 @@ export class SendFeedbackComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.feedbackForm = new FormGroup({
-      text: new FormControl<string>('', [Validators.required, Validators.maxLength(2000)])
+      text: new FormControl<string>('', [Validators.required, Validators.maxLength(2000)]),
+      assessmentText: new FormControl<string>('')
     });
   }
 
@@ -34,6 +39,9 @@ export class SendFeedbackComponent implements OnInit {
     this.reportId = this.data.reportId;
     this.lessonId = this.data.lessonId;
     this.courseId = this.data.courseId;
+    this.isFinal = this.data.isFinal;
+    this.courseTitle = this.data.courseTitle;
+    this.studentGuid = this.data.studentGuid;
   }
 
   closePopup(reportId: number) {
@@ -48,8 +56,17 @@ export class SendFeedbackComponent implements OnInit {
         lessonId: this.lessonId,
         courseId: this.courseId
       }
-
       this.store.dispatch(createFeedback({createFeedbackDto: createFeedbackDto}));
+
+      if (this.isFinal) {
+        let createAssessmentDto = {
+          studentGuid: this.studentGuid,
+          text: this.feedbackForm.value.assessmentText,
+          courseId: this.courseId
+        }
+        this.store.dispatch(createAssessment({createAssessmentDto: createAssessmentDto}))
+      }
+
       this.closePopup(this.reportId);
     }
   }

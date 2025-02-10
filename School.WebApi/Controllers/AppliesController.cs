@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using School.Application.Handlers.Applies.Commands.CreateApply;
 using School.Application.Handlers.Applies.Commands.DeleteApply;
 using School.Application.Handlers.Applies.Commands.UpdateApply;
 using School.Application.Handlers.Applies.Queries.GetApplyList;
-using School.Domain;
 using School.WebApi.Models;
 using School.WebApi.Models.Apply;
-using School.WebApi.Models.Lesson;
 
 namespace School.WebApi.Controllers
 {

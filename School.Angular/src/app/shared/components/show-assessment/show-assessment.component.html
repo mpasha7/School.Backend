@@ -1,0 +1,13 @@
+<div class="text-center my-5">
+    <div *ngIf="assessment">
+        <h4 class="result_color">Оценка вашего прогресса в процессе курса "{{courseTitle}}"</h4>
+        <p class="mx-4 mb-4">{{assessment.text}}</p>
+    </div>
+    <div *ngIf="!assessment">
+        <h4 class="result_color">Тренер ещё не оценил ваш прогресс</h4>
+    </div>
+    
+    <a mat-fab color="none" class="mx-3" (click)="closePopup()">
+        <mat-icon>check</mat-icon>
+    </a>
+</div>

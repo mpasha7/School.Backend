@@ -10,6 +10,11 @@ import { JsonPipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
 import { AuthService } from '../../core/services/auth/auth.service';
+import { loadAssessment } from '../../redux/assessments/assessments.actions';
+import { selectAssessment } from '../../redux/assessments/assessments.selector';
+import { AssessmentDetailsVm } from '../../core/models/assessment.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ShowAssessmentComponent } from '../../shared/components/show-assessment/show-assessment.component';
 
 @Component({
   selector: 'app-lesson-list',
@@ -24,10 +29,12 @@ export class LessonListComponent implements OnInit {
   courseTitle!: string | null;
   maxLessonNumber!: number;
   isCoach: boolean = false;
+  assessment!: AssessmentDetailsVm | null;
 
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
     private authService: AuthService
   ) {
     this.activatedRoute.parent?.params.subscribe(params => this.courseId = params["courseid"]);
@@ -59,5 +66,26 @@ export class LessonListComponent implements OnInit {
         this.isCoach = true;
       }
     });
+  }
+
+  getAssessment() {
+    this.store.dispatch(loadAssessment({courseId: this.courseId}));
+    this.store.select(selectAssessment).subscribe((data) => {
+      this.assessment = data;
+      this.showAssessment();
+    });
+  }
+
+  showAssessment() {
+    this.dialog.open(
+      ShowAssessmentComponent,
+      {
+        width: '50%',
+        data: {
+          assessment: this.assessment,
+          courseTitle: this.courseTitle
+        }
+      }
+    );
   }
 }

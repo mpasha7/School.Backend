@@ -35,6 +35,8 @@ namespace School.Application.Handlers.Reports.Queries.GetReportList
             else if (course.CoachGuid != request.CoachGuid)
                 throw new NoAccessException(nameof(Course), request.CourseId);
 
+            int maxNum = course.Lessons.Max(les => les.Number) ?? 0;
+
             var reports = (await _lessonRepository.GetAllAsync(
                 cancellationToken,
                 filter: l => l.CourseId == request.CourseId,
@@ -42,7 +44,9 @@ namespace School.Application.Handlers.Reports.Queries.GetReportList
                 ))
                 .AsQueryable()
                 .SelectMany(
-                    l => l.Reports.Where(r => r.Feedback == null).ToList(),
+                    l => l.Reports.Where(r => r.Feedback == null),
+                    //l => l.Reports.Where(r => (r.LessonId != maxNum && r.Feedback == null)
+                    //                       || (r.LessonId == maxNum && (r.Feedback == null || r.Lesson.CourseId))).ToList(),
                     (l, r) => _mapper.Map<ReportLookupDto>(r))
                 .OrderByDescending(r => r.CreatedAt)
                 .ToList();
@@ -50,7 +54,7 @@ namespace School.Application.Handlers.Reports.Queries.GetReportList
             return new ReportListVm 
             { 
                 Reports = reports,
-                MaxLessonNumber = course.Lessons.Max(les => les.Number) ?? 0
+                MaxLessonNumber = maxNum
             };
         }
     }

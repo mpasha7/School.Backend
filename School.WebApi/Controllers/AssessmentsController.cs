@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using School.Application.Handlers.Feedbacks.Commands.CreateFeedback;
-using School.Application.Handlers.Feedbacks.Queries.GetFeedbackDetails;
+using School.Application.Handlers.Assessments.Commands.CreateAssessment;
+using School.Application.Handlers.Assessments.Queries.GetAssessmentDetails;
 using School.WebApi.Models;
-using School.WebApi.Models.Feedback;
+using School.WebApi.Models.Assessment;
 
 namespace School.WebApi.Controllers
 {
@@ -16,62 +16,54 @@ namespace School.WebApi.Controllers
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public class FeedbacksController : BaseController
+    public class AssessmentsController : BaseController
     {
         private readonly IMapper _mapper;
 
-        public FeedbacksController(IMapper mapper)
+        public AssessmentsController(IMapper mapper)
         {
             _mapper = mapper;
         }
 
         /// <summary>
-        /// Gets the feedback by report id
+        /// Gets the asssessment by course id
         /// </summary>
         /// <remarks>
         /// Simple request:
-        /// GET api/feedbacks/2/5/7
+        /// GET api/asssessments/5
         /// </remarks>
         /// <param name="courseid">Course id (int)</param>
-        /// <param name="lessonid">Lesson id (int)</param>
-        /// <param name="reportid">Report id (int)</param>
-        /// <param name="id">Feedback id (int)</param>
-        /// <returns>Returns FeedbackDetailsVm</returns>
+        /// <returns>Returns AssessmentDetailsVm</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>
         /// <response code="403">No access to object</response>
         /// <response code="404">Object is not found</response>
-        [HttpGet("{courseid}/{lessonid}/{reportId}")]
+        [HttpGet("{courseid}")]
         [Authorize(Roles = "Student")]
-        public async Task<ActionResult<FeedbackDetailsVm>> GetFeedback(int courseid, int lessonid, int reportid)
+        public async Task<ActionResult<AssessmentDetailsVm>> GetAssessment(int courseid)
         {
-            var query = new GetFeedbackDetailsQuery
+            var query = new GetAssessmentDetailsQuery
             {
-                ReportId = reportid,
-                LessonId = lessonid,
-                CourseId = courseid,
-                StudentGuid = UserGuid
+                StudentGuid = UserGuid,
+                CourseId = courseid
             };
             var vm = await Mediator!.Send(query);
             return Ok(vm);
         }
 
         /// <summary>
-        /// Creates the feedback
+        /// Creates the assessment
         /// </summary>
         /// <remarks>
-        /// Sample request:
-        /// POST /api/feedbacks
+        /// POST /api/assessments
         /// {
-        ///     Text: "feedbacks text",
-        ///     ReportId: 12,
-        ///     LessonId: 7,
-        ///     CourseId: 2
+        ///     Text: "assessment text",
+        ///     CourseId: 5
         /// }
         /// </remarks>
-        /// <param name="dto">CreateFeedbackDto object</param>
-        /// <returns>Returns success phrase with report id</returns>
+        /// <param name="dto">CreateAssessmentDto object</param>
+        /// <returns>Returns success phrase with assessment id</returns>
         /// <response code="200">Success</response>
         /// <response code="400">Request is not correct</response>
         /// <response code="401">User is unauthorized</response>
@@ -79,15 +71,16 @@ namespace School.WebApi.Controllers
         /// <response code="404">Object is not found</response>
         [HttpPost]
         [Authorize(Roles = "Coach")]
-        public async Task<ActionResult<ResponseDto>> CreateFeedback([FromBody] CreateFeedbackDto dto)
+        public async Task<ActionResult<ResponseDto>> CreateAssessment([FromBody] CreateAssessmentDto dto)
         {
-            var command = _mapper.Map<CreateFeedbackCommand>(dto);
+            var command = _mapper.Map<CreateAssessmentCommand>(dto);
             command.CoachGuid = UserGuid;
 
-            var feedbackId = await Mediator!.Send(command);
+            var assessmentId = await Mediator!.Send(command);
 
             var response = new ResponseDto();
-            return Ok(response.Success($"Create new Feedback (id = {feedbackId}) is successful"));
+            return Ok(response.Success($"Create new Assessment (id = {assessmentId}) is successful"));
         }
+
     }
 }

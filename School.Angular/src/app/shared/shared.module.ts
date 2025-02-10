@@ -16,13 +16,15 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ShowResultComponent } from './components/show-result/show-result.component';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { SendFeedbackComponent } from './components/send-feedback/send-feedback.component';
+import { ShowAssessmentComponent } from './components/show-assessment/show-assessment.component';
 
 
 @NgModule({
   declarations: [
     SendMessageComponent,
     ShowResultComponent,
-    SendFeedbackComponent
+    SendFeedbackComponent,
+    ShowAssessmentComponent
   ],
   imports: [
     CommonModule,

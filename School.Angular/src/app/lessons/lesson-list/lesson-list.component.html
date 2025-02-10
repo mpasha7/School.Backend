@@ -4,25 +4,31 @@
       <h2>Управление курсом</h2>
     </div>
 
-    <div class="text-center">
+    <div class="text-center mb-3">
       <button mat-raised-button color="primary" type="button" 
           routerLink="/courses/messages/{{courseId}}"
           [queryParams]="{'courseTitle': courseTitle}">
         Сообщения
       </button>
     </div>
-    <div *ngIf="isCoach" class="text-center">
+    <div *ngIf="isCoach" class="text-center mb-3">
       <button mat-raised-button color="primary" type="button" 
           routerLink="/courses/applies/{{courseId}}"
           [queryParams]="{'courseTitle': courseTitle}">
         Заявки
       </button>
     </div>
-    <div *ngIf="isCoach" class="text-center">
+    <div *ngIf="isCoach" class="text-center mb-3">
       <button mat-raised-button color="primary" type="button" 
           routerLink="/courses/reports/{{courseId}}"
           [queryParams]="{'courseTitle': courseTitle}">
         Отчеты
+      </button>
+    </div>
+    <div *ngIf="!isCoach" class="text-center mb-3">
+      <button mat-raised-button color="primary" type="button" 
+          (click)="getAssessment()">
+        Оценка прогресса
       </button>
     </div>
   </mat-sidenav>

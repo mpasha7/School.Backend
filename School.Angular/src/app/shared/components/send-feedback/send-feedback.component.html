@@ -1,16 +1,25 @@
 <form [formGroup]="feedbackForm" (ngSubmit)="saveFeedback()">
     <mat-card>
-        <mat-card-header>
+        <mat-card-content>
             <h3>
                 Обратная связь ученику {{studentName}} на отчет по уроку "{{lessonTitle}}""
             </h3>
-        </mat-card-header>
-        <mat-card-content>
             <mat-form-field>
-                <mat-label>Текст</mat-label>
+                <mat-label>Текст обратной связи</mat-label>
                 <textarea matInput formControlName="text" rows="7"></textarea>
             </mat-form-field>
+
+            <div *ngIf="isFinal">
+                <h3>
+                    Оценка прогресса ученика {{studentName}} в процессе курса "{{courseTitle}}""
+                </h3>
+                <mat-form-field>
+                    <mat-label>Текст оценки</mat-label>
+                    <textarea matInput formControlName="assessmentText" rows="7"></textarea>
+                </mat-form-field>
+            </div>
         </mat-card-content>
+
         <mat-card-actions>
             <div class="container-fliud text-center">
                 <button mat-fab color="primary" class="mx-3" type="submit" >

@@ -30,7 +30,6 @@ export class CourseReportsComponent implements OnInit {
   isCoach: boolean = false;
   expandedIndex = 0;
 
-
   constructor(
     private store: Store<AppState>,
     private activatedRoute: ActivatedRoute,
@@ -69,7 +68,14 @@ export class CourseReportsComponent implements OnInit {
     });
   }
 
-  sendFeedback(studentName: string, lessonTitle: string, reportId: number, lessonId: number) {
+  sendFeedback(
+    studentName: string,
+    lessonTitle: string,
+    reportId: number,
+    lessonId: number,
+    lessonNumber: number,
+    studentGuid: string
+  ) {
     const dialogRef = this.dialog.open(
       SendFeedbackComponent,
       {
@@ -79,7 +85,10 @@ export class CourseReportsComponent implements OnInit {
           lessonTitle: lessonTitle,
           reportId: reportId,
           lessonId: lessonId,
-          courseId: this.courseId
+          courseId: this.courseId,
+          isFinal: lessonNumber == this.maxLessonNumber,
+          courseTitle: this.courseTitle,
+          studentGuid: studentGuid
         }
       }
     );
@@ -89,10 +98,6 @@ export class CourseReportsComponent implements OnInit {
         this.answeredReportsIds.push(result);
       }
     });
-  }
-
-  sendAssessment() {
-    
   }
 
   showSendResult(resultText: string) {

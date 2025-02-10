@@ -3,11 +3,6 @@ using MediatR;
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces.Repository;
 using School.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.Application.Handlers.Feedbacks.Queries.GetFeedbackDetails
 {

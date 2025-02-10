@@ -11,6 +11,7 @@
             </div>
         </button>
     </div>
+    <!-- <p>{{maxLessonNumber}}</p> -->
 
     <cdk-accordion>
         @for (report of reportList; track report; let index = $index) {
@@ -48,13 +49,8 @@
                         </div>
                         <div class="mt-2">
                             <button mat-raised-button color="primary" type="button" class="mx-3" 
-                                (click)="sendFeedback(report.studentName, report.lessonTitle, report.id, report.lessonId)">
+                                (click)="sendFeedback(report.studentName, report.lessonTitle, report.id, report.lessonId, report.lessonNumber, report.studentGuid)">
                                 Обратная связь
-                            </button>
-                            <button *ngIf="report.lessonNumber == maxLessonNumber" 
-                                mat-raised-button color="primary" type="button" class="mx-3" 
-                                (click)="sendAssessment()">
-                                Оценка прогресса
                             </button>
                         </div>
                     </div>

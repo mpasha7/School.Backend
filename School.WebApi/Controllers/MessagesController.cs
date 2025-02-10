@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using School.Application.Handlers.Messages.Commands.CreateMessage;
 using School.Application.Handlers.Messages.Commands.DeleteMessage;
 using School.Application.Handlers.Messages.Queries.GetMessageList;
-using School.Domain;
 using School.WebApi.Models;
 using School.WebApi.Models.Message;
 

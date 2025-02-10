@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using School.Application.Handlers.Courses.Queries.GetCourseList;
 using School.Application.Handlers.Courses.Queries.PublicCourseDetails;
 using School.Application.Handlers.Courses.Queries.PublicCourseList;
 
