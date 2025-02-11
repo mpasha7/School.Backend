@@ -22,6 +22,7 @@ import { StudentFromCourseComponent } from './students/student-from-course/stude
 import { CourseMessagesComponent } from './courses/course-messages/course-messages.component';
 import { CourseAppliesComponent } from './courses/course-applies/course-applies.component';
 import { CourseReportsComponent } from './courses/course-reports/course-reports.component';
+import { CourseCommentsComponent } from './courses/course-comments/course-comments.component';
 
 const courseRoutes: Routes = [
   { path: 'list', component: CourseListComponent },
@@ -31,6 +32,8 @@ const courseRoutes: Routes = [
   { path: 'applies/:id', component: CourseAppliesComponent,
         canActivate: [AuthGuard], data: { roles: ['Coach'] } },
   { path: 'reports/:id', component: CourseReportsComponent,
+        canActivate: [AuthGuard], data: { roles: ['Coach'] } },
+  { path: 'comments/:id', component: CourseCommentsComponent,
         canActivate: [AuthGuard], data: { roles: ['Coach'] } },
   { path: '', redirectTo: '/courses/list', pathMatch: 'full'},
   { path: '**', redirectTo: '/404', pathMatch: 'full' }

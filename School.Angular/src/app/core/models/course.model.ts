@@ -1,3 +1,4 @@
+import { CommentLookupDto } from "./comment.model";
 import { FileLookupDto } from "./file.model";
 
 
@@ -45,6 +46,7 @@ export interface PublicCourseDetailsVm {
     publicDescription: string | null;
 
     photo: FileLookupDto | null;
+    comments: CommentLookupDto[];
 }
 
 

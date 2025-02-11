@@ -4,12 +4,23 @@
     margin-left: 15px;
 }
 
+.subtitles {
+    color: #7d2ba6;
+}
+
+.comments_header {
+    color: #7d2ba6;
+    margin-top: 100px;
+    margin-left: 20px;
+}
+
 .just_content {
     align-items: center;
 }
 
 .sender_name {    
-    color: #7d2ba6;    
+    color: #7d2ba6;
+    width: 15%;
 }
 
 .mat-mdc-card-header {
@@ -34,4 +45,14 @@
 
 .blue_undo .mat-icon-no-color {
     color: #3d55b4;
+}
+
+.text_right {
+    margin: 0 0 0 auto;
+    width: 15%;
+    align-content: center;
+}
+
+.comment_text {
+    width: 70%;
 }

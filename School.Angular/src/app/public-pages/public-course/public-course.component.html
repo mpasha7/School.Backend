@@ -12,20 +12,20 @@
         </div>
     </div>
 
-    <div class="mt-5">
+    <div class="mt-5 mb-3">
         <button mat-raised-button color="primary" type="button" class="mx-3" (click)="sendQuestion()">Задать вопрос тренеру</button>
         <button *ngIf="userRole == 'Student'" mat-raised-button color="primary" type="button" class="mx-3" (click)="sendApply()">Подать заявку на курс</button>
     </div>
 
     <!-- Вопросы и ответы -->
-    <div *ngIf="userRole == 'Student'" class="mt-3">
+    <div *ngIf="userRole == 'Student'" class="mt-5 pt-4">
         <mat-slide-toggle color="primary" [(ngModel)]="showMessages" (change)="onToggleChange($event)"><h2 class="messages_header">Переписка с тренером</h2></mat-slide-toggle>
     </div>
     
     <div *ngIf="showMessages">
         <div class="row just_content mb-4">
-            <div class="col-6 sender_name"><h2>Вопросы</h2></div>
-            <div class="col-6 sender_name"><h2>Ответы</h2></div>
+            <div class="col-6 subtitles"><h3>Вопросы</h3></div>
+            <div class="col-6 subtitles"><h3>Ответы</h3></div>
         </div>
         
         <div *ngIf="messageList && messageList.length > 0">
@@ -66,5 +66,30 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="messageList && messageList.length == 0">
+        <mat-card >
+            <div>
+              <h3>Здесь пока нет сообщений</h3>
+            </div>
+          </mat-card>
+    </div>
+
+    <!-- Отзывы -->
+    <div *ngIf="comments && comments.length > 0">
+        <h2 class="comments_header text-start">Отзывы:</h2>
+        <mat-card *ngFor="let comment of comments" class="mb-3">
+            <mat-card-content>
+                <h4 class="sender_name text-start ms-2">
+                    {{ comment.studentName }}
+                </h4>
+                <div class="comment_text text-start me-4">
+                    {{ comment.text }}
+                </div>
+                <div class="text_right">
+                    {{ comment.createdAt | date: 'dd.MM.yyyy' }}
+                </div>
+            </mat-card-content>
+        </mat-card>
     </div>
 </div>

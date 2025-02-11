@@ -17,16 +17,19 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { createApply } from '../../redux/applies/applies.actions';
 import { selectApplyError } from '../../redux/applies/applies.selector';
 import { ShowResultComponent } from '../../shared/components/show-result/show-result.component';
+import { CommentLookupDto } from '../../core/models/comment.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-public-course',
   standalone: true,
-  imports: [SharedModule, FormsModule],
+  imports: [SharedModule, FormsModule, DatePipe],
   templateUrl: './public-course.component.html',
   styleUrl: './public-course.component.css'
 })
 export class PublicCourseComponent implements OnInit {
   selectedCourse!: PublicCourseDetailsVm | null;
+  comments!: CommentLookupDto[] | undefined;
   courseId!: number;
   userRole: string = '';
   messageList!: MessageLookupDto[];
@@ -47,6 +50,7 @@ export class PublicCourseComponent implements OnInit {
     this.store.dispatch(loadPublicCourse({id: this.courseId}));
     this.store.select(selectPublicCourse).subscribe((data) => {
       this.selectedCourse = data;
+      this.comments = this.selectedCourse?.comments;
     });
     
   }

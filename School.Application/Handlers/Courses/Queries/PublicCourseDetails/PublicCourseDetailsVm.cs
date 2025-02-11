@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using School.Application.Common.Mappings;
+using School.Application.Handlers.Comments.Queries.GetCommentList;
 using School.Application.Handlers.Files;
 using School.Domain;
 
@@ -13,6 +14,7 @@ namespace School.Application.Handlers.Courses.Queries.PublicCourseDetails
         public string PublicDescription { get; set; } = string.Empty;
 
         public FileLookupDto? Photo { get; set; }
+        public IList<CommentLookupDto> Comments { get; set; }
 
         public void Mapping(Profile profile)
         {

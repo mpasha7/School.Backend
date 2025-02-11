@@ -17,6 +17,7 @@ import { ShowResultComponent } from './components/show-result/show-result.compon
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { SendFeedbackComponent } from './components/send-feedback/send-feedback.component';
 import { ShowAssessmentComponent } from './components/show-assessment/show-assessment.component';
+import { SendCommentComponent } from './components/send-comment/send-comment.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ShowAssessmentComponent } from './components/show-assessment/show-asses
     SendMessageComponent,
     ShowResultComponent,
     SendFeedbackComponent,
-    ShowAssessmentComponent
+    ShowAssessmentComponent,
+    SendCommentComponent
   ],
   imports: [
     CommonModule,

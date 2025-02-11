@@ -31,6 +31,19 @@
         Оценка прогресса
       </button>
     </div>
+    <div *ngIf="!isCoach" class="text-center mb-3">
+      <button mat-raised-button color="primary" type="button" 
+          (click)="sendComment()">
+        Отзыв о курсе
+      </button>
+    </div>
+    <div *ngIf="isCoach" class="text-center mb-3">
+      <button mat-raised-button color="primary" type="button" 
+          routerLink="/courses/comments/{{courseId}}"
+          [queryParams]="{'courseTitle': courseTitle}">
+        Отзывы
+      </button>
+    </div>
   </mat-sidenav>
 
   <mat-sidenav-content>

@@ -9,7 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { loadReport, loadReportList } from '../../redux/reports/reports.actions';
 import { selectMaxNumber, selectReport, selectReportList } from '../../redux/reports/reports.selector';
 import { DatePipe } from '@angular/common';
-import { selectMaxLessonNumber } from '../../redux/lessons/lessons.selector';
 import { SendFeedbackComponent } from '../../shared/components/send-feedback/send-feedback.component';
 import { ShowResultComponent } from '../../shared/components/show-result/show-result.component';
 

@@ -1,0 +1,25 @@
+<form [formGroup]="commentForm" (ngSubmit)="saveComment()">
+    <mat-card>
+        <mat-card-header>
+            <h3>
+                Комментарий к курсу "{{courseTitle}}"
+            </h3>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-form-field>
+                <mat-label>Текст комментария</mat-label>
+                <textarea matInput formControlName="text" rows="7"></textarea>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="container-fliud text-center">
+                <button mat-fab color="primary" class="mx-3" type="submit" >
+                    <mat-icon>send</mat-icon>
+                </button>
+                <a mat-fab color="accent" class="mx-3" (click)="closePopup()">
+                    <mat-icon>cancel</mat-icon>
+                </a>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</form>

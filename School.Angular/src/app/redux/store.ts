@@ -4,6 +4,9 @@ import { AppliesState } from "./applies/applies.state";
 import { AssessmentEffects } from "./assessments/assessments.effects";
 import { assessmentReducer } from "./assessments/assessments.reducer";
 import { AssessmentState } from "./assessments/assessments.state";
+import { CommentEffects } from "./comments/comments.effects";
+import { commentsReducer } from "./comments/comments.reducer";
+import { CommentsState } from "./comments/comments.state";
 import { CourseEffects } from "./courses/courses.effects";
 import { coursesReducer } from "./courses/courses.reducer";
 import { CoursesState } from "./courses/courses.state";
@@ -37,6 +40,7 @@ export interface AppState {
     reportsState: ReportsState;
     feedbackState: FeedbackState;
     assessmentState: AssessmentState;
+    commentsState: CommentsState;
 }
 
 export const store = {
@@ -48,7 +52,8 @@ export const store = {
     appliesStore: appliesReducer,
     reportsStore: reportsReducer,
     feedbackStore: feedbacksReducer,
-    assessmentStore: assessmentReducer
+    assessmentStore: assessmentReducer,
+    commentsStore: commentsReducer
 }
 
 export const appEffects = [
@@ -60,5 +65,6 @@ export const appEffects = [
     ApplyEffects,
     ReportEffects,
     FeedbackEffects,
-    AssessmentEffects
+    AssessmentEffects,
+    CommentEffects
 ]

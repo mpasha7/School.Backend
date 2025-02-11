@@ -35,6 +35,7 @@ namespace School.WebApi
             builder.Services.AddScoped<IReportRepository, ReportRepository>();
             builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             builder.Services.AddScoped<IAssessmentRepository, AssessmentRepository>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
             builder.Services.AddScoped<IFileRepository, FileRepository>();
             builder.Services.AddScoped<IFileService, FileService>();
             builder.Services.AddScoped<ILessonNumbersService, LessonNumbersService>();

@@ -93,7 +93,7 @@ namespace School.WebApi.Controllers
         /// Sample request:
         /// POST api/lessons
         /// {
-        ///     Number: "lesson number in the course",
+        ///     Number: 5,
         ///     Title: "lesson title",
         ///     Description: "lesson description",
         ///     VideoLink: "link to lesson video"

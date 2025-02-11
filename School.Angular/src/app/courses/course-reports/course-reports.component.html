@@ -11,7 +11,6 @@
             </div>
         </button>
     </div>
-    <!-- <p>{{maxLessonNumber}}</p> -->
 
     <cdk-accordion>
         @for (report of reportList; track report; let index = $index) {
@@ -25,14 +24,15 @@
                 [attr.aria-controls]="'accordion-body-' + index">
                 <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
                     <span class="col-2 text-start">{{ report.createdAt | date: 'dd.MM.yyyy  H:mm' }}</span>
-                    <span class="col-3 text-start">{{report.studentName}}</span>
+                    <span class="col-3 text-start">{{ report.studentName }}</span>
                     <span class="col-1"><mat-icon *ngIf="answeredReportsIds.includes(report.id)" color="primary">check</mat-icon></span>
-                    <span class="col-5 text-start">{{report.lessonNumber}}. {{report.lessonTitle}}</span>
+                    <span class="col-5 text-start">{{ report.lessonNumber }}. {{ report.lessonTitle }}</span>
                     <span class="example-accordion-item-description col-1 text-end">
                         <mat-icon *ngIf="accordionItem.expanded">arrow_drop_up</mat-icon>
                         <mat-icon *ngIf="!accordionItem.expanded">arrow_drop_down</mat-icon>
                     </span>
                 </div>
+                
                 <div class="example-accordion-item-body"
                     role="region"
                     [style.display]="accordionItem.expanded ? '' : 'none'"
@@ -40,7 +40,7 @@
                     [attr.aria-labelledby]="'accordion-header-' + index">
                     <div *ngIf="selectedReport">
                         <div class="row">
-                            <p>{{selectedReport.text}}</p>
+                            <p>{{ selectedReport.text }}</p>
                         </div>
                         <div class="row">
                             <div *ngFor="let photo of selectedReport?.photos" class="col-md-6 col-sm-12 text-center mt-2 p-3">

@@ -5,9 +5,6 @@ import { Store } from '@ngrx/store';
 import { deleteLesson, loadLessonList } from '../../redux/lessons/lessons.actions';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { selectContainingCourse, selectLessonList, selectMaxLessonNumber } from '../../redux/lessons/lessons.selector';
-import { selectCourseList } from '../../redux/courses/courses.selector';
-import { JsonPipe } from '@angular/common';
-import { Subscription } from 'rxjs';
 import { SharedModule } from '../../shared/shared.module';
 import { AuthService } from '../../core/services/auth/auth.service';
 import { loadAssessment } from '../../redux/assessments/assessments.actions';
@@ -15,6 +12,8 @@ import { selectAssessment } from '../../redux/assessments/assessments.selector';
 import { AssessmentDetailsVm } from '../../core/models/assessment.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowAssessmentComponent } from '../../shared/components/show-assessment/show-assessment.component';
+import { SendCommentComponent } from '../../shared/components/send-comment/send-comment.component';
+import { ShowResultComponent } from '../../shared/components/show-result/show-result.component';
 
 @Component({
   selector: 'app-lesson-list',
@@ -84,6 +83,35 @@ export class LessonListComponent implements OnInit {
         data: {
           assessment: this.assessment,
           courseTitle: this.courseTitle
+        }
+      }
+    );
+  }
+
+  sendComment() {
+    const dialogRef = this.dialog.open(
+      SendCommentComponent,
+      {
+        width: '50%',
+        data: {
+          courseId: this.courseId,
+          courseTitle: this.courseTitle
+        }
+      }
+    );
+    dialogRef.afterClosed().subscribe(_ => {
+      this.showSendResult('Создание комментария');
+    });
+  }
+
+  showSendResult(resultText: string) {
+    this.dialog.open(
+      ShowResultComponent,
+      {
+        width: '50%',
+        data: {
+          result: true,
+          resultText: resultText
         }
       }
     );
