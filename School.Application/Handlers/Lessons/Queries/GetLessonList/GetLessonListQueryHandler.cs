@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using School.Application.Common.Exceptions;
+using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
 using School.Application.Interfaces.Repository;
 using School.Domain;
@@ -59,7 +60,7 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonList
             return new LessonListVm 
             { 
                 Lessons = lessons,
-                Course = _mapper.Map<CourseLookupDto>(course),
+                Course = _mapper.Map<CourseDetailsVm>(course),
                 MaxLessonNumber = maxLessonNumber
             };
         }

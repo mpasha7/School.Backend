@@ -26,9 +26,12 @@ export class LessonListComponent implements OnInit {
   lessonList!: LessonLookupDto[];
   courseId!: number;
   courseTitle!: string | null;
+  beginQuest!: string | undefined;
+  endQuest!: string | undefined;
   maxLessonNumber!: number;
   isCoach: boolean = false;
   assessment!: AssessmentDetailsVm | null;
+  
 
   constructor(
     private store: Store<AppState>,
@@ -47,6 +50,8 @@ export class LessonListComponent implements OnInit {
     });
     this.store.select(selectContainingCourse).subscribe((data) => {
       this.courseTitle = data?.title ? data.title : "";
+      this.beginQuest = data?.beginQuestionnaire ? data.beginQuestionnaire : undefined;
+      this.endQuest = data?.endQuestionnaire ? data.endQuestionnaire : undefined;
     });
     this.store.select(selectMaxLessonNumber).subscribe((data) => {
       this.maxLessonNumber = data

@@ -61,6 +61,16 @@
       <button mat-raised-button type="button" routerLink="/courses/list">
         Назад
       </button>
+
+      <!-- Анкета в начале -->
+      <mat-card *ngIf="beginQuest">
+        <div class="title-link">
+          <button mat-button type="button" routerLink="/courses/quest/{{courseId}}"
+            [queryParams]="{'courseTitle': courseTitle, 'begin': true}">
+            <h2>Анкета перед началом курса</h2>
+          </button>
+        </div>
+      </mat-card>
     
       <div *ngIf="lessonList && lessonList.length > 0">
         <mat-card *ngFor="let item of lessonList">
@@ -88,8 +98,18 @@
             <h2>Здесь пока нет уроков</h2>
           </div>
         </mat-card>
-      </div>  
-    </div>
+      </div>
+
+      <!-- Анкета в конце -->
+      <mat-card *ngIf="endQuest">
+        <div class="title-link">
+          <button mat-button type="button" routerLink="/courses/quest/{{courseId}}"
+            [queryParams]="{'courseTitle': courseTitle, 'begin': false}">
+            <h2>Анкета в конце курса</h2>
+          </button>
+        </div>
+      </mat-card>
+    </div>   
 
     <div class="bottom-filler"></div>
   </mat-sidenav-content>

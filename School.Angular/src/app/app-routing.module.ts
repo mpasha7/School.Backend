@@ -23,6 +23,7 @@ import { CourseMessagesComponent } from './courses/course-messages/course-messag
 import { CourseAppliesComponent } from './courses/course-applies/course-applies.component';
 import { CourseReportsComponent } from './courses/course-reports/course-reports.component';
 import { CourseCommentsComponent } from './courses/course-comments/course-comments.component';
+import { CourseQuestComponent } from './courses/course-quest/course-quest.component';
 
 const courseRoutes: Routes = [
   { path: 'list', component: CourseListComponent },
@@ -35,6 +36,7 @@ const courseRoutes: Routes = [
         canActivate: [AuthGuard], data: { roles: ['Coach'] } },
   { path: 'comments/:id', component: CourseCommentsComponent,
         canActivate: [AuthGuard], data: { roles: ['Coach'] } },
+  { path: 'quest/:id', component: CourseQuestComponent },
   { path: '', redirectTo: '/courses/list', pathMatch: 'full'},
   { path: '**', redirectTo: '/404', pathMatch: 'full' }
 ]

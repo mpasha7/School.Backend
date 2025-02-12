@@ -1,9 +1,9 @@
-import { CourseLookupDto } from "./course.model";
+import { CourseDetailsVm, CourseLookupDto } from "./course.model";
 import { ReportDetailsVm, ReportLookupDto } from "./report.model";
 
 export interface LessonListVm {
     lessons: LessonLookupDto[];
-    course: CourseLookupDto;
+    course: CourseDetailsVm;
     maxLessonNumber: number;
 }
 
@@ -20,11 +20,13 @@ export interface LessonDetailsVm {
     number: number;
     title: string | null;
     description: string | null;
-    videoLink: string | null;
+    videoLink: string;
 
-    course: CourseLookupDto;
+    course: CourseDetailsVm;
     report: ReportDetailsVm | null;
 }
+
+
 
 export interface CreateLessonDto {
     courseId: number;

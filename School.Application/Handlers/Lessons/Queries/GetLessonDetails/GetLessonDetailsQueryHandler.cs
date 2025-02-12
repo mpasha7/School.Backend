@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using School.Application.Common.Exceptions;
+using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
 using School.Application.Handlers.Files;
 using School.Application.Handlers.Reports.Queries.GetReportDetails;
@@ -60,7 +61,7 @@ namespace School.Application.Handlers.Lessons.Queries.GetLessonDetails
                     throw new NoAccessException(nameof(Lesson), request.Id);
 
             var lessonVm = _mapper.Map<LessonDetailsVm>(lesson);
-            lessonVm.Course = _mapper.Map<CourseLookupDto>(lesson.Course);
+            lessonVm.Course = _mapper.Map<CourseDetailsVm>(lesson.Course);
             if (request.UserRole == UserRoles.Student)
             {
                 var report = (await _reportRepository.GetAllAsync(
