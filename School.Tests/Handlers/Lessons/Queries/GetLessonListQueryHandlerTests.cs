@@ -1,17 +1,17 @@
 ﻿using AutoMapper;
 using School.Application.Common.Exceptions;
 using School.Application.Handlers.Courses.Queries.GetCourseDetails;
-using School.Application.Handlers.Files;
+using School.Application.Handlers.Lessons.Queries.GetLessonList;
 using School.Domain;
 using School.Persistence;
 using School.Tests.Common;
 using School.WebApi.Repository;
 using Shouldly;
 
-namespace School.Tests.Handlers.Courses.Queries
+namespace School.Tests.Handlers.Lessons.Queries
 {
     [Collection("QueryCollection")]
-    public class GetCourseDetailsQueryHandlerTests
+    public class GetLessonListQueryHandlerTests
     {
         private readonly SchoolDbContext Context;
         private readonly IMapper Mapper;
@@ -24,82 +24,99 @@ namespace School.Tests.Handlers.Courses.Queries
         private readonly string tomId = "77be0187-1d57-42dd-8d76-145c36c51bed";
         private readonly string alexId = "acc53bf2-c3f6-442b-99c0-da2cf971516e";
 
-        public GetCourseDetailsQueryHandlerTests(TestQueriesFixtire fixtire)
+        public GetLessonListQueryHandlerTests(TestQueriesFixtire fixtire)
         {
             Context = fixtire.Context;
             Mapper = fixtire.Mapper;
         }
 
         [Fact]
-        public async Task GetCourseDetailsQueryHandler_SuccessForCoach()
+        public async Task GetLessonListQueryHandler_SuccessForCoach()
         {
             // Arrange
-            var handler = new GetCourseDetailsQueryHandler(new CourseRepository(Context), Mapper);            
+            var handler = new GetLessonListQueryHandler(
+                new LessonRepository(Context),
+                new CourseRepository(Context),
+                Mapper
+            );
 
             // Act
             var result = await handler.Handle(
-                new GetCourseDetailsQuery
+                new GetLessonListQuery
                 {
-                    Id = 2,
+                    CourseId = 2,
                     UserGuid = olgaId,
                     UserRole = UserRoles.Coach
                 },
                 CancellationToken.None);
 
-            // Assert            
-            result.ShouldBeOfType<CourseDetailsVm>();
-            result.Title.ShouldBe("Йога кундалини");
-            result.Description.ShouldBe(lorem2);
-            result.ShortDescription.ShouldBe(lorem);
-            result.PublicDescription.ShouldBe(lorem2);
-            result.BeginQuestionnaire.ShouldBe("");
-            result.EndQuestionnaire.ShouldBe("");
+            // Assert
+            result.ShouldBeOfType<LessonListVm>();
+            result.Lessons.Count.ShouldBe(3);
 
-            result.Photo.ShouldBeOfType<FileLookupDto>();
-            result.Photo.UniqueFileName.ShouldEndWith("Йога кундалини.jpg");
+            result.Course.ShouldBeOfType<CourseDetailsVm>();
+            result.Course.Title.ShouldBe("Йога кундалини");
+            result.Course.Description.ShouldBe(lorem2);
+            result.Course.ShortDescription.ShouldBe(lorem);
+            result.Course.PublicDescription.ShouldBe(lorem2);
+            result.Course.BeginQuestionnaire.ShouldBe("");
+            result.Course.EndQuestionnaire.ShouldBe("");
+
+            result.MaxLessonNumber.ShouldBe(3);
         }
 
         [Fact]
-        public async Task GetCourseDetailsQueryHandler_SuccessForStudent()
+        public async Task GetLessonListQueryHandler_SuccessForStudent()
         {
             // Arrange
-            var handler = new GetCourseDetailsQueryHandler(new CourseRepository(Context), Mapper);
+            var handler = new GetLessonListQueryHandler(
+                new LessonRepository(Context),
+                new CourseRepository(Context),
+                Mapper
+            );
 
             // Act
             var result = await handler.Handle(
-                new GetCourseDetailsQuery
+                new GetLessonListQuery
                 {
-                    Id = 2,
+                    CourseId = 2,
                     UserGuid = tomId,
                     UserRole = UserRoles.Student
                 },
                 CancellationToken.None);
-            // Assert            
-            result.ShouldBeOfType<CourseDetailsVm>();
-            result.Title.ShouldBe("Йога кундалини");
-            result.Description.ShouldBe(lorem2);
-            result.ShortDescription.ShouldBe(lorem);
-            result.PublicDescription.ShouldBe(lorem2);
-            result.BeginQuestionnaire.ShouldBe("");
-            result.EndQuestionnaire.ShouldBe("");
 
-            result.Photo.ShouldBeOfType<FileLookupDto>();
-            result.Photo.UniqueFileName.ShouldEndWith("Йога кундалини.jpg");
+            // Assert
+            result.ShouldBeOfType<LessonListVm>();
+            result.Lessons.Count.ShouldBe(3);
+
+            result.Course.ShouldBeOfType<CourseDetailsVm>();
+            result.Course.Title.ShouldBe("Йога кундалини");
+            result.Course.Description.ShouldBe(lorem2);
+            result.Course.ShortDescription.ShouldBe(lorem);
+            result.Course.PublicDescription.ShouldBe(lorem2);
+            result.Course.BeginQuestionnaire.ShouldBe("");
+            result.Course.EndQuestionnaire.ShouldBe("");
+
+            result.MaxLessonNumber.ShouldBe(3);
         }
 
         [Fact]
-        public async Task GetCourseDetailsQueryHandler_FailOnWrongId()
+        public async Task GetLessonListQueryHandler_FailOnWrongCourseId()
         {
             // Arrange
-            var handler = new GetCourseDetailsQueryHandler(new CourseRepository(Context), Mapper);
+            var handler = new GetLessonListQueryHandler(
+                new LessonRepository(Context),
+                new CourseRepository(Context),
+                Mapper
+            );
 
             // Act
             // Assert
             await Assert.ThrowsAsync<NotFoundException>(async () =>
                 await handler.Handle(
-                    new GetCourseDetailsQuery
+                    new GetLessonListQuery
                     {
-                        Id = 10,
+                        CourseId = 10,
                         UserGuid = olgaId,
                         UserRole = UserRoles.Coach
                     },
@@ -107,18 +124,22 @@ namespace School.Tests.Handlers.Courses.Queries
         }
 
         [Fact]
-        public async Task GetCourseDetailsQueryHandler_FailOnWrongCoachId()
+        public async Task GetLessonListQueryHandler_FailOnWrongCoachId()
         {
             // Arrange
-            var handler = new GetCourseDetailsQueryHandler(new CourseRepository(Context), Mapper);
+            var handler = new GetLessonListQueryHandler(
+                new LessonRepository(Context),
+                new CourseRepository(Context),
+                Mapper
+            );
 
             // Act
             // Assert
             await Assert.ThrowsAsync<NoAccessException>(async () =>
                 await handler.Handle(
-                    new GetCourseDetailsQuery
+                    new GetLessonListQuery
                     {
-                        Id = 2,
+                        CourseId = 2,
                         UserGuid = irinaId,
                         UserRole = UserRoles.Coach
                     },
@@ -126,18 +147,22 @@ namespace School.Tests.Handlers.Courses.Queries
         }
 
         [Fact]
-        public async Task GetCourseDetailsQueryHandler_FailOnWrongStudentId()
+        public async Task GetLessonListQueryHandler_FailOnWrongStudentId()
         {
             // Arrange
-            var handler = new GetCourseDetailsQueryHandler(new CourseRepository(Context), Mapper);
+            var handler = new GetLessonListQueryHandler(
+                new LessonRepository(Context),
+                new CourseRepository(Context),
+                Mapper
+            );
 
             // Act
             // Assert
             await Assert.ThrowsAsync<NoAccessException>(async () =>
                 await handler.Handle(
-                    new GetCourseDetailsQuery
+                    new GetLessonListQuery
                     {
-                        Id = 2,
+                        CourseId = 2,
                         UserGuid = alexId,
                         UserRole = UserRoles.Student
                     },
@@ -145,18 +170,22 @@ namespace School.Tests.Handlers.Courses.Queries
         }
 
         [Fact]
-        public async Task GetCourseDetailsQueryHandler_FailOnWrongUserRole()
+        public async Task GetLessonListQueryHandler_FailOnWrongUserRole()
         {
             // Arrange
-            var handler = new GetCourseDetailsQueryHandler(new CourseRepository(Context), Mapper);
+            var handler = new GetLessonListQueryHandler(
+                new LessonRepository(Context),
+                new CourseRepository(Context),
+                Mapper
+            );
 
             // Act
             // Assert
             await Assert.ThrowsAsync<ArgumentNullException>(async () =>
                 await handler.Handle(
-                    new GetCourseDetailsQuery
+                    new GetLessonListQuery
                     {
-                        Id = 2,
+                        CourseId = 2,
                         UserGuid = olgaId,
                         UserRole = UserRoles.Admin
                     },

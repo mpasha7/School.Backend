@@ -76,7 +76,5 @@ namespace School.Tests.Handlers.Courses.Commands
                       && f.FileOwner == FileOwners.Course
                       && f.CourseId == courseId));
         }
-
-
     }
 }

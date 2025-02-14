@@ -1,19 +1,12 @@
 ﻿using AutoMapper;
 using School.Application.Common.Exceptions;
 using School.Application.Handlers.Comments.Queries.GetCommentList;
-using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.PublicCourseDetails;
 using School.Application.Handlers.Files;
-using School.Domain;
 using School.Persistence;
 using School.Tests.Common;
 using School.WebApi.Repository;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.Tests.Handlers.Courses.Queries
 {

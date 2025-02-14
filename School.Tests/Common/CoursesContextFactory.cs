@@ -22,13 +22,22 @@ namespace School.Tests.Common
             context.Comments.Add(
                 new Comment
                 {
-                    //Id = 1,
                     StudentGuid = tomId,
                     StudentName = "Том",
                     CreatedAt = DateTime.Today,
                     Text = "Comment Text",
                     IsPublic = true,
                     CourseId = 2
+                }
+            );
+            context.Reports.Add(
+                new Report
+                {
+                    StudentGuid = tomId,
+                    StudentName = "Том",
+                    CreatedAt = DateTime.Today,
+                    Text = "Report Text",
+                    LessonId = 4
                 }
             );
             context.SaveChanges();

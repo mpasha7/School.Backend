@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Handlers\Lessons\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\School.Application\School.Application.csproj" />
     <ProjectReference Include="..\School.Persistence\School.Persistence.csproj" />
     <ProjectReference Include="..\School.WebApi\School.WebApi.csproj" />
@@ -38,6 +34,11 @@
     <None Update="test_photo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Handlers\Students\Commands\" />
+    <Folder Include="Handlers\Students\Queries\" />
   </ItemGroup>
 
 </Project>

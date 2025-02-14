@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
-using School.Application.Handlers.Courses.Queries.GetCourseDetails;
 using School.Application.Handlers.Courses.Queries.GetCourseList;
 using School.Domain;
 using School.Persistence;
 using School.Tests.Common;
 using School.WebApi.Repository;
 using Shouldly;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.Tests.Handlers.Courses.Queries
 {

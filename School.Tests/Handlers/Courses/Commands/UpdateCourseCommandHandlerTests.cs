@@ -3,17 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using School.Application.Common.Exceptions;
-using School.Application.Handlers.Courses.Commands.DeleteCourse;
 using School.Application.Handlers.Courses.Commands.UpdateCourse;
 using School.Domain;
 using School.Tests.Common;
 using School.WebApi.Repository;
 using School.WebApi.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.Tests.Handlers.Courses.Commands
 {
