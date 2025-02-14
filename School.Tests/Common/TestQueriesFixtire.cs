@@ -2,11 +2,6 @@
 using School.Application.Common.Mappings;
 using School.Application.Interfaces;
 using School.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.Tests.Common
 {

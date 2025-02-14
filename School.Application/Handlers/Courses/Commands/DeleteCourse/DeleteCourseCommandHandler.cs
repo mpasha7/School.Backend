@@ -15,16 +15,13 @@ namespace School.Application.Handlers.Courses.Commands.DeleteCourse
     public class DeleteCourseCommandHandler : IRequestHandler<DeleteCourseCommand>
     {
         private readonly ICourseRepository _courseRepository;
-        private readonly IFileRepository _fileRepository;
         private readonly IFileService _fileService;
 
         public DeleteCourseCommandHandler(
             ICourseRepository courseRepository,
-            IFileRepository fileRepository,
             IFileService fileService)
         {
             this._courseRepository = courseRepository;
-            this._fileRepository = fileRepository;
             this._fileService = fileService;
         }
 
@@ -38,7 +35,6 @@ namespace School.Application.Handlers.Courses.Commands.DeleteCourse
                 throw new NoAccessException(nameof(Course), request.Id);
 
             await _fileService.DeleteFileAsync(course.Photo.Id, FileTypes.Photo, cancellationToken);
-            await _fileRepository.DeleteAsync(course.Photo, cancellationToken);
 
             await _courseRepository.DeleteAsync(course, cancellationToken);
         }
