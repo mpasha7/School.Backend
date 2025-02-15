@@ -115,7 +115,7 @@ namespace School.Tests.Handlers.Lessons.Queries
             result.Report.ShouldNotBeNull();
             result.Report.ShouldBeOfType<ReportDetailsVm>();
             result.Report.Id.ShouldBe(1);
-            result.Report.Text.ShouldBe("Report Text");
+            result.Report.Text.ShouldBe("Report Text for 4 Lesson");
         }
 
         [Fact]

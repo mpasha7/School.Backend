@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using School.Application.Handlers.Students.Commands.AddStudentToCourse;
 using School.Application.Handlers.Students.Commands.RemoveStudentFromCourse;
-using School.Application.Handlers.Students.Queries.GetStudentIds;
+using School.Application.Handlers.Students.Queries.GetStudentsIds;
 using School.Application.Handlers.Students.Queries.GetStudentsIds;
 using School.WebApi.Models;
 using School.WebApi.Models.Student;

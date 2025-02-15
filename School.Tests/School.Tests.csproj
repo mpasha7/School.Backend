@@ -36,9 +36,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handlers\Students\Commands\" />
-    <Folder Include="Handlers\Students\Queries\" />
-  </ItemGroup>
-
 </Project>

@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MediatR;
-using School.Application.Handlers.Students.Queries.GetStudentsIds;
 using School.Application.Interfaces.Repository;
 
-namespace School.Application.Handlers.Students.Queries.GetStudentIds
+namespace School.Application.Handlers.Students.Queries.GetStudentsIds
 {
     public class GetStudentsIdsQueryHandler : IRequestHandler<GetStudentsIdsQuery, StudentsIdsVm>
     {

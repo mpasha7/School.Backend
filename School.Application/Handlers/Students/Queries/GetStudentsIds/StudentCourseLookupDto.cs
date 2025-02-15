@@ -2,7 +2,7 @@
 using School.Application.Common.Mappings;
 using School.Domain;
 
-namespace School.Application.Handlers.Students.Queries.GetStudentIds
+namespace School.Application.Handlers.Students.Queries.GetStudentsIds
 {
     public class StudentCourseLookupDto : IMapWith<Course>
     {

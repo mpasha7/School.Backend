@@ -22,7 +22,6 @@ namespace School.Tests.Handlers.Courses.Commands
                 .Setup(m => m.WebRootPath)
                 .Returns(Directory.GetCurrentDirectory());
             var _courseRepo = new CourseRepository(Context);
-
             var handler = new UpdateCourseCommandHandler(
                 _courseRepo,
                 new FileService(mockEnv.Object, new FileRepository(Context))
@@ -45,6 +44,8 @@ namespace School.Tests.Handlers.Courses.Commands
 
             FileStream testFileStram = File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "test_photo.png"));
             IFormFile formFile = new FormFile(testFileStram, 0, testFileStram.Length, "file", newPhotoName);
+
+            var maxFileId = await Context.Files.MaxAsync(f => f.Id);
 
             // Act
             await handler.Handle(
@@ -79,7 +80,7 @@ namespace School.Tests.Handlers.Courses.Commands
                     f => f.Id == photoId));
             Assert.NotNull(
                 await Context.Files.SingleOrDefaultAsync(
-                    f => f.Id == 5
+                    f => f.Id == maxFileId + 1
                       && f.CreatedAt.Date == DateTime.Today
                       && f.FileName == newPhotoName
                       && f.FileSize == testFileStram.Length

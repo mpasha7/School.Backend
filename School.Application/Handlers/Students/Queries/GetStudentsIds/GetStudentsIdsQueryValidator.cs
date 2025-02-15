@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
-using School.Application.Handlers.Students.Queries.GetStudentsIds;
 
-namespace School.Application.Handlers.Students.Queries.GetStudentIds
+namespace School.Application.Handlers.Students.Queries.GetStudentsIds
 {
     public class GetStudentsIdsQueryValidator : AbstractValidator<GetStudentsIdsQuery>
     {
