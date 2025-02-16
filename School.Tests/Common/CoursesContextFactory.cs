@@ -33,7 +33,7 @@ namespace School.Tests.Common
                     CourseId = 2
                 }
             );
-            context.Reports.Add(
+            context.Reports.AddRange(
                 new Report
                 {
                     StudentGuid = tomId,
@@ -41,6 +41,22 @@ namespace School.Tests.Common
                     CreatedAt = DateTime.Today,
                     Text = "Report Text for 4 Lesson",
                     LessonId = 4
+                },
+                new Report
+                {
+                    StudentGuid = tomId,
+                    StudentName = "Том",
+                    CreatedAt = DateTime.Today,
+                    Text = "Report Text for 5 Lesson",
+                    LessonId = 5
+                }
+            );
+            context.Feedbacks.Add(
+                new Feedback
+                {
+                    CreatedAt = DateTime.Today,
+                    Text = "Feedback Text for 1 Report",
+                    ReportId = 1
                 }
             );
             context.Files.Add(

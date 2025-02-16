@@ -35,6 +35,8 @@ namespace School.Tests.Handlers.Reports.Commands
             string studentName = "Том";
             string text = "New Report Text";
             string photoName = "photo.png";
+            int lessonId = 6;
+            int courseId = 2;
 
             FileStream testFileStram = File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "test_photo.png"));
             IFormFile formFile = new FormFile(testFileStram, 0, testFileStram.Length, "file", photoName);
@@ -49,8 +51,8 @@ namespace School.Tests.Handlers.Reports.Commands
                     StudentName = studentName,
                     Text = text,
                     FormFiles = new List<IFormFile> { formFile },
-                    LessonId = 5,
-                    CourseId = 2
+                    LessonId = lessonId,
+                    CourseId = courseId
                 },
                 CancellationToken.None);
 
@@ -62,7 +64,7 @@ namespace School.Tests.Handlers.Reports.Commands
                       && r.StudentName == studentName
                       && r.CreatedAt.Date == DateTime.Today
                       && r.Text == text
-                      && r.LessonId == 5));
+                      && r.LessonId == lessonId));
             Assert.NotNull(
                 await Context.Files.SingleOrDefaultAsync(
                     f => f.Id == maxFileId + 1

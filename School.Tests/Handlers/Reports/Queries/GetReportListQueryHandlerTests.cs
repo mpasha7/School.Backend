@@ -55,13 +55,13 @@ namespace School.Tests.Handlers.Reports.Queries
             var reports = result.Reports.ToList();
             reports.Count.ShouldBe(1);
             reports[0].ShouldBeOfType<ReportLookupDto>();
-            reports[0].Id.ShouldBe(1);
+            reports[0].Id.ShouldBe(2);
             reports[0].StudentGuid.ShouldBe(tomId);
             reports[0].StudentName.ShouldBe("Том");
             reports[0].CreatedAt.ShouldBe(DateTime.Today);
-            reports[0].LessonId.ShouldBe(4);
-            reports[0].LessonNumber.ShouldBe(1);
-            reports[0].LessonTitle.ShouldBe("Первый урок");
+            reports[0].LessonId.ShouldBe(5);
+            reports[0].LessonNumber.ShouldBe(2);
+            reports[0].LessonTitle.ShouldBe("Второй урок");
         }
 
         [Fact]

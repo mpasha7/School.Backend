@@ -44,12 +44,15 @@ namespace School.Tests.Handlers.Lessons.Queries
                 Mapper
             );
 
+            int lessonId = 4;
+            int courseId = 2;
+
             // Act
             var result = await handler.Handle(
                 new GetLessonDetailsQuery
                 {
-                    Id = 4,
-                    CourseId = 2,
+                    Id = lessonId,
+                    CourseId = courseId,
                     UserGuid = olgaId,
                     UserRole = UserRoles.Coach
                 },
