@@ -82,6 +82,15 @@ namespace School.Tests.Common
                     QuestionId = 1
                 }
             );
+            context.Applies.Add(
+                new Apply
+                {
+                    StudentGuid = tomId,
+                    StudentName = "Том",
+                    IsAssepted = false,
+                    CourseId = 1
+                }
+            );
             context.SaveChanges();
 
             return context;

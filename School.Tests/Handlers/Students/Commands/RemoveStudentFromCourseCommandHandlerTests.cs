@@ -83,7 +83,7 @@ namespace School.Tests.Handlers.Students.Commands
         }
 
         [Fact]
-        public async Task RemoveStudentFromCourseCommandHandler_FailOnAlreadyActionCompleted()
+        public async Task RemoveStudentFromCourseCommandHandler_FailOnStudentNotHaveCourse()
         {
             // Arrange
             var handler = new RemoveStudentFromCourseCommandHandler(

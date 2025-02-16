@@ -90,7 +90,7 @@ namespace School.Tests.Handlers.Students.Commands
         }
 
         [Fact]
-        public async Task AddStudentToCourseCommandHandler_FailOnAlreadyActionCompleted()
+        public async Task AddStudentToCourseCommandHandler_FailOnStudentAlreadyHasCourse()
         {
             // Arrange
             var _studentRepo = new StudentRepository(Context);

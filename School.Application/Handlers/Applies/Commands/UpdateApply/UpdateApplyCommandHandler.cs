@@ -2,11 +2,6 @@
 using School.Application.Common.Exceptions;
 using School.Application.Interfaces.Repository;
 using School.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace School.Application.Handlers.Applies.Commands.UpdateApply
 {
@@ -47,9 +42,6 @@ namespace School.Application.Handlers.Applies.Commands.UpdateApply
                 CourseId = request.CourseId
             };
             await _studentRepository.AddAsync(studentOfCourse, cancellationToken);
-
-            //apply.IsAssepted = true;
-            //await _applyRepository.UpdateAsync(apply, cancellationToken);
 
             await _applyRepository.DeleteAsync(apply, cancellationToken);
         }
